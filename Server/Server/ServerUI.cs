@@ -13,8 +13,7 @@ namespace Server
 {
     public partial class ServerUI : Form
     {
-         Label status;
-        IServer server;
+        Label status;
         static bool isPortChanged;
         static bool isIpChanged;
         
@@ -22,12 +21,7 @@ namespace Server
         {
             InitializeComponent();
         }
-        private void ServerUI_Load(object sender, EventArgs e)
-        {
-            server = new ServerManager(this);
-            isIpChanged = false;
-            isPortChanged = false;
-        }
+
 
         private void bunifuFlatButton1_Click_1(object sender, EventArgs e)
         {
@@ -46,23 +40,23 @@ namespace Server
             {
                 if (isIpChanged == true && isPortChanged == true)
                 {
-                    ServerManager.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
-                    server.StartServer();
+                    ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
+                    StartServer();
                     MessageBox.Show("SetUP was successfull.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
                 else
-                    server.StartServer();
+                    StartServer();
 
 
-                StatusChanged($@"Server started on    <<<   {ServerManager.ServerAddress}   >>>", "green");
+                StatusChanged($@"Server started on    <<<   {ServerAddress}   >>>", "green");
                 startServer_btn.Enabled = false;
                 stopServer_btn.Enabled = true;
             }
             catch
             {
-                StatusChanged($"Server field to start on    <<<   {ServerManager.ServerAddress}   >>>", "red");
+                StatusChanged($"Server field to start on    <<<   {ServerAddress}   >>>", "red");
                 MessageBox.Show("please enter a valid ip and port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
@@ -92,7 +86,7 @@ namespace Server
             status.Dock = DockStyle.Top;
             status.TextAlign = ContentAlignment.MiddleLeft;
             statusBar_gp.Controls.Add(status);
-            ServerManager.ServerStatus = msg;
+            ServerStatus = msg;
 
         }
 
@@ -120,7 +114,7 @@ namespace Server
 
         private void stopServer_btn_Click(object sender, EventArgs e)
         {
-            server.StopServer();
+            StopServer();
             stopServer_btn.Enabled = false;
             startServer_btn.Enabled = true;
             StatusChanged("Server stoped", "red");
