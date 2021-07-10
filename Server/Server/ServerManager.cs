@@ -4,24 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleTcp;
+using System.Windows.Forms;
+
+
 namespace Server
 {
-    public class ServerManager :IServer
+    public partial class ServerUI : Form, IServer
     {
         private static string ServerIpAddress = "127.0.0.1:9000";
-        private static SimpleTcpServer server;
+        private SimpleTcpServer server;
         private static ServerUI serverUI;
         public static List<string> serverStatus;
         static ServerManager()
         {
             serverStatus = new List<string>();
+
         }
-        public ServerManager()
+
+        public ServerManager(ServerUI serverUi)
         {
             server = new SimpleTcpServer(ServerIpAddress);
             server.Events.ClientConnected += ClientConnected;
             server.Events.ClientDisconnected += ClientDisConnected;
             server.Events.DataReceived += DataRecived;
+            serverUI = serverUi;
         }
 
         public static string ServerStatus
@@ -47,7 +53,6 @@ namespace Server
             
         public void StartServer()
         {
-            serverUI = new ServerUI();
             server.Start();
         }
         public void StopServer()
@@ -71,10 +76,11 @@ namespace Server
 
         private void ClientConnected(object sender, ClientConnectedEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("client connected");
+           // System.Windows.Forms.MessageBox.Show("client connected");
 
-            serverUI.StatusChanged(e.IpPort + " is connected.", "cyan");
+            serverUI.StatusChanged(" is connected.");
             serverUI.AD_UserList(e.IpPort, true);
         }
+
     }
 }

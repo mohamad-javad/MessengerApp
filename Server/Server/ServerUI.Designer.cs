@@ -58,6 +58,7 @@ namespace Server
             this.port_tb = new Bunifu.UI.WinForms.BunifuTextBox();
             this.ip_tb = new Bunifu.UI.WinForms.BunifuTextBox();
             this.sratus_gp = new System.Windows.Forms.GroupBox();
+            this.statusBar_gp = new Bunifu.UI.WinForms.BunifuGroupBox();
             this.top_gp = new Bunifu.UI.WinForms.BunifuGroupBox();
             this.Exit_btn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
@@ -65,7 +66,6 @@ namespace Server
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Users = new System.Windows.Forms.ListBox();
-            this.statusBar = new Bunifu.UI.WinForms.BunifuGroupBox();
             this.sm_gp.SuspendLayout();
             this.history_gp.SuspendLayout();
             this.cfg_gp.SuspendLayout();
@@ -502,7 +502,7 @@ namespace Server
             // sratus_gp
             // 
             this.sratus_gp.BackColor = System.Drawing.SystemColors.Control;
-            this.sratus_gp.Controls.Add(this.statusBar);
+            this.sratus_gp.Controls.Add(this.statusBar_gp);
             this.sratus_gp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sratus_gp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sratus_gp.Location = new System.Drawing.Point(200, 112);
@@ -513,6 +513,16 @@ namespace Server
             this.sratus_gp.TabIndex = 3;
             this.sratus_gp.TabStop = false;
             this.sratus_gp.Text = "ToDayStatus";
+            // 
+            // statusBar_gp
+            // 
+            this.statusBar_gp.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.statusBar_gp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusBar_gp.Location = new System.Drawing.Point(3, 25);
+            this.statusBar_gp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.statusBar_gp.Name = "statusBar_gp";
+            this.statusBar_gp.Size = new System.Drawing.Size(1111, 645);
+            this.statusBar_gp.TabIndex = 6;
             // 
             // top_gp
             // 
@@ -609,16 +619,6 @@ namespace Server
             this.Users.Size = new System.Drawing.Size(194, 743);
             this.Users.TabIndex = 8;
             // 
-            // statusBar
-            // 
-            this.statusBar.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.statusBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statusBar.Location = new System.Drawing.Point(3, 25);
-            this.statusBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(1111, 645);
-            this.statusBar.TabIndex = 6;
-            // 
             // ServerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -636,6 +636,7 @@ namespace Server
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ServerUI";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.ServerUI_Load);
             this.sm_gp.ResumeLayout(false);
             this.history_gp.ResumeLayout(false);
             this.cfg_gp.ResumeLayout(false);
@@ -671,7 +672,7 @@ namespace Server
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private Bunifu.UI.WinForms.BunifuGroupBox statusBar;
+        private Bunifu.UI.WinForms.BunifuGroupBox statusBar_gp;
     }
 }
 

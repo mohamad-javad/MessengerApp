@@ -42,13 +42,13 @@ namespace Sliding_Application
 
         private void DisconnectClient(object sender, ClientDisconnectedEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("you are dissconnected");
+            //System.Windows.Forms.MessageBox.Show("you are dissconnected");
 
         }
 
         private void ConnectClient(object sender, ClientConnectedEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("you are connected");
+            //System.Windows.Forms.MessageBox.Show("you are connected");
         }
     }
 }
