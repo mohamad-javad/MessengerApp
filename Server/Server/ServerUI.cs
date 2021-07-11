@@ -26,6 +26,7 @@ namespace Server
             CheckForIllegalCrossThreadCalls = false;
             isIpChanged = false;
             isPortChanged = false;
+            ServerManager.DefServerUi = this;
         }
 
 
@@ -71,6 +72,7 @@ namespace Server
 
         public  void StatusChanged(string msg, string color = "black")
         {
+
             status = new Label();
             CheckForIllegalCrossThreadCalls = false;
             switch (color)
@@ -91,9 +93,12 @@ namespace Server
             status.Text += msg + $",      {DateTime.Now.ToString("HH:MM:ss")}";
             status.Dock = DockStyle.Top;
             status.TextAlign = ContentAlignment.MiddleLeft;
-            statusBar_gp.Controls.Add(status);
+          
             ServerManager.ServerStatus = msg;
-
+            this.BeginInvoke((Action)(() =>
+            {
+                statusBar_gp.Controls.Add(status);
+            }));
         }
 
         private void ip_tb_TextChange(object sender, EventArgs e)

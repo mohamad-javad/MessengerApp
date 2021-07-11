@@ -15,9 +15,11 @@ namespace Server
         private static SimpleTcpServer server;
         private static ServerUI serverUI;
         public static List<string> serverStatus;
-
+        
         static ServerManager()
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            server = new SimpleTcpServer(ServerIpAddress);
             serverStatus = new List<string>();
             server.Events.DataReceived += DataRecieved;
             server.Events.ClientConnected += ClientConnected;
@@ -64,6 +66,7 @@ namespace Server
 
         private static void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
             serverUI.StatusChanged(e.IpPort + " is disconnected.","red");
             serverUI.AD_UserList(e.IpPort, false);
         }
@@ -71,12 +74,15 @@ namespace Server
         private static void ClientConnected(object sender, ClientConnectedEventArgs e)
         {
             // System.Windows.Forms.MessageBox.Show("client connected");
+            Control.CheckForIllegalCrossThreadCalls = false;
 
             serverUI.StatusChanged(" is connected.");
             serverUI.AD_UserList(e.IpPort, true);
         }
         private static void DataRecieved(object sender, DataReceivedEventArgs e)
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
+
             string msg = Encoding.UTF8.GetString(e.Data);
             serverUI.StatusChanged(e.IpPort + " sent a message.");
         }
