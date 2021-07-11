@@ -89,6 +89,9 @@
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="ServerManager.resx">
+      <DependentUpon>ServerManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ServerUI.resx">
       <DependentUpon>ServerUI.cs</DependentUpon>
     </EmbeddedResource>

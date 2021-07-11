@@ -516,6 +516,8 @@ namespace Server
             // 
             // statusBar_gp
             // 
+            this.statusBar_gp.AllowDrop = true;
+            this.statusBar_gp.AutoScroll = true;
             this.statusBar_gp.BackColor = System.Drawing.SystemColors.HighlightText;
             this.statusBar_gp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statusBar_gp.Location = new System.Drawing.Point(3, 25);

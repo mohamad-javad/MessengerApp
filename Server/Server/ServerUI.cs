@@ -85,7 +85,7 @@ namespace Server
             status.Text += msg + $",      {DateTime.Now.ToString("HH:MM:ss")}";
             status.Dock = DockStyle.Top;
             status.TextAlign = ContentAlignment.MiddleLeft;
-            statusBar_gp.Controls.Add(status);
+            statusBar.Controls.Add(status);
             ServerStatus = msg;
 
         }
