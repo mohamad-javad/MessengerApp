@@ -21,6 +21,12 @@ namespace Server
         {
             InitializeComponent();
         }
+        private void ServerUI_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+            isIpChanged = false;
+            isPortChanged = false;
+        }
 
 
         private void bunifuFlatButton1_Click_1(object sender, EventArgs e)
@@ -40,23 +46,23 @@ namespace Server
             {
                 if (isIpChanged == true && isPortChanged == true)
                 {
-                    ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
-                    StartServer();
+                    ServerManager.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
+                    ServerManager.StartServer();
                     MessageBox.Show("SetUP was successfull.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
                 else
-                    StartServer();
+                    ServerManager.StartServer();
 
 
-                StatusChanged($@"Server started on    <<<   {ServerAddress}   >>>", "green");
+                StatusChanged($@"Server started on    <<<   {ServerManager.ServerAddress}   >>>", "green");
                 startServer_btn.Enabled = false;
                 stopServer_btn.Enabled = true;
             }
             catch
             {
-                StatusChanged($"Server field to start on    <<<   {ServerAddress}   >>>", "red");
+                StatusChanged($"Server field to start on    <<<   {ServerManager.ServerAddress}   >>>", "red");
                 MessageBox.Show("please enter a valid ip and port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
@@ -66,7 +72,7 @@ namespace Server
         public  void StatusChanged(string msg, string color = "black")
         {
             status = new Label();
-
+            CheckForIllegalCrossThreadCalls = false;
             switch (color)
             {
                 case "black":
@@ -85,8 +91,8 @@ namespace Server
             status.Text += msg + $",      {DateTime.Now.ToString("HH:MM:ss")}";
             status.Dock = DockStyle.Top;
             status.TextAlign = ContentAlignment.MiddleLeft;
-            statusBar.Controls.Add(status);
-            ServerStatus = msg;
+            statusBar_gp.Controls.Add(status);
+            ServerManager.ServerStatus = msg;
 
         }
 
@@ -102,6 +108,8 @@ namespace Server
 
         public void AD_UserList(string user, bool add)
         {
+            CheckForIllegalCrossThreadCalls = false;
+
             if (add)
             {
                 Users.Items.Add(user);
@@ -114,11 +122,12 @@ namespace Server
 
         private void stopServer_btn_Click(object sender, EventArgs e)
         {
-            StopServer();
+            ServerManager.StopServer();
             stopServer_btn.Enabled = false;
             startServer_btn.Enabled = true;
             StatusChanged("Server stoped", "red");
         }
+
 
     }
 
