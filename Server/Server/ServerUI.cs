@@ -26,7 +26,7 @@ namespace Server
             CheckForIllegalCrossThreadCalls = false;
             isIpChanged = false;
             isPortChanged = false;
-            ServerManager.DefServerUi = this;
+            ServerConnectionManager.DefServerUi = this;
         }
 
 
@@ -47,23 +47,23 @@ namespace Server
             {
                 if (isIpChanged == true && isPortChanged == true)
                 {
-                    ServerManager.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
-                    ServerManager.StartServer();
+                    ServerConnectionManager.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
+                    ServerConnectionManager.StartServer();
                     MessageBox.Show("Setting UP address was successfull.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
                 else
-                    ServerManager.StartServer();
+                    ServerConnectionManager.StartServer();
 
 
-                StatusChanged($@"Server started on    <<<   {ServerManager.ServerAddress}   >>>", "green");
+                StatusChanged($@"Server started on    <<<   {ServerConnectionManager.ServerAddress}   >>>", "green");
                 startServer_btn.Enabled = false;
                 stopServer_btn.Enabled = true;
             }
             catch
             {
-                StatusChanged($"Server field to start on    <<<   {ServerManager.ServerAddress}   >>>", "red");
+                StatusChanged($"Server field to start on    <<<   {ServerConnectionManager.ServerAddress}   >>>", "red");
                 MessageBox.Show("please enter a valid ip and port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
@@ -94,7 +94,7 @@ namespace Server
             status.Dock = DockStyle.Top;
             status.TextAlign = ContentAlignment.MiddleLeft;
           
-            ServerManager.ServerStatus = msg;
+            ServerConnectionManager.ServerStatus = msg;
             this.BeginInvoke((Action)(() =>
             {
                 statusBar_gp.Controls.Add(status);
@@ -135,7 +135,7 @@ namespace Server
 
         private void stopServer_btn_Click(object sender, EventArgs e)
         {
-            ServerManager.StopServer();
+            ServerConnectionManager.StopServer();
             stopServer_btn.Enabled = false;
             startServer_btn.Enabled = true;
             StatusChanged("Server stoped", "red");

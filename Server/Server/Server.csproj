@@ -146,10 +146,10 @@
     <Compile Include="Databse\DataBase.cs" />
     <Compile Include="Databse\DataManager.cs" />
     <Compile Include="IServer.cs" />
-    <Compile Include="Manager.cs" />
+    <Compile Include="ServerManager.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MyExtentions.cs" />
-    <Compile Include="ServerManager.cs" />
+    <Compile Include="ServerConnectionManager.cs" />
     <Compile Include="ServerUI.cs">
       <SubType>Form</SubType>
     </Compile>

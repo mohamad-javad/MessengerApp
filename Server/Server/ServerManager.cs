@@ -3,81 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SimpleTcp;
-using System.Windows.Forms;
-
-
+using MongoDB.Bson;
 namespace Server
 {
-    public static class ServerManager
+    public class ServerManager
     {
-        private static string ServerIpAddress = "127.0.0.1:9000";
-        private static SimpleTcpServer server;
-        private static ServerUI serverUI;
-        public static List<string> serverStatus;
-
-        static ServerManager()
+        List<ServerUser> users;
+        DataManager dtManager;
+        public ServerManager()
         {
-            server = new SimpleTcpServer(ServerIpAddress);
-            serverStatus = new List<string>();
-            server.Events.DataReceived += DataRecieved;
-            server.Events.ClientConnected += ClientConnected;
-            server.Events.ClientDisconnected += ClientDisconnected;
+            dtManager = new DataManager();
+            users = new List<ServerUser>();
+            UploadUsers();
         }
 
-        public static ServerUI DefServerUi
+        public void UploadUsers()
         {
-            set
-            {
-                serverUI = value;
-            }
+            users = dtManager.GetUsers();
         }
-
-        public static string ServerStatus
+        public bool CreateUser(ServerUser user)
         {
-            set
+            bool result = true;
+            foreach (var usr in users)
             {
-                serverStatus.Add(value);
-            }
-        }
-        public static string ServerAddress
-        {
-            get
-            {
-                return ServerIpAddress;
+                if(usr.UserName == user.UserName)
+                {
+                    result = false;
+                    break;
+                }
 
             }
-            set
+            if (!result)
             {
-                ServerIpAddress = value;
-                serverStatus.Add(value);
+                return result;
             }
-        }
+            user.Password = user.Password.Sha_256();
+            return dtManager.AddUser(user);
 
-        public static void StartServer()
-        {
-            server.Start();
-        }
-        public static void StopServer()
-        {
-            server.Stop();
-        }
-
-        private static void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
-        {
-            serverUI.StatusChanged(e.IpPort + " is disconnected.", "red");
-            serverUI.AD_UserList(e.IpPort, false);
-        }
-
-        private static void ClientConnected(object sender, ClientConnectedEventArgs e)
-        {
-            serverUI.StatusChanged(e.IpPort + " is connected.", "cyan");
-            serverUI.AD_UserList(e.IpPort, true);
-        }
-        private static void DataRecieved(object sender, DataReceivedEventArgs e)
-        {
-            string msg = Encoding.UTF8.GetString(e.Data);
-            serverUI.StatusChanged(e.IpPort + " sent a message.");
         }
         
     }

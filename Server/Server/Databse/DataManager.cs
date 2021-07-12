@@ -23,7 +23,7 @@ namespace Server
 
         }
 
-        public bool CreateDB(string dbName)
+        public bool CreateTable(string dbName)
         {
             CommandResult result = dB.CreateCollection(dbName);
             return result.Ok;
@@ -35,7 +35,7 @@ namespace Server
         }
         public bool AddUser(ServerUser user)
         {
-
+            return true;
         }
 
         public List<ServerUser> GetUsers()
