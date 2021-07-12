@@ -9,6 +9,6 @@ namespace Sliding_Application.Repository
     class OwnerUser
     {
         User user;
-        string Password;
+        string password;
     }
 }
