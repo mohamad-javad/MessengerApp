@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Sliding_Application
 {
-    class User
+    public class User
     {
+        string _id;
         string name;
         string family;
-
+        string _password;
 
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sliding_Application
+namespace MessengerApp
 {
     public partial class ChatsMainForm : Form
     {

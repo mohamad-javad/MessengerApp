@@ -129,26 +129,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repository\ChatMessage.cs" />
+    <Compile Include="Chat.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="ChatsMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChatsMainForm.Designer.cs">
       <DependentUpon>ChatsMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repository\Client.cs" />
-    <Compile Include="Repository\Contact.cs" />
-    <Compile Include="Repository\Group.cs" />
-    <Compile Include="Repository\IContacts.cs" />
-    <Compile Include="Repository\IShowSendRecive.cs" />
-    <Compile Include="Repository\Manager.cs" />
-    <Compile Include="Repository\Message.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Contact.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="IContacts.cs" />
+    <Compile Include="IShowSendRecive.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="MessengerMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MessengerMainForm.Designer.cs">
       <DependentUpon>MessengerMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OwnerUser.cs" />
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,9 +159,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Chat.cs" />
-    <Compile Include="Repository\OwnerUser.cs" />
-    <Compile Include="Repository\User.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,6 +207,9 @@
       <Project>{C5B8BAE6-A19B-4D9A-867D-9F7A28F90766}</Project>
       <Name>Server</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

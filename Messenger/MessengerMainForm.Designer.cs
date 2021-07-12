@@ -1,4 +1,4 @@
-﻿namespace Sliding_Application
+﻿namespace MessengerApp
 {
     partial class MessengerMainForm
     {

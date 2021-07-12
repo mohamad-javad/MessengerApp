@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MessengerApp;
 
-namespace Sliding_Application
+namespace MessengerApp
 {
     public partial class MessengerMainForm : Form
     {
