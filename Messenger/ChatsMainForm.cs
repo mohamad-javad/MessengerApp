@@ -13,9 +13,11 @@ namespace Sliding_Application
     public partial class ChatsMainForm : Form
     {
         Chat chat = new Chat();
+
         public ChatsMainForm()
         {
             InitializeComponent();
+
         }
 
         private void messages_pnl_ControlAdded(object sender, ControlEventArgs e)
@@ -25,10 +27,7 @@ namespace Sliding_Application
 
         private void button1_Click(object sender, EventArgs e)
         {
-            chat.ShowRecivedMessage(messages_pnl, " به همگی سلام.");
-           //chat.ShowRecivedMessage(messages_pnl, " همچنین سلام به شما عزیزم شمنبتیسمنبتشمبنتلبکشمنلبتیسمبنلتشیسبملنتسشلمنشتسلشمنستلب" +
-              //  "شسمتمشتبمشسمنتیبشمکبمشبتشتبشنتبشمیسبشسمتبسشمکب" +
-              //  "مسشبتشمسبتشسبنمشبمنسشتبمشتبمشتبمسشنبمکنسشتبشمتبسمنب");
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

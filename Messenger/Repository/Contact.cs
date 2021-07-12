@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sliding_Application
 {
-    class Description
+    class Contact
     {
-        private string name;
-        private string family;
-        private string userName;
-        private string bio;
+        User person;
+        List<Message> messages;
     }
 }

@@ -15,7 +15,7 @@ namespace Sliding_Application
 
         public Client()
         {
-            client = new SimpleTcpClient("127.0.0.1:9000");
+            client = new SimpleTcpClient(ServerManager.ServerAddress);
             client.Events.Connected += ConnectClient;
             client.Events.Disconnected += DisconnectClient;
             client.Events.DataReceived += ReciveData;
