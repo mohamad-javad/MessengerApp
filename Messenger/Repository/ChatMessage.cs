@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace Sliding_Application
 {
     class ChatMessage
-    {
-        Description decribe;
 
+    {
         List<string> Messages;
 
     }

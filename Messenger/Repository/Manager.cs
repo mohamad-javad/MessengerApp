@@ -9,6 +9,5 @@ namespace Sliding_Application
     class Manager
     {
         private List<object> messengerObjects;
-        
     }
 }

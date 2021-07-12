@@ -49,7 +49,7 @@ namespace Server
                 {
                     ServerManager.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
                     ServerManager.StartServer();
-                    MessageBox.Show("SetUP was successfull.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Setting UP address was successfull.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
 
@@ -117,11 +117,19 @@ namespace Server
 
             if (add)
             {
-                Users.Items.Add(user);
+                this.BeginInvoke((Action)(() =>
+                {
+                    Users.Items.Add(user);
+                }));
+               
             }
             else
             {
-                Users.Items.Remove(user);
+                this.BeginInvoke((Action)(() =>
+                {
+                    Users.Items.Remove(user);
+                }));
+
             }
         }
 

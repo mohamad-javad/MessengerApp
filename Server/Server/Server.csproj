@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
-    <Compile Include="DataBase\DataManager.cs" />
+    <Compile Include="DataManager.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="ServerUI.cs">
