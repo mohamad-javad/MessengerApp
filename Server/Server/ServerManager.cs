@@ -8,18 +8,45 @@ namespace Server
 {
     public class ServerManager
     {
+        ServerUI sUI;
         List<ServerUser> users;
         DataManager dtManager;
         public ServerManager()
         {
             dtManager = new DataManager();
             users = new List<ServerUser>();
-            UploadUsers();
+            users = dtManager.GetAllUsers();
+            sUI = new ServerUI();
         }
-
-        public void UploadUsers()
+        public string ExecuteCommand(string command, string[] args)
         {
-            users = dtManager.GetUsers();
+            switch (command)
+            {
+                case "new user":
+                    ServerUser usr= new ServerUser();
+                    usr.Name = args[0];
+                    usr.Family = args[1];
+                    usr.UserName = args[2];
+                    usr.Password = args[3];
+                    if (CreateUser(usr))
+                    {
+                        sUI.StatusChanged($"{usr.UserName} was created");
+                    }
+                    break;
+                case "send message":
+                    Message msg = new Message();
+                    msg.Sender = args[0];
+                    msg.Reciever = args[1];
+                    msg.MsgText = args[2];
+                    dtManager.AddMessage(msg);
+                    break; 
+                case "give messages":
+                    return dtManager.GetUserMessages(args[0], args[1]);
+
+                default:
+                    break;
+            }
+            return "";
         }
         public bool CreateUser(ServerUser user)
         {
@@ -40,6 +67,12 @@ namespace Server
             user.Password = user.Password.Sha_256();
             return dtManager.AddUser(user);
 
+        }
+
+
+        public bool NewMessage(Message msg)
+        {
+            return false;
         }
         
     }

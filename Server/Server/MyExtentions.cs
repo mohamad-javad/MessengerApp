@@ -20,5 +20,12 @@ namespace Server
             }
             return hash.ToString();
         }
+        public static Message MkMessage(this string recievedTxt)
+        {
+            Message msg = new Message();
+
+        }
     }
+
+
 }
