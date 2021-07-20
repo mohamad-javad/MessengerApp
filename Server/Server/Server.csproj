@@ -151,7 +151,6 @@
     <Compile Include="IServer.cs" />
     <Compile Include="ServerManager.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="MyExtentions.cs" />
     <Compile Include="ServerConnectionManager.cs" />
     <Compile Include="ServerUI.cs">
       <SubType>Form</SubType>

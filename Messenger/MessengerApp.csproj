@@ -232,13 +232,13 @@
     <Compile Include="IContacts.cs" />
     <Compile Include="IShowSendRecive.cs" />
     <Compile Include="Manager.cs" />
-    <Compile Include="Message.cs" />
     <Compile Include="MessengerMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MessengerMainForm.Designer.cs">
       <DependentUpon>MessengerMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyExtentions.cs" />
     <Compile Include="OwnerUser.cs" />
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
