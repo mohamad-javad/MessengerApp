@@ -238,8 +238,6 @@
     <Compile Include="MessengerMainForm.Designer.cs">
       <DependentUpon>MessengerMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyExtentions.cs" />
-    <Compile Include="OwnerUser.cs" />
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,7 +246,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>

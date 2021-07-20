@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using MongoDB.Driver.Core;
 using MongoDB.Driver.Builders;
-using System.Threading.Tasks;
+
 
 namespace Server
 {
@@ -15,18 +12,34 @@ namespace Server
         MongoClient mongoClient;
         MongoServer mongoServer;
         MongoDatabase dB;
-        public void StartDatabase()
+        MongoCollection<ServerUser> UsersCollection;
+
+        [Obsolete]
+        public DataManager()
         {
             mongoClient = new MongoClient("mongodb://localhost");
             mongoServer = mongoClient.GetServer();
             dB = mongoServer.GetDatabase("MessengerDB");
-
+            UsersCollection = dB.GetCollection<ServerUser>("Users");
         }
 
-        public bool CreateTable(string dbName)
+        public List<ServerUser> GetAllUsers()
         {
-            CommandResult result = dB.CreateCollection(dbName);
-            return result.Ok;
+            List<ServerUser> users = new List<ServerUser>();
+            foreach (var user in UsersCollection.FindAll())
+            {
+                users.Add(user);
+            }
+
+            return users;
+        }
+
+        public void AddMessage(Message msg)
+        {
+            MongoCollection<Message> usr1Messages = dB.GetCollection<Message>(msg.MsgHeader.Sender);
+            usr1Messages.Insert<Message>(msg);
+            MongoCollection<Message> usr2Messages = dB.GetCollection<Message>(msg.MsgHeader.Reciever);
+            usr2Messages.Insert<Message>(msg);
         }
         public string FindUserName(string userName)
         {
@@ -35,24 +48,64 @@ namespace Server
         }
         public bool AddUser(ServerUser user)
         {
-            return true;
+            bool res = false;
+
+            BsonDocument bsonUser = new BsonDocument() {
+                { "Name",user.Name}, { "Family", user.Family },
+                {"UserName",user.UserName },{"Password",user.Password}
+            };
+            WriteConcernResult result = UsersCollection.Insert(bsonUser);
+            res = !result.HasLastErrorMessage;
+
+            return res;
         }
-
-        public List<ServerUser> GetUsers()
+        public string GetUserMessages(string srcUserName, string userName)
         {
-            MongoUser[] userCollection = dB.FindAllUsers();
-            List<ServerUser> users = new List<ServerUser>();
-            foreach (var user in userCollection)
-            {
-                BsonDocument bsonUser = user.ToBsonDocument();
+            string output = "";
+            MongoCollection<Message> msgCollection = dB.GetCollection<Message>(srcUserName);
 
-                ServerUser usr = new ServerUser(bsonUser[1][1].ToString(), bsonUser[2][1].ToString(), bsonUser[3][1].ToString(),bsonUser[4][1].ToString());
-                usr.Id = bsonUser[0][1].ToString();
-                users.Add(usr);
+            foreach (var msg in msgCollection.FindAll())
+            {
+                if (msg.MsgHeader.Reciever == userName)
+                {
+                    output += "#" + msg._id + ":left" + ":" + userName + ":" + msg.MsgContent + ":" + msg.Date;
+                }
+                else if (msg.MsgHeader.Sender == userName)
+                {
+                    output += "#" + msg._id + ":right" + ":" + userName + ":" + msg.MsgContent + ":" + msg.Date;
+                }
             }
 
-
-            return users;
+            return output;
         }
+        public void AddContact(string username, string[] contact)
+        {
+            List<string> ct = new List<string>();
+            var query = Query<ServerUser>.EQ(u => u.UserName, username);
+            ServerUser user = UsersCollection.FindOne(query);
+
+            ct = user.contacts;
+            foreach (var item in contact)
+            {
+                ct.Add(item);
+            }
+            var update = Update<ServerUser>.Set(u => u.contacts, ct);
+            UsersCollection.Update(query, update);
+        }
+        public string GetUserContacts(string userName)
+        {
+            List<string> ct = new List<string>();
+            var query = Query<ServerUser>.EQ(u => u.UserName, userName);
+            ServerUser user = UsersCollection.FindOne(query);
+            string output = "contacts#";
+            ct = user.contacts;
+            foreach (var item in ct)
+            {
+                output += item + "#";
+            }
+
+            return output;
+        }
+
     }
 }

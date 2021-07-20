@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Server;
 using SimpleTcp;
 
 
@@ -37,7 +37,10 @@ namespace MessengerApp
 
         private void ReciveData(object sender, DataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+
+            Manager mngr = new Manager();
+            
+
         }
 
         private void DisconnectClient(object sender, ClientDisconnectedEventArgs e)
@@ -49,6 +52,11 @@ namespace MessengerApp
         private void ConnectClient(object sender, ClientConnectedEventArgs e)
         {
             //System.Windows.Forms.MessageBox.Show("you are connected");
+        }
+
+        public void SendToServer(Message msg)
+        {
+            client.Send(msg.ConvertMessageToByte());
         }
     }
 }

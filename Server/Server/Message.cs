@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,29 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Message
+    public struct Header
     {
-        string _sender;
-        string _reciever;
-        string _mText;
-        DateTime date;
-        public Message()
+        public string Command { get; set; }
+        public string Sender { get; set; }
+        public string Reciever { get; set; }
+        public string TypeOfMessage { get; set; }
+
+    }
+    public class Message
+    {
+        public ObjectId _id { get; set; }
+        public Header MsgHeader { get; set; }
+        public object MsgContent { get; set; }
+        public DateTime Date { get; set; }
+        public Message(Header header)
         {
-            date = DateTime.Now;
+
+            MsgHeader = header;
+            Date = DateTime.Now;
         }
         public override string ToString()
         {
-            return $"{_sender}:{_reciever}:{_mText}:{date.ToString("HH:mm:ss")}";
+            return $"{MsgHeader.Sender}:{MsgHeader.Reciever}:{MsgContent}:{Date.ToString("HH:mm:ss")}";
         }
-
     }
 }

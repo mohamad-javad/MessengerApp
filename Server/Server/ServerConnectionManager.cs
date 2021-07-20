@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Server
 {
-    public static class ServerConnectionManager
+    public class ServerConnectionManager
     {
         private static string ServerIpAddress = "127.0.0.1:9000";
         private static SimpleTcpServer server;
@@ -76,9 +76,18 @@ namespace Server
         }
         private static void DataRecieved(object sender, DataReceivedEventArgs e)
         {
-            string msg = Encoding.UTF8.GetString(e.Data);
-            serverUI.StatusChanged(e.IpPort + " sent a message.");
+            Message msg = e.Data.ConvertMessageFromByte();
+
+            ServerManager svManager = new ServerManager();
+            svManager.ExecuteCommand(msg, e.IpPort);
+
         }
-        
+        public void SendToClient(Message resMsg, string ipPort)
+        {
+            byte[] byteMsg = resMsg.ConvertMessageToByte();
+            server.Send(ipPort, byteMsg);
+
+        }
+
     }
 }
