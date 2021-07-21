@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
-
+using System.Threading.Tasks;
 
 namespace Server
 {
@@ -59,26 +59,22 @@ namespace Server
 
             return res;
         }
-        public string GetUserMessages(string srcUserName, string userName)
+        public async Task<List<Message>> GetUserMessages(string srcUserName, string userName)
         {
-            string output = "";
+            List<Message> msgs = new List<Message>();
             MongoCollection<Message> msgCollection = dB.GetCollection<Message>(srcUserName);
-
+            
             foreach (var msg in msgCollection.FindAll())
             {
-                if (msg.MsgHeader.Reciever == userName)
+                if (msg.MsgHeader.Sender == userName || msg.MsgHeader.Reciever == userName)
                 {
-                    output += "#" + msg._id + ":left" + ":" + userName + ":" + msg.MsgContent + ":" + msg.Date;
-                }
-                else if (msg.MsgHeader.Sender == userName)
-                {
-                    output += "#" + msg._id + ":right" + ":" + userName + ":" + msg.MsgContent + ":" + msg.Date;
+                    msgs.Add(msg);
                 }
             }
 
-            return output;
+            return msgs;
         }
-        public void AddContact(string username, string[] contact)
+        public void AddContact(string username, List<string> contact)
         {
             List<string> ct = new List<string>();
             var query = Query<ServerUser>.EQ(u => u.UserName, username);
@@ -92,19 +88,15 @@ namespace Server
             var update = Update<ServerUser>.Set(u => u.contacts, ct);
             UsersCollection.Update(query, update);
         }
-        public string GetUserContacts(string userName)
+        public List<string> GetUserContacts(string userName)
         {
-            List<string> ct = new List<string>();
+            List<string> cntct = new List<string>();
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
             ServerUser user = UsersCollection.FindOne(query);
             string output = "contacts#";
-            ct = user.contacts;
-            foreach (var item in ct)
-            {
-                output += item + "#";
-            }
+            cntct = user.contacts;
 
-            return output;
+            return cntct;
         }
 
     }

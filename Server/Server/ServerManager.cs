@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
@@ -8,7 +9,7 @@ namespace Server
 {
     public interface IManager
     {
-        Message ExecuteCommand(Message msg, string ipPort);
+        void ExecuteCommand(Message msg, string ipPort);
     }
 
     public class ServerManager : IManager
@@ -29,91 +30,117 @@ namespace Server
         {
             this.users = dtManager.GetAllUsers();
         }
-        public Message ExecuteCommand(Message message, string ipPort)
+        public async void ExecuteCommand(Message message, string ipPort)
         {
-            Message resmessage;
+            Message resmessage = new Message(new Header());
             Header header;
             UpdateUsers();
             switch (message.MsgHeader.Command)
             {
                 case "new user":
                     ServerUser usr = (ServerUser)(message.MsgContent);
-                    
+                    header = new Header()
+                    {
+                        Command = "register user response",
+                        Sender = "Server",
+                        Reciever = usr.UserName,
+                        TypeOfMessage = "ServerUser"
+                    };
                     if (CreateUser(usr))
                     {
                         UpdateUsers();
-                        header = new Header()
-                        {
-                            Command = "register was succesfull",
-                            Sender = "Server",
-                            Reciever = usr.UserName,
-                            TypeOfMessage = "ServerUser"
-                        };
-                        resmessage = new Message(header);
-                        resmessage.MsgContent = usr;
-
                         
+                        resmessage = new Message(header);
+                        resmessage.MsgContent = "successfull";
 
                         sUI.StatusChanged($"{usr.UserName} was created");
 
-
-
+                    }
+                    else
+                    {
+                        resmessage = new Message(header);
+                        resmessage.MsgContent = "field";
                     }
                     break;
 
-                case "send text message":
 
-                    Message msg = new Message(new Header()
-                    {
-                        Sender = args[0],
-                        Reciever = args[1],
-                        TypeOfMessage = "string"
-                    });
-
-                    msg.MsgContent = args[2];
-                    dtManager.AddMessage(msg);
+                case "send message":
+                    dtManager.AddMessage(message);
                     break;
 
 
                 case "get messages":
-                    string messages = dtManager.GetUserMessages(args[0], args[1]);
-                    return messages;
+                    string srcUserName = message.MsgHeader.Sender,
+                        destUserName = message.MsgHeader.Reciever;
+                    
+                    header = new Header() {
+                        Sender = srcUserName,
+                        Reciever = destUserName,
+                        Command = "all user messages",
+                        TypeOfMessage = "list of messages"
+                    };
+                    resmessage = new Message(header);
+                    Task<List<Message>> tskMsg = dtManager.GetUserMessages(srcUserName, destUserName);
+                    List<Message> messages = await tskMsg;
+                    resmessage.MsgContent = messages;
+                    svconnectioManager.SendToClient(resmessage, ipPort);
+                    break;
+
 
                 case "add contact":
-                    string userName = args[0];
-                    string[] contact = args.Skip(1).ToArray();
+                    string userName = message.MsgHeader.Sender;
+                    List<string> contact = (List<string>)message.MsgContent;
                     dtManager.AddContact(userName, contact);
                     UpdateUsers();
                     break;
 
 
                 case "get contacts":
-                    string usrName = args[0];
-                    string contacts = dtManager.GetUserContacts(usrName);
-                    return contacts;
+                    string usrName = message.MsgHeader.Sender;
+                    List<string> contacts = dtManager.GetUserContacts(usrName);
+                    
+                    header = new Header()
+                    {
+                        Sender = "Server",
+                        Command = "all user contacts",
+                        Reciever = usrName
+                    };
+                    resmessage = new Message(header);
+                    resmessage.MsgContent = contacts;
+                    break;
 
 
                 case "create group":
+
                     break;
 
+
                 case "login":
-                    ServerUser usr1 = Login(args[0], args[1]);
+                    ServerUser usr1 = (ServerUser)message.MsgContent;
+                    header = new Header() { 
+                        Sender = "Server",
+                        Reciever = usr1.UserName,
+                        Command = "login response"
+                    };
+                    resmessage = new Message(header);
 
-                    if (usr1 != null)
+                    if (Login(usr1.UserName, usr1.Password) != null)
                     {
-                        string outMsg = $"loginres#success#{usr1._id}#{usr1.Name}#{usr1.Family}#{usr1.UserName}#{usr1.Password}";
-
-                        return outMsg;
+                        resmessage.MsgContent = "successfull";
                     }
-
+                    else
+                    {
+                        resmessage.MsgContent = "no user";
+                    }
                     break;
 
 
                 default:
-
                     break;
             }
-            return "";
+
+            svconnectioManager = new ServerConnectionManager();
+            svconnectioManager.SendToClient(resmessage, ipPort);
 
         }
         public bool CreateUser(ServerUser user)
@@ -156,11 +183,6 @@ namespace Server
                 }
             }
             return null;
-        }
-
-        public object ExecuteCommand(string command, object args)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

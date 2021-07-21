@@ -15,8 +15,9 @@ namespace Server
         private static SimpleTcpServer server;
         private static ServerUI serverUI;
         public static List<string> serverStatus;
+        IManager svManager;
 
-        static ServerConnectionManager()
+        public ServerConnectionManager()
         {
             server = new SimpleTcpServer(ServerIpAddress);
             serverStatus = new List<string>();
@@ -63,22 +64,22 @@ namespace Server
             server.Stop();
         }
 
-        private static void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
+        private void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
         {
             serverUI.StatusChanged(e.IpPort + " is disconnected.", "red");
             serverUI.AD_UserList(e.IpPort, false);
         }
 
-        private static void ClientConnected(object sender, ClientConnectedEventArgs e)
+        private void ClientConnected(object sender, ClientConnectedEventArgs e)
         {
             serverUI.StatusChanged(e.IpPort + " is connected.", "cyan");
             serverUI.AD_UserList(e.IpPort, true);
         }
-        private static void DataRecieved(object sender, DataReceivedEventArgs e)
+        private void DataRecieved(object sender, DataReceivedEventArgs e)
         {
             Message msg = e.Data.ConvertMessageFromByte();
 
-            ServerManager svManager = new ServerManager();
+            svManager = new ServerManager();
             svManager.ExecuteCommand(msg, e.IpPort);
 
         }

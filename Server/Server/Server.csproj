@@ -146,7 +146,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Databse\DataBase.cs" />
     <Compile Include="Databse\DataManager.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="MyExtentions.cs" />

@@ -12,6 +12,7 @@ namespace MessengerApp
     class Client
     {
         SimpleTcpClient client;
+        Manager mngr;
 
         public Client()
         {
@@ -38,8 +39,9 @@ namespace MessengerApp
         private void ReciveData(object sender, DataReceivedEventArgs e)
         {
 
-            Manager mngr = new Manager();
-            
+            mngr = new Manager();
+            Message msg = e.Data.ConvertMessageFromByte();
+            mngr.ExecuteCommand(msg);
 
         }
 
