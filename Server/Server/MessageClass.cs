@@ -10,8 +10,8 @@ namespace Server
     {
         public string Sender { get; set; }
         public string Reciever { get; set; }
-        public string  Command { get; set; }
-        public string  MessageType { get; set; }
+        public string Command { get; set; }
+        public string MessageType { get; set; }
 
     }
     public class MessageClass
@@ -24,5 +24,29 @@ namespace Server
             MessageHeader = header;
             CreationDate = DateTime.Now;
         }
+
+        public string this[string input]
+        {
+            get
+            {
+                string output = "";
+                switch (input)
+                {
+                    case "command":
+                        output = MessageHeader.Command;
+                        break;
+                    case "sender":
+                        output = MessageHeader.Sender;
+                        break;
+                    case "reciever":
+                        output = MessageHeader.Reciever;
+                        break;
+                    default:
+                        throw new Exception("the index not found!!!");
+                }
+                return output;
+            }
+        }
+
     }
 }

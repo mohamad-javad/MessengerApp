@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using SimpleTcp;
 
 
@@ -33,7 +33,7 @@ namespace MessengerApp
 
         private void ReciveData(object sender, DataReceivedEventArgs e)
         {
-
+           
         }
 
         private void DisconnectClient(object sender, ClientDisconnectedEventArgs e)
@@ -45,6 +45,23 @@ namespace MessengerApp
         private void ConnectClient(object sender, ClientConnectedEventArgs e)
         {
             //System.Windows.Forms.MessageBox.Show("you are connected");
+        }
+        public void ConnectToServer()
+        {
+            Task.Run((() =>
+            {
+                while (!client.IsConnected)
+                {
+                    try
+                    {
+                        client.Connect();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }));
         }
     }
 }
