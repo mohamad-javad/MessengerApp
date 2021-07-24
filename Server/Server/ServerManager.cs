@@ -34,7 +34,7 @@ namespace Server
             Message resmessage = new Message(new Header());
             Header header;
             UpdateUsers();
-            switch (message.MsgHeader.Command)
+            switch (message["command"])
             {
                 case "new user":
                     ServerUser usr = (ServerUser)(message.MsgContent);
@@ -77,8 +77,8 @@ namespace Server
 
 
                 case "get messages":
-                    string srcUserName = message.MsgHeader.Sender,
-                        destUserName = message.MsgHeader.Reciever;
+                    string srcUserName = message["sender"],
+                        destUserName = message["reciever"];
 
                     header = new Header()
                     {
@@ -95,7 +95,7 @@ namespace Server
 
 
                 case "add contact":
-                    string userName = message.MsgHeader.Sender;
+                    string userName = message["sender"];
                     List<string> contact = (List<string>)message.MsgContent;
                     dtManager.AddContact(userName, contact);
                     UpdateUsers();
@@ -103,7 +103,7 @@ namespace Server
 
 
                 case "get contacts":
-                    string usrName = message.MsgHeader.Sender;
+                    string usrName = message["sender"];
                     List<string> contacts = dtManager.GetUserContacts(usrName);
 
                     header = new Header()

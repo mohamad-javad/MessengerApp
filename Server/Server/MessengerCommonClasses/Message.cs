@@ -34,5 +34,38 @@ namespace Server
         {
             return $"{MsgHeader.Sender}:{MsgHeader.Reciever}:{MsgContent}:{Date.ToString("HH:mm:ss")}";
         }
+
+        public string this[string input]
+        {
+            get
+            {
+                string returnValue = "";
+                switch (input)
+                {
+                    case "sender":
+                        returnValue= MsgHeader.Sender;
+                        break;
+                    case "reciever":
+                        returnValue= MsgHeader.Reciever;
+                        break;
+                    case "msgType":
+                        returnValue= MsgHeader.TypeOfMessage;
+                        break;
+                    case "create":
+                        returnValue= Date.ToString("G");
+                        break;
+                    case "command":
+                        returnValue= MsgHeader.Command;
+                        break;
+                    default:
+                        break;
+                }
+
+                return returnValue;
+            }
+
+            
+        }
+
     }
 }
