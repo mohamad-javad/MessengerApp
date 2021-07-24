@@ -1,4 +1,6 @@
 ﻿
+using Bunifu.Framework.UI;
+
 namespace Server
 {
     partial class ServerUI
@@ -63,7 +65,7 @@ namespace Server
             this.Exit_btn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.Title_lbl = new System.Windows.Forms.Label();
-            this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.BunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Users = new System.Windows.Forms.ListBox();
             this.sm_gp.SuspendLayout();
@@ -593,10 +595,10 @@ namespace Server
             // 
             // bunifuDragControl1
             // 
-            this.bunifuDragControl1.Fixed = true;
-            this.bunifuDragControl1.Horizontal = true;
-            this.bunifuDragControl1.TargetControl = this.top_gp;
-            this.bunifuDragControl1.Vertical = true;
+            this.BunifuDragControl1.Fixed = true;
+            this.BunifuDragControl1.Horizontal = true;
+            this.BunifuDragControl1.TargetControl = this.top_gp;
+            this.BunifuDragControl1.Vertical = true;
             // 
             // groupBox1
             // 
@@ -664,7 +666,7 @@ namespace Server
         private Bunifu.UI.WinForms.BunifuTextBox port_tb;
         private Bunifu.UI.WinForms.BunifuTextBox ip_tb;
         private System.Windows.Forms.Label Title_lbl;
-        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
+        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl;
         private System.Windows.Forms.ListBox History;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox Users;
@@ -675,6 +677,10 @@ namespace Server
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Bunifu.UI.WinForms.BunifuGroupBox statusBar_gp;
+        private BunifuDragControl bunifuDragControl1;
+
+        public BunifuDragControl BunifuDragControl1 { get => BunifuDragControl11; set => BunifuDragControl11 = value; }
+        public BunifuDragControl BunifuDragControl11 { get => bunifuDragControl1; set => bunifuDragControl1 = value; }
     }
 }
 
