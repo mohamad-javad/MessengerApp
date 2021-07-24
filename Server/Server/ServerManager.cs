@@ -18,35 +18,46 @@ namespace Server
             users = dtManager.GetAllUsers();
             sUI = new ServerUI();
         }
-        public string ExecuteCommand(MessageClass message)
+        public MessageClass ExecuteCommand(MessageClass message)
         {
-            switch (command)
+            MessageClass resMessage = new MessageClass(new Header());
+            Header header = new Header() { Reciever = message.MessageHeader.Sender };
+            switch (message["command"])
             {
                 case "new user":
-                    ServerUser usr= new ServerUser();
-                    usr.Name = args[0];
-                    usr.Family = args[1];
-                    usr.UserName = args[2];
-                    usr.Password = args[3];
+                    ServerUser usr= (ServerUser)message.MessageContent;
                     if (CreateUser(usr))
                     {
-                        sUI.StatusChanged($"{usr.UserName} was created");
+                        header.Sender = "Server";
+                        header.Command = "register response";
+                        header.MessageType = "ServerUser";
+                        resMessage = new MessageClass(header);
+                        resMessage.MessageContent = usr;
+                        try
+                        {
+                            sUI.StatusChanged($"{usr.UserName} was created");
+                        }
+                        catch
+                        {
+
+                        }
+                        
                     }
                     break;
                 case "send message":
-                    Message msg = new Message();
-                    msg.Sender = args[0];
-                    msg.Reciever = args[1];
-                    msg.MsgText = args[2];
-                    dtManager.AddMessage(msg);
+                    dtManager.AddMessage(message);
                     break; 
                 case "give messages":
-                    return dtManager.GetUserMessages(args[0], args[1]);
-
+                    header.Command = "get all user messages";
+                    header.Sender = "Server";
+                    header.MessageType = "list of messages";
+                    resMessage = new MessageClass(header);
+                    resMessage.MessageContent = dtManager.GetUserMessages(message["sender"], message["reciever"]);
+                    break;
                 default:
                     break;
             }
-            return "";
+            return resMessage;
         }
         public bool CreateUser(ServerUser user)
         {
@@ -70,7 +81,7 @@ namespace Server
         }
 
 
-        public bool NewMessage(Message msg)
+        public bool NewMessage(MessageClass msg)
         {
             return false;
         }
