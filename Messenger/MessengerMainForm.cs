@@ -134,8 +134,7 @@ namespace MessengerApp
 
         private void ch_btn_Click(object sender, EventArgs e)
         {
-            Client client = new Client();
-            client.ClientSetUp();
+            
         }
 
         private void Exit_btn_MouseHover(object sender, EventArgs e)
