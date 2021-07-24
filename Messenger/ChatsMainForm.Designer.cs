@@ -38,8 +38,10 @@ namespace MessengerApp
             this.write_msg = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.write_msg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -104,6 +106,7 @@ namespace MessengerApp
             this.write_msg.BorderRadius = 1;
             this.write_msg.BorderThickness = 1;
             this.write_msg.Controls.Add(this.richTextBox1);
+            this.write_msg.Controls.Add(this.pictureBox2);
             this.write_msg.Controls.Add(this.pictureBox1);
             this.write_msg.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.write_msg.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Gradient;
@@ -126,9 +129,9 @@ namespace MessengerApp
             this.richTextBox1.BackColor = System.Drawing.Color.SteelBlue;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(72, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(765, 74);
+            this.richTextBox1.Size = new System.Drawing.Size(690, 74);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
@@ -137,12 +140,21 @@ namespace MessengerApp
             this.pictureBox1.BackColor = System.Drawing.Color.SteelBlue;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(765, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(762, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(58, 74);
+            this.pictureBox1.Size = new System.Drawing.Size(61, 74);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(72, 74);
+            this.pictureBox2.TabIndex = 10;
+            this.pictureBox2.TabStop = false;
             // 
             // ChatsMainForm
             // 
@@ -157,6 +169,7 @@ namespace MessengerApp
             this.Text = "Chats";
             this.write_msg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -170,5 +183,6 @@ namespace MessengerApp
         private Bunifu.UI.WinForms.BunifuShadowPanel write_msg;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
