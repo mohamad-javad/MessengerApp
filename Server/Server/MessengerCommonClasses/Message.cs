@@ -21,18 +21,23 @@ namespace Server
     public class Message
     {
         public ObjectId _id { get; set; }
-        public Header MsgHeader { get; set; }
-        public object MsgContent { get; set; }
-        public DateTime Date { get; set; }
+        public object MessageContent { get; set; }
+        public DateTime CreationDate { get; private set; }
+        public Header MessageHeader { get; set; }
+        
         public Message(Header header)
         {
 
-            MsgHeader = header;
-            Date = DateTime.Now;
+            MessageHeader = header;
+            CreationDate = DateTime.Now;
         }
         public override string ToString()
         {
-            return $"{MsgHeader.Sender}:{MsgHeader.Reciever}:{MsgContent}:{Date.ToString("HH:mm:ss")}";
+            if(MessageContent is string)
+            return $"{MessageHeader.Sender}:{MessageContent}:{CreationDate.ToString("HH:mm:ss")}";
+            else{
+                return $"{MessageHeader.Sender}:Send a file:{CreationDate.ToString("HH:mm:ss")}";
+            }
         }
 
         public string this[string input]
@@ -43,29 +48,26 @@ namespace Server
                 switch (input)
                 {
                     case "sender":
-                        returnValue= MsgHeader.Sender;
+                        returnValue = MessageHeader.Sender;
                         break;
                     case "reciever":
-                        returnValue= MsgHeader.Reciever;
+                        returnValue = MessageHeader.Reciever;
                         break;
                     case "msgType":
-                        returnValue= MsgHeader.TypeOfMessage;
+                        returnValue = MessageHeader.TypeOfMessage;
                         break;
                     case "create":
-                        returnValue= Date.ToString("G");
+                        returnValue = CreationDate.ToString("G");
                         break;
                     case "command":
-                        returnValue= MsgHeader.Command;
+                        returnValue = MessageHeader.Command;
                         break;
                     default:
-                        break;
+                        throw new Exception("the index not found!!!");
                 }
 
                 return returnValue;
             }
-
-            
         }
-
     }
 }

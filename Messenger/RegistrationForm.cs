@@ -61,7 +61,7 @@ namespace Sliding_Application
                 usr.UserName = userName_txt.Text;
                 usr.Password = pswd_txt.Text.Sha_256();
 
-                rgstrMsg.MsgContent = usr;
+                rgstrMsg.MessageContent = usr;
                 new Manager().ExecuteCommand(rgstrMsg);
             }
         }

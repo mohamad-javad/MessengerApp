@@ -52,7 +52,7 @@ namespace Sliding_Application
                 ServerUser user = new ServerUser();
                 user.UserName = usr_txt.Text;
                 user.Password = pswd_txt.Text;
-                msg.MsgContent = user;
+                msg.MessageContent = user;
 
                 new Manager().ExecuteCommand(msg);
             }

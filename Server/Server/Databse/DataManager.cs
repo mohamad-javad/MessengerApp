@@ -36,9 +36,9 @@ namespace Server
 
         public void AddMessage(Message msg)
         {
-            MongoCollection<Message> usr1Messages = dB.GetCollection<Message>(msg.MsgHeader.Sender);
+            MongoCollection<Message> usr1Messages = dB.GetCollection<Message>(msg.MessageHeader.Sender);
             usr1Messages.Insert<Message>(msg);
-            MongoCollection<Message> usr2Messages = dB.GetCollection<Message>(msg.MsgHeader.Reciever);
+            MongoCollection<Message> usr2Messages = dB.GetCollection<Message>(msg.MessageHeader.Reciever);
             usr2Messages.Insert<Message>(msg);
         }
         public string FindUserName(string userName)
@@ -66,7 +66,7 @@ namespace Server
             
             foreach (var msg in msgCollection.FindAll())
             {
-                if (msg.MsgHeader.Sender == userName || msg.MsgHeader.Reciever == userName)
+                if (msg["sender"] == userName || msg["reciever"] == userName)
                 {
                     msgs.Add(msg);
                 }
@@ -74,9 +74,9 @@ namespace Server
 
             return msgs;
         }
-        public void AddContact(string username, List<string> contact)
+        public void AddContact(string username, List<User> contact)
         {
-            List<string> ct = new List<string>();
+            List<User> ct = new List<User>();
             var query = Query<ServerUser>.EQ(u => u.UserName, username);
             ServerUser user = UsersCollection.FindOne(query);
 
@@ -88,12 +88,11 @@ namespace Server
             var update = Update<ServerUser>.Set(u => u.contacts, ct);
             UsersCollection.Update(query, update);
         }
-        public List<string> GetUserContacts(string userName)
+        public List<User> GetUserContacts(string userName)
         {
-            List<string> cntct = new List<string>();
+            List<User> cntct = new List<User>();
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
             ServerUser user = UsersCollection.FindOne(query);
-            string output = "contacts#";
             cntct = user.contacts;
 
             return cntct;

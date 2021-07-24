@@ -37,7 +37,7 @@ namespace Server
             switch (message["command"])
             {
                 case "new user":
-                    ServerUser usr = (ServerUser)(message.MsgContent);
+                    ServerUser usr = (ServerUser)(message.MessageContent);
                     header = new Header()
                     {
                         Command = "register user response",
@@ -50,7 +50,7 @@ namespace Server
                         UpdateUsers();
 
                         resmessage = new Message(header);
-                        resmessage.MsgContent = usr;
+                        resmessage.MessageContent = usr;
 
                         try
                         {
@@ -66,7 +66,7 @@ namespace Server
                     else
                     {
                         resmessage = new Message(header);
-                        resmessage.MsgContent = "field";
+                        resmessage.MessageContent = "field";
                     }
                     break;
 
@@ -90,13 +90,13 @@ namespace Server
                     resmessage = new Message(header);
                     Task<List<Message>> tskMsg = dtManager.GetUserMessages(srcUserName, destUserName);
                     List<Message> messages = await tskMsg;
-                    resmessage.MsgContent = messages;
+                    resmessage.MessageContent = messages;
                     break;
 
 
                 case "add contact":
                     string userName = message["sender"];
-                    List<string> contact = (List<string>)message.MsgContent;
+                    List<User> contact = (List<User>)message.MessageContent;
                     dtManager.AddContact(userName, contact);
                     UpdateUsers();
                     break;
@@ -104,7 +104,7 @@ namespace Server
 
                 case "get contacts":
                     string usrName = message["sender"];
-                    List<string> contacts = dtManager.GetUserContacts(usrName);
+                    List<User> contacts = dtManager.GetUserContacts(usrName);
 
                     header = new Header()
                     {
@@ -113,7 +113,7 @@ namespace Server
                         Reciever = usrName
                     };
                     resmessage = new Message(header);
-                    resmessage.MsgContent = contacts;
+                    resmessage.MessageContent = contacts;
                     break;
 
 
@@ -123,7 +123,7 @@ namespace Server
 
 
                 case "login user":
-                    ServerUser usr1 = (ServerUser)message.MsgContent;
+                    ServerUser usr1 = (ServerUser)message.MessageContent;
                     header = new Header()
                     {
                         Sender = "Server",
@@ -135,11 +135,11 @@ namespace Server
                     ServerUser usr3 = Login(usr1.UserName, usr1.Password);
                     if (usr3 != null)
                     {
-                        resmessage.MsgContent = usr3;
+                        resmessage.MessageContent = usr3;
                     }
                     else
                     {
-                        resmessage.MsgContent = "no user";
+                        resmessage.MessageContent = "no user";
                     }
                     break;
 
