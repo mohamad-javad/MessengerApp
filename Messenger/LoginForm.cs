@@ -6,7 +6,6 @@ namespace Sliding_Application
 {
     public partial class LoginForm : Form
     {
-        RegistrationForm rgForm;
         static LoginForm loginForm;
         public static LoginForm GetFrom
         {
@@ -24,18 +23,15 @@ namespace Sliding_Application
             InitializeComponent();
         }
 
-        public void SetInstance(RegistrationForm form)
-        {
-            InitializeComponent();
-            rgForm = form;
-            rgForm.Visible = false;
-            Manager.loginForm = GetFrom;
-        }
-
         private void label4_Click(object sender, EventArgs e)
         {
-            this.Close();
-            rgForm.Visible = true;
+            Server.Message msg = new Server.Message(new Header()
+            {
+                Sender = usr_txt.Text,
+                Reciever = "Server",
+                Command = "register"
+            });
+            new Manager().ExecuteCommand(msg);
         }
 
         private void button1_Click(object sender, EventArgs e)

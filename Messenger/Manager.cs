@@ -6,40 +6,40 @@ namespace MessengerApp
 {
     public class Manager
     {
-        public ServerUser Owner { get; set; }
-        public static MessengerMainForm mainClientForm { get; set; }
-        public static MessengerMainForm CurrentMessengerForm { get; set; }
-        public static RegistrationForm registeratioForm { get; set; }
-        public static LoginForm loginForm { get; set; }
-
+        public static ServerUser Owner { get; set; }
+        public static Manager manager;
+        static Manager()
+        {
+            manager = new Manager();
+        }
         public void ExecuteCommand(Message message)
         {
-
+            
             ServerUser usr;
-            string command = message.MsgHeader.Command;
+            
             Header header;
             Message CMessage = new Message(header);
 
-            switch (command)
+            switch (message["command"])
             {
                 case "register user response":
-                    if (message.MsgHeader.TypeOfMessage == "ServerUser")
+                    if (message["msgType"] == "ServerUser")
                     {
-                        Owner = (ServerUser)message.MsgContent;
-
+                        Owner = (ServerUser)message.MessageContent;
+                        manager.ShowMain();
                         LoginUser();
                     }
                     else
                     {
-                        registeratioForm.Hide();
-                        registeratioForm.ShowDialog(CurrentMessengerForm);
-                        registeratioForm.AddError("this user name is existed");
+                        manager.ShowRegistratio();
+                        manager.AddError("this user name exist", "register");
 
                     }
+
                     break;
 
                 case "register user":
-                    usr = (ServerUser)message.MsgContent;
+                    usr = (ServerUser)message.MessageContent;
                     header = new Header()
                     {
                         Sender = usr.UserName,
@@ -47,7 +47,7 @@ namespace MessengerApp
                         Command = "new user"
                     };
                     CMessage = new Message(header);
-                    CMessage.MsgContent = usr;
+                    CMessage.MessageContent = usr;
 
                     break;
 
@@ -70,28 +70,36 @@ namespace MessengerApp
 
 
                 case "login user":
-                    header = message.MsgHeader;
+                    header = message.MessageHeader;
                     CMessage = new Message(header);
-                    CMessage.MsgContent = message.MsgContent;
+                    CMessage.MessageContent = message.MessageContent;
 
                     break;
 
 
                 case "login response":
-                    if (message.MsgHeader.TypeOfMessage == "ServerUser")
+                    if (message["msgType"] == "ServerUser")
                     {
-                        Owner = (ServerUser)message.MsgContent;
+                        Owner = (ServerUser)message.MessageContent;
                         LoginUser();
                     }
                     else
                     {
-                        loginForm.Hide();
-                        loginForm.ShowDialog();
-                        loginForm.AddError("user name or password are wrong!");
-
+                        manager.ShowLogin();
+                        manager.AddError("user name or password are wrong!", "login");
                     }
+
                     break;
 
+                case "register":
+                    manager.ShowRegistratio();
+                    break;
+                case "login":
+                    manager.ShowLogin();
+                    break;
+                case "upload forms":
+                    manager.UploadForms((MessengerMainForm)message.MessageContent);
+                    break;
 
                 default:
                     break;
@@ -101,24 +109,8 @@ namespace MessengerApp
 
         private void LoginUser()
         {
-
-            try
-            {
-                CurrentMessengerForm.SayHi(Owner.Name);
-                CurrentMessengerForm.ShowDialog();
-            }
-            catch { }
-            try
-            {
-                registeratioForm.Close();
-            }
-            catch { }
-
-            try
-            {
-                loginForm.Close();
-            }
-            catch { }
+            Owner.Name.SayHi();
+            manager.ShowMain();
         }
     }
 }

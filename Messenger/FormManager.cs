@@ -13,7 +13,7 @@ namespace Sliding_Application
         public static RegistrationForm Registration { get; private set; }
         public static LoginForm Login { get; private set; }
 
-        public static void UploadForms(MessengerMainForm mainForm)
+        public static void UploadForms(this Manager manager, MessengerMainForm mainForm)
         {
             MainForm = mainForm;
             Registration = RegistrationForm.GetForm;
@@ -45,7 +45,24 @@ namespace Sliding_Application
             try { Login.ShowDialog(); } catch { }
         }
         
-
+        public static void AddError(this Manager manager, string error, string form)
+        {
+            switch (form)
+            {
+                case "login":
+                    Login.AddError(error);
+                    break;
+                case "register":
+                    Registration.AddError(error);
+                    break;
+                default:
+                    break;
+            }
+        }
+        public static void SayHi(this string name)
+        {
+            MainForm.SayHi(name);
+        }
 
     }
 }

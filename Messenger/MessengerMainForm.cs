@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Server;
 using Sliding_Application;
 
 namespace MessengerApp
@@ -8,7 +9,7 @@ namespace MessengerApp
     public partial class MessengerMainForm : Form
     {
         Form currentForm;
-        Manager mngr;
+        Manager manager;
         public MessengerMainForm()
         {
             InitializeComponent();
@@ -18,11 +19,11 @@ namespace MessengerApp
         private void MessengerMainForm_Load(object sender, EventArgs e)
         {
             Client.ConnectToServer();
-            Manager.CurrentMessengerForm = this;
-            this.HideForm();
-            RegistrationForm.GetForm.ShowDialog();
-            RegistrationForm.SetInstance(this);
-
+            manager = new Manager();
+            Header header = new Header() { Command = "upload forms" };
+            Server.Message msg = new Server.Message(header);
+            msg.MessageContent = this;
+            manager.ExecuteCommand(msg);
         }
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)

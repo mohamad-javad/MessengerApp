@@ -9,8 +9,6 @@ namespace Sliding_Application
     public partial class RegistrationForm : Form
     {
         static RegistrationForm rgstrForm;
-        static MessengerMainForm mainForm;
-
         public static RegistrationForm GetForm
         {
             get
@@ -26,11 +24,6 @@ namespace Sliding_Application
         {
             InitializeComponent();
             
-        }
-        public static void SetInstance(MessengerMainForm form)
-        {
-            mainForm = form;
-            mainForm.Hide();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -110,7 +103,7 @@ namespace Sliding_Application
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
-            Manager.registeratioForm = GetForm;
+
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
@@ -120,10 +113,6 @@ namespace Sliding_Application
 
         private void login_btn_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            LoginForm login = LoginForm.GetFrom;
-            login.SetInstance(GetForm);
-            login.ShowDialog();
         }
         public void AddError(string error)
         {
