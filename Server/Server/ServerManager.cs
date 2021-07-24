@@ -25,7 +25,7 @@ namespace Server
             switch (message["command"])
             {
                 case "new user":
-                    ServerUser usr= (ServerUser)message.MessageContent;
+                    ServerUser usr = (ServerUser)message.MessageContent;
                     if (CreateUser(usr))
                     {
                         header.Sender = "Server";
@@ -41,18 +41,28 @@ namespace Server
                         {
 
                         }
-                        
+
                     }
                     break;
                 case "send message":
                     dtManager.AddMessage(message);
-                    break; 
+                    break;
                 case "give messages":
                     header.Command = "get all user messages";
                     header.Sender = "Server";
                     header.MessageType = "list of messages";
                     resMessage = new MessageClass(header);
                     resMessage.MessageContent = dtManager.GetUserMessages(message["sender"], message["reciever"]);
+                    break;
+                case "login user":
+                    ServerUser userlogin = LoginUser((ServerUser)message.MessageContent);
+                    if (userlogin != null)
+                    {
+                        header.Sender = "Server";
+                        header.Command = "login response";
+                        header.MessageType = "server user";
+                        resMessage.MessageContent = userlogin;
+                    }
                     break;
                 default:
                     break;
@@ -64,7 +74,7 @@ namespace Server
             bool result = true;
             foreach (var usr in users)
             {
-                if(usr.UserName == user.UserName)
+                if (usr.UserName == user.UserName)
                 {
                     result = false;
                     break;
@@ -80,11 +90,25 @@ namespace Server
 
         }
 
+        private ServerUser LoginUser(ServerUser user)
+        {
+            foreach (var usr in users)
+            {
+                if (user.UserName == usr.UserName)
+                {
+                    if (user.Password == usr.Password)
+                    {
+                        return usr;
+                    }
+                }
+            }
+            return null;
+        }
 
         public bool NewMessage(MessageClass msg)
         {
             return false;
         }
-        
+
     }
 }
