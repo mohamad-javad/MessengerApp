@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Server;
+﻿using Server;
+using Sliding_Application;
+
+
 namespace MessengerApp
 {
     class Manager
     {
         public ServerUser Owner { get; set; }
         public static MessengerMainForm mainClientForm { get; set; }
-        Client client;
+        public static MessengerMainForm CurrentMessengerForm { get; set; }
+        public static RegistrationForm registeratioForm { get; set; }
+        public static LoginForm loginForm { get; set; }
 
-        public async void ExecuteCommand(Message message)
+        public void ExecuteCommand(Message message)
         {
+
             ServerUser usr;
             string command = message.MsgHeader.Command;
             Header header;
@@ -22,16 +23,24 @@ namespace MessengerApp
             switch (command)
             {
                 case "register user response":
-                    if ((string)message.MsgContent == "successfull")
+                    if (message.MsgHeader.TypeOfMessage == "ServerUser")
                     {
+                        Owner = (ServerUser)message.MsgContent;
+
                         LoginUser();
-                        
+                    }
+                    else
+                    {
+                        registeratioForm.Hide();
+                        registeratioForm.ShowDialog(CurrentMessengerForm);
+                        registeratioForm.AddError("this user name is existed");
+
                     }
                     break;
 
                 case "register user":
                     usr = (ServerUser)message.MsgContent;
-                    Header hewader = new Header()
+                    header = new Header()
                     {
                         Sender = usr.UserName,
                         Reciever = "Server",
@@ -39,11 +48,12 @@ namespace MessengerApp
                     };
                     CMessage = new Message(header);
                     CMessage.MsgContent = usr;
-                    
+
                     break;
 
 
                 case "get user messages":
+
                     break;
 
 
@@ -60,24 +70,55 @@ namespace MessengerApp
 
 
                 case "login user":
+                    header = message.MsgHeader;
+                    CMessage = new Message(header);
+                    CMessage.MsgContent = message.MsgContent;
+
                     break;
 
 
                 case "login response":
-                    break;
+                    if (message.MsgHeader.TypeOfMessage == "ServerUser")
+                    {
+                        Owner = (ServerUser)message.MsgContent;
+                        LoginUser();
+                    }
+                    else
+                    {
+                        loginForm.Hide();
+                        loginForm.ShowDialog();
+                        loginForm.AddError("user name or password are wrong!");
 
+                    }
+                    break;
 
 
                 default:
                     break;
             }
-            client = new Client();
-            client.SendToServer(CMessage);
+            Client.SendToServer(CMessage);
         }
 
         private void LoginUser()
         {
 
+            try
+            {
+                CurrentMessengerForm.SayHi(Owner.Name);
+                CurrentMessengerForm.ShowDialog();
+            }
+            catch { }
+            try
+            {
+                registeratioForm.Close();
+            }
+            catch { }
+
+            try
+            {
+                loginForm.Close();
+            }
+            catch { }
         }
     }
 }

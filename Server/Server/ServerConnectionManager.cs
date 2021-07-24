@@ -9,31 +9,23 @@ using System.Windows.Forms;
 
 namespace Server
 {
-    public class ServerConnectionManager
+    public static class ServerConnectionManager
     {
         private static string ServerIpAddress = "127.0.0.1:9000";
         private static SimpleTcpServer server;
         private static ServerUI serverUI;
         public static List<string> serverStatus;
-        IManager svManager;
+        static IManager svManager;
 
-        public ServerConnectionManager()
+        static ServerConnectionManager()
         {
             server = new SimpleTcpServer(ServerIpAddress);
             serverStatus = new List<string>();
             server.Events.DataReceived += DataRecieved;
             server.Events.ClientConnected += ClientConnected;
             server.Events.ClientDisconnected += ClientDisconnected;
+            serverUI = ServerUI.GetForm;
         }
-
-        public static ServerUI DefServerUi
-        {
-            set
-            {
-                serverUI = value;
-            }
-        }
-
         public static string ServerStatus
         {
             set
@@ -41,7 +33,7 @@ namespace Server
                 serverStatus.Add(value);
             }
         }
-        public static string ServerAddress
+        public static  string ServerAddress
         {
             get
             {
@@ -64,31 +56,29 @@ namespace Server
             server.Stop();
         }
 
-        private void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
+        private static void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
         {
             serverUI.StatusChanged(e.IpPort + " is disconnected.", "red");
             serverUI.AD_UserList(e.IpPort, false);
         }
 
-        private void ClientConnected(object sender, ClientConnectedEventArgs e)
+        private static void ClientConnected(object sender, ClientConnectedEventArgs e)
         {
             serverUI.StatusChanged(e.IpPort + " is connected.", "cyan");
             serverUI.AD_UserList(e.IpPort, true);
         }
-        private void DataRecieved(object sender, DataReceivedEventArgs e)
+        private static async void DataRecieved(object sender, DataReceivedEventArgs e)
         {
             Message msg = e.Data.ConvertMessageFromByte();
 
             svManager = new ServerManager();
-            svManager.ExecuteCommand(msg, e.IpPort);
+            Task<Message> response = svManager.ExecuteCommand(msg);
+            Message message = await response;
+
+            server.Send(e.IpPort, message.ConvertMessageToByte());
 
         }
-        public void SendToClient(Message resMsg, string ipPort)
-        {
-            byte[] byteMsg = resMsg.ConvertMessageToByte();
-            server.Send(ipPort, byteMsg);
 
-        }
 
     }
 }

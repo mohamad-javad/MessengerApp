@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MessengerApp;
+using Sliding_Application;
 
 namespace MessengerApp
 {
     public partial class MessengerMainForm : Form
     {
-        Client client;
-        private Form currentForm;
+        Form currentForm;
+        Manager mngr;
         public MessengerMainForm()
         {
             InitializeComponent();
-            client = new Client();
             
+            
+        }
+        private void MessengerMainForm_Load(object sender, EventArgs e)
+        {
+            Client.ConnectToServer();
+            Manager.CurrentMessengerForm = this;
+            this.HideForm();
+            RegistrationForm.GetForm.ShowDialog();
+            RegistrationForm.SetInstance(this);
+
         }
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)
@@ -78,6 +80,7 @@ namespace MessengerApp
             {
                 currentForm.Close();
             }
+            welcom_lbl.Visible = false;
             currentForm = form;
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
@@ -87,16 +90,6 @@ namespace MessengerApp
             form.BringToFront();
             form.Show();
             PageName.Text = $"({form.Text})";
-        }
-
-        private void PictureBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Logo_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Profile_btn_Click(object sender, EventArgs e)
@@ -113,17 +106,6 @@ namespace MessengerApp
         {
 
         }
-
-        private void dashboard_btn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Submenu(string nameOfSubPanel, bool visiblity=false)
-        {
-
-        }
-
         private void People_btn_Click(object sender, EventArgs e)
         {
 
@@ -136,7 +118,20 @@ namespace MessengerApp
 
         private void ch_btn_Click(object sender, EventArgs e)
         {
-            client.ClientSetUp();
+        }
+        public void HideForm()
+        {
+            
+            this.Hide();
+            this.Visible = false;
+            
+        }
+        public void SayHi(string name)
+        {
+            BeginInvoke((Action)(() =>
+            {
+                welcom_lbl.Text += "\n" + name;
+            }));
         }
     }
 }

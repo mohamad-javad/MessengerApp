@@ -17,19 +17,10 @@ namespace MessengerApp
             InitializeComponent();
         }
 
-        private void BunifuMaterialTextbox2_OnValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void ProfileForm_Load(object sender, EventArgs e)
         {
 
         }
+
     }
 }

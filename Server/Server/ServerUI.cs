@@ -16,8 +16,18 @@ namespace Server
         Label status;
         static bool isPortChanged;
         static bool isIpChanged;
-        
-        public ServerUI()
+        static ServerUI serverUi;
+        public static ServerUI GetForm {
+            get
+            {
+                if (serverUi == null)
+                {
+                    serverUi = new ServerUI();
+                }
+                return serverUi;
+            }
+        }
+        private ServerUI()
         {
             InitializeComponent();
         }
@@ -26,7 +36,7 @@ namespace Server
             CheckForIllegalCrossThreadCalls = false;
             isIpChanged = false;
             isPortChanged = false;
-            ServerConnectionManager.DefServerUi = this;
+            stopServer_btn.Enabled = false;
         }
 
 

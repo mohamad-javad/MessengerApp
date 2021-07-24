@@ -40,6 +40,19 @@ namespace Server
 
             return ms.ToArray();
         }
+
+        public static bool IsIn(this char chr, string str)
+        {
+            foreach (var c in str)
+            {
+                if (c == chr)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 
 }

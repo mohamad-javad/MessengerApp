@@ -9,18 +9,17 @@ namespace Server
 {
     public interface IManager
     {
-        void ExecuteCommand(Message msg, string ipPort);
+        Task<Message> ExecuteCommand(Message msg);
     }
 
     public class ServerManager : IManager
     {
-        ServerConnectionManager svconnectioManager;
         ServerUI sUI;
         List<ServerUser> users;
         DataManager dtManager;
         public ServerManager()
         {
-            sUI = new ServerUI();
+            sUI = ServerUI.GetForm;
             dtManager = new DataManager();
             users = new List<ServerUser>();
             UpdateUsers();
@@ -30,7 +29,7 @@ namespace Server
         {
             this.users = dtManager.GetAllUsers();
         }
-        public async void ExecuteCommand(Message message, string ipPort)
+        public async Task<Message> ExecuteCommand(Message message)
         {
             Message resmessage = new Message(new Header());
             Header header;
@@ -49,11 +48,19 @@ namespace Server
                     if (CreateUser(usr))
                     {
                         UpdateUsers();
-                        
-                        resmessage = new Message(header);
-                        resmessage.MsgContent = "successfull";
 
-                        sUI.StatusChanged($"{usr.UserName} was created");
+                        resmessage = new Message(header);
+                        resmessage.MsgContent = usr;
+
+                        try
+                        {
+                            sUI.StatusChanged($"{usr.UserName} was created");
+                        }
+                        catch (System.Exception)
+                        {
+
+                            
+                        }
 
                     }
                     else
@@ -72,8 +79,9 @@ namespace Server
                 case "get messages":
                     string srcUserName = message.MsgHeader.Sender,
                         destUserName = message.MsgHeader.Reciever;
-                    
-                    header = new Header() {
+
+                    header = new Header()
+                    {
                         Sender = srcUserName,
                         Reciever = destUserName,
                         Command = "all user messages",
@@ -83,7 +91,6 @@ namespace Server
                     Task<List<Message>> tskMsg = dtManager.GetUserMessages(srcUserName, destUserName);
                     List<Message> messages = await tskMsg;
                     resmessage.MsgContent = messages;
-                    svconnectioManager.SendToClient(resmessage, ipPort);
                     break;
 
 
@@ -98,7 +105,7 @@ namespace Server
                 case "get contacts":
                     string usrName = message.MsgHeader.Sender;
                     List<string> contacts = dtManager.GetUserContacts(usrName);
-                    
+
                     header = new Header()
                     {
                         Sender = "Server",
@@ -115,18 +122,20 @@ namespace Server
                     break;
 
 
-                case "login":
+                case "login user":
                     ServerUser usr1 = (ServerUser)message.MsgContent;
-                    header = new Header() { 
+                    header = new Header()
+                    {
                         Sender = "Server",
                         Reciever = usr1.UserName,
-                        Command = "login response"
+                        Command = "login response",
+                        TypeOfMessage = "ServerUser"
                     };
                     resmessage = new Message(header);
-
-                    if (Login(usr1.UserName, usr1.Password) != null)
+                    ServerUser usr3 = Login(usr1.UserName, usr1.Password);
+                    if (usr3 != null)
                     {
-                        resmessage.MsgContent = "successfull";
+                        resmessage.MsgContent = usr3;
                     }
                     else
                     {
@@ -138,10 +147,7 @@ namespace Server
                 default:
                     break;
             }
-
-            svconnectioManager = new ServerConnectionManager();
-            svconnectioManager.SendToClient(resmessage, ipPort);
-
+            return resmessage;
         }
         public bool CreateUser(ServerUser user)
         {
@@ -154,14 +160,12 @@ namespace Server
                     result = false;
                     break;
                 }
-
             }
             if (!result)
             {
                 return result;
             }
             return dtManager.AddUser(user);
-
         }
 
 

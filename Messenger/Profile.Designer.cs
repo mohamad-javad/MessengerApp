@@ -28,98 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bunifuCustomTextbox1 = new Bunifu.Framework.BunifuCustomTextbox();
-            this.bunifuCustomTextbox2 = new Bunifu.Framework.BunifuCustomTextbox();
-            this.bunifuCustomTextbox3 = new Bunifu.Framework.BunifuCustomTextbox();
-            this.bunifuCustomTextbox4 = new Bunifu.Framework.BunifuCustomTextbox();
-            this.bunifuCustomTextbox5 = new Bunifu.Framework.BunifuCustomTextbox();
+            this.family_txt = new Bunifu.Framework.BunifuCustomTextbox();
+            this.name_txt = new Bunifu.Framework.BunifuCustomTextbox();
+            this.age_txt = new Bunifu.Framework.BunifuCustomTextbox();
             this.usrName_lbl = new System.Windows.Forms.Label();
+            this.phone_txt = new Bunifu.Framework.BunifuCustomTextbox();
+            this.emai_txt = new Bunifu.Framework.BunifuCustomTextbox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // bunifuCustomTextbox1
+            // family_txt
             // 
-            this.bunifuCustomTextbox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.bunifuCustomTextbox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.bunifuCustomTextbox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.bunifuCustomTextbox1.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuCustomTextbox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bunifuCustomTextbox1.Font = new System.Drawing.Font("B Zar", 12F);
-            this.bunifuCustomTextbox1.ForeColor = System.Drawing.Color.Gray;
-            this.bunifuCustomTextbox1.Location = new System.Drawing.Point(584, 173);
-            this.bunifuCustomTextbox1.Multiline = true;
-            this.bunifuCustomTextbox1.Name = "bunifuCustomTextbox1";
-            this.bunifuCustomTextbox1.Size = new System.Drawing.Size(313, 62);
-            this.bunifuCustomTextbox1.TabIndex = 9;
-            this.bunifuCustomTextbox1.Text = "Family";
-            this.bunifuCustomTextbox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.family_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.family_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
+            this.family_txt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.family_txt.BorderColor = System.Drawing.Color.Transparent;
+            this.family_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.family_txt.Font = new System.Drawing.Font("B Zar", 12F);
+            this.family_txt.ForeColor = System.Drawing.Color.Gray;
+            this.family_txt.Location = new System.Drawing.Point(584, 173);
+            this.family_txt.Multiline = true;
+            this.family_txt.Name = "family_txt";
+            this.family_txt.Size = new System.Drawing.Size(313, 62);
+            this.family_txt.TabIndex = 9;
+            this.family_txt.Text = "Family";
+            this.family_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // bunifuCustomTextbox2
+            // name_txt
             // 
-            this.bunifuCustomTextbox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.bunifuCustomTextbox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.bunifuCustomTextbox2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.bunifuCustomTextbox2.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuCustomTextbox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bunifuCustomTextbox2.Font = new System.Drawing.Font("B Zar", 12F);
-            this.bunifuCustomTextbox2.ForeColor = System.Drawing.Color.Gray;
-            this.bunifuCustomTextbox2.Location = new System.Drawing.Point(123, 173);
-            this.bunifuCustomTextbox2.Multiline = true;
-            this.bunifuCustomTextbox2.Name = "bunifuCustomTextbox2";
-            this.bunifuCustomTextbox2.Size = new System.Drawing.Size(313, 62);
-            this.bunifuCustomTextbox2.TabIndex = 10;
-            this.bunifuCustomTextbox2.Text = "Name";
-            this.bunifuCustomTextbox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.name_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.name_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
+            this.name_txt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.name_txt.BorderColor = System.Drawing.Color.Transparent;
+            this.name_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.name_txt.Font = new System.Drawing.Font("B Zar", 12F);
+            this.name_txt.ForeColor = System.Drawing.Color.Gray;
+            this.name_txt.Location = new System.Drawing.Point(123, 173);
+            this.name_txt.Multiline = true;
+            this.name_txt.Name = "name_txt";
+            this.name_txt.Size = new System.Drawing.Size(313, 62);
+            this.name_txt.TabIndex = 10;
+            this.name_txt.Text = "Name";
+            this.name_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // bunifuCustomTextbox3
+            // age_txt
             // 
-            this.bunifuCustomTextbox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.bunifuCustomTextbox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.bunifuCustomTextbox3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.bunifuCustomTextbox3.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuCustomTextbox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bunifuCustomTextbox3.Font = new System.Drawing.Font("B Zar", 12F);
-            this.bunifuCustomTextbox3.ForeColor = System.Drawing.Color.Gray;
-            this.bunifuCustomTextbox3.Location = new System.Drawing.Point(123, 288);
-            this.bunifuCustomTextbox3.Multiline = true;
-            this.bunifuCustomTextbox3.Name = "bunifuCustomTextbox3";
-            this.bunifuCustomTextbox3.Size = new System.Drawing.Size(313, 62);
-            this.bunifuCustomTextbox3.TabIndex = 11;
-            this.bunifuCustomTextbox3.Text = "Age";
-            this.bunifuCustomTextbox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // bunifuCustomTextbox4
-            // 
-            this.bunifuCustomTextbox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.bunifuCustomTextbox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.bunifuCustomTextbox4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.bunifuCustomTextbox4.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuCustomTextbox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bunifuCustomTextbox4.Font = new System.Drawing.Font("B Zar", 12F);
-            this.bunifuCustomTextbox4.ForeColor = System.Drawing.Color.Gray;
-            this.bunifuCustomTextbox4.Location = new System.Drawing.Point(584, 288);
-            this.bunifuCustomTextbox4.Multiline = true;
-            this.bunifuCustomTextbox4.Name = "bunifuCustomTextbox4";
-            this.bunifuCustomTextbox4.Size = new System.Drawing.Size(313, 62);
-            this.bunifuCustomTextbox4.TabIndex = 12;
-            this.bunifuCustomTextbox4.Text = "Phone Number";
-            this.bunifuCustomTextbox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // bunifuCustomTextbox5
-            // 
-            this.bunifuCustomTextbox5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.bunifuCustomTextbox5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.bunifuCustomTextbox5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.bunifuCustomTextbox5.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuCustomTextbox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bunifuCustomTextbox5.Font = new System.Drawing.Font("B Zar", 12F);
-            this.bunifuCustomTextbox5.ForeColor = System.Drawing.Color.Gray;
-            this.bunifuCustomTextbox5.Location = new System.Drawing.Point(123, 409);
-            this.bunifuCustomTextbox5.Multiline = true;
-            this.bunifuCustomTextbox5.Name = "bunifuCustomTextbox5";
-            this.bunifuCustomTextbox5.Size = new System.Drawing.Size(774, 62);
-            this.bunifuCustomTextbox5.TabIndex = 13;
-            this.bunifuCustomTextbox5.Text = "Email";
-            this.bunifuCustomTextbox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.age_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.age_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
+            this.age_txt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.age_txt.BorderColor = System.Drawing.Color.Transparent;
+            this.age_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.age_txt.Font = new System.Drawing.Font("B Zar", 12F);
+            this.age_txt.ForeColor = System.Drawing.Color.Gray;
+            this.age_txt.Location = new System.Drawing.Point(123, 288);
+            this.age_txt.Multiline = true;
+            this.age_txt.Name = "age_txt";
+            this.age_txt.Size = new System.Drawing.Size(313, 62);
+            this.age_txt.TabIndex = 11;
+            this.age_txt.Text = "Age";
+            this.age_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // usrName_lbl
             // 
@@ -131,18 +98,64 @@
             this.usrName_lbl.TabIndex = 15;
             this.usrName_lbl.Text = "UserName";
             // 
+            // phone_txt
+            // 
+            this.phone_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.phone_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
+            this.phone_txt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.phone_txt.BorderColor = System.Drawing.Color.Transparent;
+            this.phone_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.phone_txt.Font = new System.Drawing.Font("B Zar", 12F);
+            this.phone_txt.ForeColor = System.Drawing.Color.Gray;
+            this.phone_txt.Location = new System.Drawing.Point(584, 288);
+            this.phone_txt.Multiline = true;
+            this.phone_txt.Name = "phone_txt";
+            this.phone_txt.Size = new System.Drawing.Size(313, 62);
+            this.phone_txt.TabIndex = 12;
+            this.phone_txt.Text = "Phone Number";
+            this.phone_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // emai_txt
+            // 
+            this.emai_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.emai_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
+            this.emai_txt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.emai_txt.BorderColor = System.Drawing.Color.Transparent;
+            this.emai_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emai_txt.Font = new System.Drawing.Font("B Zar", 12F);
+            this.emai_txt.ForeColor = System.Drawing.Color.Gray;
+            this.emai_txt.Location = new System.Drawing.Point(123, 409);
+            this.emai_txt.Multiline = true;
+            this.emai_txt.Name = "emai_txt";
+            this.emai_txt.Size = new System.Drawing.Size(774, 62);
+            this.emai_txt.TabIndex = 13;
+            this.emai_txt.Text = "Email";
+            this.emai_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(420, 548);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(153, 61);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Apply Changes";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1048, 621);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.usrName_lbl);
-            this.Controls.Add(this.bunifuCustomTextbox5);
-            this.Controls.Add(this.bunifuCustomTextbox4);
-            this.Controls.Add(this.bunifuCustomTextbox3);
-            this.Controls.Add(this.bunifuCustomTextbox2);
-            this.Controls.Add(this.bunifuCustomTextbox1);
+            this.Controls.Add(this.emai_txt);
+            this.Controls.Add(this.phone_txt);
+            this.Controls.Add(this.age_txt);
+            this.Controls.Add(this.name_txt);
+            this.Controls.Add(this.family_txt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProfileForm";
             this.Text = "Profile";
             this.Load += new System.EventHandler(this.ProfileForm_Load);
@@ -152,11 +165,12 @@
         }
 
         #endregion
-        private Bunifu.Framework.BunifuCustomTextbox bunifuCustomTextbox1;
-        private Bunifu.Framework.BunifuCustomTextbox bunifuCustomTextbox2;
-        private Bunifu.Framework.BunifuCustomTextbox bunifuCustomTextbox3;
-        private Bunifu.Framework.BunifuCustomTextbox bunifuCustomTextbox4;
-        private Bunifu.Framework.BunifuCustomTextbox bunifuCustomTextbox5;
+        private Bunifu.Framework.BunifuCustomTextbox family_txt;
+        private Bunifu.Framework.BunifuCustomTextbox name_txt;
+        private Bunifu.Framework.BunifuCustomTextbox age_txt;
         private System.Windows.Forms.Label usrName_lbl;
+        private Bunifu.Framework.BunifuCustomTextbox phone_txt;
+        private Bunifu.Framework.BunifuCustomTextbox emai_txt;
+        private System.Windows.Forms.Button button1;
     }
 }

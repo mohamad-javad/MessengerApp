@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Server
 {
+    [Serializable]
     public class ServerUser
     {
         public ObjectId _id { get; set; }

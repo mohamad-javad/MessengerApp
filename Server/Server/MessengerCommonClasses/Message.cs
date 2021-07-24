@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
+    [Serializable]
     public struct Header
     {
         public string Command { get; set; }
@@ -15,6 +16,8 @@ namespace Server
         public string TypeOfMessage { get; set; }
 
     }
+
+    [Serializable]
     public class Message
     {
         public ObjectId _id { get; set; }

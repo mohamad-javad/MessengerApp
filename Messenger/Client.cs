@@ -9,12 +9,12 @@ using SimpleTcp;
 
 namespace MessengerApp
 {
-    class Client
+    static class Client
     {
-        SimpleTcpClient client;
-        Manager mngr;
+        static SimpleTcpClient client;
+        static Manager mngr;
 
-        public Client()
+        static Client()
         {
             client = new SimpleTcpClient("127.0.0.1:9000");
             client.Events.Connected += ConnectClient;
@@ -22,7 +22,7 @@ namespace MessengerApp
             client.Events.DataReceived += ReciveData;
         }
 
-        public void ClientSetUp()
+        public static void ClientSetUp()
         {
 
             try
@@ -33,10 +33,10 @@ namespace MessengerApp
             {
 
             }
-            
+
         }
 
-        private void ReciveData(object sender, DataReceivedEventArgs e)
+        private static void ReciveData(object sender, DataReceivedEventArgs e)
         {
 
             mngr = new Manager();
@@ -45,20 +45,53 @@ namespace MessengerApp
 
         }
 
-        private void DisconnectClient(object sender, ClientDisconnectedEventArgs e)
+        private static void DisconnectClient(object sender, ClientDisconnectedEventArgs e)
         {
             //System.Windows.Forms.MessageBox.Show("you are dissconnected");
 
         }
 
-        private void ConnectClient(object sender, ClientConnectedEventArgs e)
+        private static void ConnectClient(object sender, ClientConnectedEventArgs e)
         {
             //System.Windows.Forms.MessageBox.Show("you are connected");
         }
 
-        public void SendToServer(Message msg)
+        public static void SendToServer(Message msg)
         {
-            client.Send(msg.ConvertMessageToByte());
+            try
+            {
+                client.Send(msg.ConvertMessageToByte());
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("connection error", "", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+            }
+        }
+
+        public static async void ConnectToServer()
+        {
+
+
+            await Task.Run(() =>
+            {
+                while (!client.IsConnected)
+                {
+                    try
+                    {
+                        client.Connect();
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+
+
+                }
+                string a = "connecting to server";
+            });
+
         }
     }
 }
