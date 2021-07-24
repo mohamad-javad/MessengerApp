@@ -4,7 +4,7 @@ using Sliding_Application;
 
 namespace MessengerApp
 {
-    class Manager
+    public class Manager
     {
         public ServerUser Owner { get; set; }
         public static MessengerMainForm mainClientForm { get; set; }
