@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Sliding_Application;
 
@@ -132,6 +133,21 @@ namespace MessengerApp
             {
                 welcom_lbl.Text += "\n" + name;
             }));
+        }
+
+        private void label1_MouseHover(object sender, EventArgs e)
+        {
+            exit_btn.BackColor = Color.Maroon;
+        }
+
+        private void exit_btn_MouseLeave(object sender, EventArgs e)
+        {
+            exit_btn.BackColor = Color.Transparent;
+        }
+
+        private void exit_btn_Click_2(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
