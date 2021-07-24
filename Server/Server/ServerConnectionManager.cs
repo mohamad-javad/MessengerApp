@@ -74,9 +74,14 @@ namespace Server
             serverUI.StatusChanged(e.IpPort + " is connected.", "cyan");
             serverUI.AD_UserList(e.IpPort, true);
         }
-        private static void DataRecieved(object sender, DataReceivedEventArgs e)
+        private async static void DataRecieved(object sender, DataReceivedEventArgs e)
         {
-            
+            MessageClass message = e.Data.ConvertToMessageFromByte();
+            Task<MessageClass> asyncMessage = new ServerManager().ExecuteCommand(message);
+
+            message = await asyncMessage;
+
+            server.Send(e.IpPort, message.ConvertMessageToByte());
         }
         
     }

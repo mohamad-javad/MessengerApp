@@ -3,7 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Server;
 
-namespace MessengerCommongClasses
+namespace Server
 {
     public static class MessengerExtentions
     {

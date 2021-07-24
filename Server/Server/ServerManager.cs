@@ -18,7 +18,7 @@ namespace Server
             users = dtManager.GetAllUsers();
             sUI = new ServerUI();
         }
-        public MessageClass ExecuteCommand(MessageClass message)
+        public async Task<MessageClass> ExecuteCommand(MessageClass message)
         {
             MessageClass resMessage = new MessageClass(new Header());
             Header header = new Header() { Reciever = message.MessageHeader.Sender };
@@ -85,7 +85,6 @@ namespace Server
             {
                 return result;
             }
-            user.Password = user.Password.Sha_256();
             return dtManager.AddUser(user);
 
         }
