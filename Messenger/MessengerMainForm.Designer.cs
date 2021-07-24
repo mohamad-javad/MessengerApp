@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.StateProperties stateProperties2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.StateProperties();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessengerMainForm));
             Bunifu.UI.WinForms.BunifuAnimatorNS.Animation animation9 = new Bunifu.UI.WinForms.BunifuAnimatorNS.Animation();
             BunifuAnimatorNS.Animation animation8 = new BunifuAnimatorNS.Animation();
             BunifuAnimatorNS.Animation animation11 = new BunifuAnimatorNS.Animation();
             BunifuAnimatorNS.Animation animation10 = new BunifuAnimatorNS.Animation();
-            Bunifu.UI.WinForms.BunifuAnimatorNS.Animation animation7 = new Bunifu.UI.WinForms.BunifuAnimatorNS.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessengerMainForm));
-            BunifuAnimatorNS.Animation animation12 = new BunifuAnimatorNS.Animation();
+            Bunifu.UI.WinForms.BunifuAnimatorNS.Animation animation12 = new Bunifu.UI.WinForms.BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation7 = new BunifuAnimatorNS.Animation();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.PanelMenu = new System.Windows.Forms.Panel();
             this.Favorite_btn = new Bunifu.Framework.UI.BunifuFlatButton();
@@ -48,8 +47,8 @@
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuGradientPanel1 = new Bunifu.Framework.UI.BunifuGradientPanel();
+            this.Exit_btn = new System.Windows.Forms.Label();
             this.PanelUp = new System.Windows.Forms.Panel();
-            this.Exit_btn = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.Menu_trns = new Bunifu.UI.WinForms.BunifuTransition(this.components);
             this.Desktop = new System.Windows.Forms.Panel();
             this.Logo_trns = new BunifuAnimatorNS.BunifuTransition(this.components);
@@ -358,6 +357,7 @@
             // 
             this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
             this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel1.Controls.Add(this.Exit_btn);
             this.bunifuGradientPanel1.Controls.Add(this.PageName);
             this.menue_btn_trns.SetDecoration(this.bunifuGradientPanel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.Logo_trns.SetDecoration(this.bunifuGradientPanel1, BunifuAnimatorNS.DecorationType.None);
@@ -377,11 +377,31 @@
             this.bunifuGradientPanel1.TabIndex = 10;
             this.bunifuGradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.bunifuGradientPanel1_Paint);
             // 
+            // Exit_btn
+            // 
+            this.Exit_btn.AutoSize = true;
+            this.Exit_btn.BackColor = System.Drawing.Color.Transparent;
+            this.verticalTransition.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
+            this.Logo_trns.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
+            this.Menu_trns.SetDecoration(this.Exit_btn, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.BigLogo_trns.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
+            this.mbar_animate.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
+            this.menue_btn_trns.SetDecoration(this.Exit_btn, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.Exit_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Exit_btn.ForeColor = System.Drawing.Color.White;
+            this.Exit_btn.Location = new System.Drawing.Point(1290, 21);
+            this.Exit_btn.Name = "Exit_btn";
+            this.Exit_btn.Size = new System.Drawing.Size(31, 29);
+            this.Exit_btn.TabIndex = 5;
+            this.Exit_btn.Text = "X";
+            this.Exit_btn.Click += new System.EventHandler(this.Exit_btn_Click_2);
+            this.Exit_btn.MouseLeave += new System.EventHandler(this.Exit_btn_MouseLeave);
+            this.Exit_btn.MouseHover += new System.EventHandler(this.Exit_btn_MouseHover);
+            // 
             // PanelUp
             // 
             this.PanelUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(255)))));
             this.PanelUp.Controls.Add(this.bunifuCustomLabel1);
-            this.PanelUp.Controls.Add(this.Exit_btn);
             this.PanelUp.Controls.Add(this.bunifuGradientPanel1);
             this.verticalTransition.SetDecoration(this.PanelUp, BunifuAnimatorNS.DecorationType.None);
             this.mbar_animate.SetDecoration(this.PanelUp, BunifuAnimatorNS.DecorationType.None);
@@ -395,48 +415,6 @@
             this.PanelUp.Name = "PanelUp";
             this.PanelUp.Size = new System.Drawing.Size(1333, 70);
             this.PanelUp.TabIndex = 1;
-            // 
-            // Exit_btn
-            // 
-            this.Exit_btn.BackColor = System.Drawing.Color.Transparent;
-            this.Exit_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Exit_btn.BackgroundImage")));
-            this.Exit_btn.ButtonText = "X";
-            this.Exit_btn.ButtonTextMarginLeft = 0;
-            this.Logo_trns.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
-            this.Menu_trns.SetDecoration(this.Exit_btn, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.BigLogo_trns.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
-            this.mbar_animate.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
-            this.verticalTransition.SetDecoration(this.Exit_btn, BunifuAnimatorNS.DecorationType.None);
-            this.menue_btn_trns.SetDecoration(this.Exit_btn, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.Exit_btn.DisabledBorderColor = System.Drawing.Color.White;
-            this.Exit_btn.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(129)))));
-            this.Exit_btn.DisabledForecolor = System.Drawing.Color.White;
-            this.Exit_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Exit_btn.ForeColor = System.Drawing.Color.White;
-            this.Exit_btn.IconLeftCursor = System.Windows.Forms.Cursors.Default;
-            this.Exit_btn.IconPadding = 10;
-            this.Exit_btn.IconRightCursor = System.Windows.Forms.Cursors.Default;
-            this.Exit_btn.IdleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(60)))), ((int)(((byte)(230)))));
-            this.Exit_btn.IdleBorderRadius = 1;
-            this.Exit_btn.IdleBorderThickness = 0;
-            this.Exit_btn.IdleFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(99)))), ((int)(((byte)(150)))));
-            this.Exit_btn.IdleIconLeftImage = null;
-            this.Exit_btn.IdleIconRightImage = null;
-            this.Exit_btn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Exit_btn.Location = new System.Drawing.Point(1279, 23);
-            this.Exit_btn.Margin = new System.Windows.Forms.Padding(4);
-            this.Exit_btn.Name = "Exit_btn";
-            stateProperties2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(129)))));
-            stateProperties2.BorderRadius = 1;
-            stateProperties2.BorderThickness = 1;
-            stateProperties2.FillColor = System.Drawing.Color.Navy;
-            stateProperties2.IconLeftImage = null;
-            stateProperties2.IconRightImage = null;
-            this.Exit_btn.onHoverState = stateProperties2;
-            this.Exit_btn.Size = new System.Drawing.Size(41, 31);
-            this.Exit_btn.TabIndex = 2;
-            this.Exit_btn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Exit_btn.Click += new System.EventHandler(this.Exit_btn_Click_1);
             // 
             // Menu_trns
             // 
@@ -548,27 +526,6 @@
             // 
             this.menue_btn_trns.AnimationType = Bunifu.UI.WinForms.BunifuAnimatorNS.AnimationType.HorizBlind;
             this.menue_btn_trns.Cursor = null;
-            animation7.AnimateOnlyDifferences = true;
-            animation7.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.BlindCoeff")));
-            animation7.LeafCoeff = 0F;
-            animation7.MaxTime = 1F;
-            animation7.MinTime = 0F;
-            animation7.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.MosaicCoeff")));
-            animation7.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation7.MosaicShift")));
-            animation7.MosaicSize = 0;
-            animation7.Padding = new System.Windows.Forms.Padding(0);
-            animation7.RotateCoeff = 0F;
-            animation7.RotateLimit = 0F;
-            animation7.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.ScaleCoeff")));
-            animation7.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.SlideCoeff")));
-            animation7.TimeCoeff = 0F;
-            animation7.TransparencyCoeff = 0F;
-            this.menue_btn_trns.DefaultAnimation = animation7;
-            // 
-            // verticalTransition
-            // 
-            this.verticalTransition.AnimationType = BunifuAnimatorNS.AnimationType.VertSlide;
-            this.verticalTransition.Cursor = null;
             animation12.AnimateOnlyDifferences = true;
             animation12.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation12.BlindCoeff")));
             animation12.LeafCoeff = 0F;
@@ -584,7 +541,28 @@
             animation12.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation12.SlideCoeff")));
             animation12.TimeCoeff = 0F;
             animation12.TransparencyCoeff = 0F;
-            this.verticalTransition.DefaultAnimation = animation12;
+            this.menue_btn_trns.DefaultAnimation = animation12;
+            // 
+            // verticalTransition
+            // 
+            this.verticalTransition.AnimationType = BunifuAnimatorNS.AnimationType.VertSlide;
+            this.verticalTransition.Cursor = null;
+            animation7.AnimateOnlyDifferences = true;
+            animation7.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.BlindCoeff")));
+            animation7.LeafCoeff = 0F;
+            animation7.MaxTime = 1F;
+            animation7.MinTime = 0F;
+            animation7.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.MosaicCoeff")));
+            animation7.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation7.MosaicShift")));
+            animation7.MosaicSize = 0;
+            animation7.Padding = new System.Windows.Forms.Padding(0);
+            animation7.RotateCoeff = 0F;
+            animation7.RotateLimit = 0F;
+            animation7.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.ScaleCoeff")));
+            animation7.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.SlideCoeff")));
+            animation7.TimeCoeff = 0F;
+            animation7.TransparencyCoeff = 0F;
+            this.verticalTransition.DefaultAnimation = animation7;
             this.verticalTransition.MaxAnimationTime = 3000;
             this.verticalTransition.TimeStep = 0.01F;
             // 
@@ -644,10 +622,10 @@
         private BunifuAnimatorNS.BunifuTransition BigLogo_trns;
         private Bunifu.UI.WinForms.BunifuTransition menue_btn_trns;
         private System.Windows.Forms.Panel PanelUp;
-        private Bunifu.UI.WinForms.BunifuButton.BunifuButton Exit_btn;
         private Bunifu.Framework.UI.BunifuGradientPanel bunifuGradientPanel1;
         private BunifuAnimatorNS.BunifuTransition verticalTransition;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
+        private System.Windows.Forms.Label Exit_btn;
     }
 }
 

@@ -13,12 +13,10 @@ namespace MessengerApp
 {
     public partial class MessengerMainForm : Form
     {
-        Client client;
         private Form currentForm;
         public MessengerMainForm()
         {
             InitializeComponent();
-            client = new Client();
             
         }
 
@@ -136,7 +134,23 @@ namespace MessengerApp
 
         private void ch_btn_Click(object sender, EventArgs e)
         {
+            Client client = new Client();
             client.ClientSetUp();
+        }
+
+        private void Exit_btn_MouseHover(object sender, EventArgs e)
+        {
+            Exit_btn.BackColor = Color.Maroon;
+        }
+
+        private void Exit_btn_MouseLeave(object sender, EventArgs e)
+        {
+            Exit_btn.BackColor = Color.Transparent;
+        }
+
+        private void Exit_btn_Click_2(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -44,8 +44,8 @@
     <Reference Include="Bunifu.Dataviz.WinForms">
       <HintPath>..\..\..\..\..\..\..\jb-visual2019\buninfu controls\Bunifu.Dataviz.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Bunifu.Licensing%281%29">
-      <HintPath>..\..\..\..\..\..\..\jb-visual2019\buninfu controls\Bunifu.Licensing(1).dll</HintPath>
+    <Reference Include="Bunifu.Licensing">
+      <HintPath>..\..\..\..\..\..\..\jb-visual2019\buninfu controls\Bunifu.Licensing.dll</HintPath>
     </Reference>
     <Reference Include="Bunifu.UI.WinForm.BunifuShadowPanel">
       <HintPath>..\..\..\..\..\..\..\jb-visual2019\buninfu controls\Bunifu.UI.WinForm.BunifuShadowPanel.dll</HintPath>
