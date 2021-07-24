@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using MongoDB.Driver.Core;
 using MongoDB.Driver.Builders;
-using System.Threading.Tasks;
+using Server;
+
+
 
 namespace Server
 {
@@ -17,18 +16,13 @@ namespace Server
         MongoDatabase dB;
         MongoCollection<ServerUser> UsersCollection;
 
+        [Obsolete]
         public DataManager()
-        {
-            StartDatabase();
-        }
-
-        public void StartDatabase()
         {
             mongoClient = new MongoClient("mongodb://localhost");
             mongoServer = mongoClient.GetServer();
             dB = mongoServer.GetDatabase("MessengerDB");
             UsersCollection = dB.GetCollection<ServerUser>("Users");
-
         }
 
         public List<ServerUser> GetAllUsers()
@@ -42,12 +36,12 @@ namespace Server
             return users;
         }
 
-        public void AddMessage(Message msg)
+        public void AddMessage(MessageClass msg)
         {
-            MongoCollection<Message> usr1Messages = dB.GetCollection<Message>(msg.Sender);
-            usr1Messages.Insert<Message>(msg);
-            MongoCollection<Message> usr2Messages = dB.GetCollection<Message>(msg.Reciever);
-            usr2Messages.Insert<Message>(msg);
+            MongoCollection<MessageClass> usr1Messages = dB.GetCollection<MessageClass>(msg.MessageHeader.Sender);
+            usr1Messages.Insert<MessageClass>(msg);
+            MongoCollection<MessageClass> usr2Messages = dB.GetCollection<MessageClass>(msg.MessageHeader.Reciever);
+            usr2Messages.Insert<MessageClass>(msg);
         }
         public string FindUserName(string userName)
         {
@@ -67,23 +61,41 @@ namespace Server
 
             return res;
         }
-        public string GetUserMessages(string srcUserName, string userName)
+        public List<MessageClass> GetUserMessages(string srcUserName, string userName)
         {
-            string output = "";
-            MongoCollection<Message> msgCollection = dB.GetCollection<Message>(srcUserName);
+            List<MessageClass> messages = new List<MessageClass>();
+            MongoCollection<MessageClass> msgCollection = dB.GetCollection<MessageClass>(srcUserName);
+
             foreach (var msg in msgCollection.FindAll())
             {
-                if (msg.Reciever == userName)
-                {
-                    output += "#**#" + msg._id + ":left" + ":" + msg.Sender + ":" + msg.MsgText + ":" + msg.Date;
-                }
-                else if (msg.Sender == userName)
-                {
-                    output += "#**#" + msg._id + ":right" + ":" + msg.Reciever + ":" + msg.MsgText + ":" + msg.Date;
-                }
+                messages.Add(msg);
             }
 
-            return output;
+            return messages;
+        }
+        public void AddContact(string username, List<User> contact)
+        {
+            List<User> ct = new List<User>();
+            var query = Query<ServerUser>.EQ(u => u.UserName, username);
+            ServerUser user = UsersCollection.FindOne(query);
+
+            ct = user.contacts;
+            foreach (var item in contact)
+            {
+                ct.Add(item);
+            }
+            var update = Update<ServerUser>.Set(u => u.contacts, ct);
+            UsersCollection.Update(query, update);
+        }
+        public List<User> GetUserContacts(string userName)
+        {
+            List<User> ct = new List<User>();
+            var query = Query<ServerUser>.EQ(u => u.UserName, userName);
+            ServerUser user = UsersCollection.FindOne(query);
+            ct = user.contacts;
+
+
+            return ct;
         }
 
     }

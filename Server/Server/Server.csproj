@@ -38,7 +38,9 @@
     <Reference Include="Bunifu.Charts.WinForms">
       <HintPath>C:\jb-visual2019\buninfu controls\Bunifu.Charts.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Bunifu.Licensing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b" />
+    <Reference Include="Bunifu.Licensing">
+      <HintPath>..\..\..\..\..\..\..\jb-visual2019\buninfu controls\Bunifu.Licensing.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuGroupBox">
       <HintPath>C:\jb-visual2019\buninfu controls\Bunifu.UI.WinForms.BunifuGroupBox.dll</HintPath>
     </Reference>
@@ -78,8 +80,8 @@
     <Reference Include="SharpCompress, Version=0.23.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpCompress.0.23.0\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleTcp, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSimpleTcp.2.4.0\lib\net461\SimpleTcp.dll</HintPath>
+    <Reference Include="SimpleTcp">
+      <HintPath>..\..\packages\SuperSimpleTcp.2.4.0\lib\netcoreapp3.1\SimpleTcp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -143,11 +145,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Databse\DataBase.cs" />
     <Compile Include="Databse\DataManager.cs" />
     <Compile Include="IServer.cs" />
+    <Compile Include="MessageClass.cs" />
+    <Compile Include="MessengerExtentions.cs" />
     <Compile Include="ServerManager.cs" />
-    <Compile Include="Message.cs" />
     <Compile Include="MyExtentions.cs" />
     <Compile Include="ServerConnectionManager.cs" />
     <Compile Include="ServerUI.cs">

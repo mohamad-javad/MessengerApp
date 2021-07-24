@@ -13,10 +13,6 @@ namespace MessengerApp
         List<User> users;
         List<User> admins;
         List<Message> messages;
-        public void A()
-        {
-            
-            
-        }
+
     }
 }

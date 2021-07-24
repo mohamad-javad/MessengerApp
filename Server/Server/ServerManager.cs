@@ -18,7 +18,7 @@ namespace Server
             users = dtManager.GetAllUsers();
             sUI = new ServerUI();
         }
-        public string ExecuteCommand(string command, string[] args)
+        public string ExecuteCommand(MessageClass message)
         {
             switch (command)
             {

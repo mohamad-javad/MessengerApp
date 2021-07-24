@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using SimpleTcp;
+
 
 
 namespace MessengerApp
@@ -37,7 +33,7 @@ namespace MessengerApp
 
         private void ReciveData(object sender, DataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         private void DisconnectClient(object sender, ClientDisconnectedEventArgs e)

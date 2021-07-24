@@ -76,8 +76,7 @@ namespace Server
         }
         private static void DataRecieved(object sender, DataReceivedEventArgs e)
         {
-            string msg = Encoding.UTF8.GetString(e.Data);
-            serverUI.StatusChanged(e.IpPort + " sent a message.");
+            
         }
         
     }
