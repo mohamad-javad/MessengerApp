@@ -104,7 +104,7 @@ namespace Sliding_Application
             this.exit_lbl.Size = new System.Drawing.Size(24, 25);
             this.exit_lbl.TabIndex = 6;
             this.exit_lbl.Text = "X";
-            this.exit_lbl.Click += new System.EventHandler(this.label4_Click);
+            this.exit_lbl.Click += new System.EventHandler(this.exit_lbl_Click);
             // 
             // login_btn
             // 

@@ -23,17 +23,6 @@ namespace Sliding_Application
             InitializeComponent();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-            Server.Message msg = new Server.Message(new Header()
-            {
-                Sender = usr_txt.Text,
-                Reciever = "Server",
-                Command = "register"
-            });
-            new Manager().ExecuteCommand(msg);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Server.Message msg = new Server.Message(new Header()
@@ -66,6 +55,15 @@ namespace Sliding_Application
         private void usr_txt_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void exit_lbl_Click(object sender, EventArgs e)
+        {
+            Manager manager = new Manager();
+            Header header = new Header() { Command = "register" };
+
+            Server.Message message = new Server.Message(header);
+            manager.ManageForms(message);
         }
     }
 }

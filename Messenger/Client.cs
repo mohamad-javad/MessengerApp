@@ -69,12 +69,8 @@ namespace MessengerApp
             }
         }
 
-        public static async void ConnectToServer()
+        public static void ConnectToServer()
         {
-
-
-            await Task.Run(() =>
-            {
                 while (!client.IsConnected)
                 {
                     try
@@ -89,9 +85,6 @@ namespace MessengerApp
 
 
                 }
-                string a = "connecting to server";
-            });
-
         }
     }
 }

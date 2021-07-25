@@ -9,41 +9,38 @@ using System.Windows.Forms;
 
 namespace Server
 {
-    public static class ServerConnectionManager
+    public class ServerConnectionManager
     {
-        private static string ServerIpAddress = "127.0.0.1:9000";
+        static ServerConnectionManager scm;
+        private static string _serverIpAddress;
         private static SimpleTcpServer server;
-        private static ServerUI serverUI;
-        public static List<string> serverStatus;
-        static IManager svManager;
-
-        static ServerConnectionManager()
+        public static ServerConnectionManager ServerConnectionGetForm { get
+            {
+                if (scm == null)
+                {
+                    scm = new ServerConnectionManager();
+                }
+                return scm;
+            } }
+        private ServerConnectionManager()
         {
-            server = new SimpleTcpServer(ServerIpAddress);
-            serverStatus = new List<string>();
+            _serverIpAddress = "127.0.0.1:9000";
+            server = new SimpleTcpServer(_serverIpAddress);
             server.Events.DataReceived += DataRecieved;
             server.Events.ClientConnected += ClientConnected;
             server.Events.ClientDisconnected += ClientDisconnected;
-            serverUI = ServerUI.GetForm;
         }
-        public static string ServerStatus
-        {
-            set
-            {
-                serverStatus.Add(value);
-            }
-        }
-        public static  string ServerAddress
+       
+        public string ServerAddress
         {
             get
             {
-                return ServerIpAddress;
+                return _serverIpAddress;
 
             }
             set
             {
-                ServerIpAddress = value;
-                serverStatus.Add(value);
+                _serverIpAddress = value;
             }
         }
 
@@ -58,20 +55,21 @@ namespace Server
 
         private static void ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
         {
-            serverUI.StatusChanged(e.IpPort + " is disconnected.", "red");
-            serverUI.AD_UserList(e.IpPort, false);
+
+            ServerUI.GetForm.StatusChanged(e.IpPort + " is disconnected.", "red");
+            ServerUI.GetForm.AD_UserList(e.IpPort, false);
         }
 
         private static void ClientConnected(object sender, ClientConnectedEventArgs e)
         {
-            serverUI.StatusChanged(e.IpPort + " is connected.", "cyan");
-            serverUI.AD_UserList(e.IpPort, true);
+            ServerUI.GetForm.StatusChanged(e.IpPort + " is connected.", "cyan");
+            ServerUI.GetForm.AD_UserList(e.IpPort, true);
         }
         private static async void DataRecieved(object sender, DataReceivedEventArgs e)
         {
             Message msg = e.Data.ConvertMessageFromByte();
-
-            svManager = new ServerManager();
+            
+            ServerManager svManager = new ServerManager();
             Task<Message> response = svManager.ExecuteCommand(msg);
             Message message = await response;
 

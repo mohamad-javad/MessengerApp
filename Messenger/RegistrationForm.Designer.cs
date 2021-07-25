@@ -29,6 +29,7 @@ namespace Sliding_Application
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@ namespace Sliding_Application
             this.login_btn = new System.Windows.Forms.Label();
             this.error_lbl = new System.Windows.Forms.Label();
             this.Exit_btn = new System.Windows.Forms.Button();
+            this.CheckConnection_timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -184,6 +186,11 @@ namespace Sliding_Application
             this.Exit_btn.UseVisualStyleBackColor = false;
             this.Exit_btn.Click += new System.EventHandler(this.Exit_btn_Click);
             // 
+            // CheckConnection_timer
+            // 
+            this.CheckConnection_timer.Interval = 5000;
+            this.CheckConnection_timer.Tick += new System.EventHandler(this.CheckConnection_timer_Tick);
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -230,5 +237,6 @@ namespace Sliding_Application
         private System.Windows.Forms.Label login_btn;
         private System.Windows.Forms.Label error_lbl;
         private System.Windows.Forms.Button Exit_btn;
+        private System.Windows.Forms.Timer CheckConnection_timer;
     }
 }

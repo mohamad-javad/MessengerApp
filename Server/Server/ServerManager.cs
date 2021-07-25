@@ -14,6 +14,7 @@ namespace Server
 
     public class ServerManager : IManager
     {
+        public static List<string> serverStatus;
         ServerUI sUI;
         List<ServerUser> users;
         DataManager dtManager;
@@ -24,6 +25,17 @@ namespace Server
             users = new List<ServerUser>();
             UpdateUsers();
 
+        }
+        public static string ServerStatus
+        {
+            set
+            {
+                if(serverStatus == null)
+                {
+                    serverStatus = new List<string>();
+                }
+                serverStatus.Add(value);
+            }
         }
         void UpdateUsers()
         {

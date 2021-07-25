@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimpleTcp;
+using System.IO;
 
 namespace Server
 {
@@ -17,6 +18,7 @@ namespace Server
         static bool isPortChanged;
         static bool isIpChanged;
         static ServerUI serverUi;
+        ServerConnectionManager serverConnection;
         public static ServerUI GetForm {
             get
             {
@@ -37,6 +39,7 @@ namespace Server
             isIpChanged = false;
             isPortChanged = false;
             stopServer_btn.Enabled = false;
+            serverConnection = ServerConnectionManager.ServerConnectionGetForm;
         }
 
 
@@ -57,7 +60,8 @@ namespace Server
             {
                 if (isIpChanged == true && isPortChanged == true)
                 {
-                    ServerConnectionManager.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
+
+                    serverConnection.ServerAddress = $"{ip_tb.Text}:{port_tb.Text}";
                     ServerConnectionManager.StartServer();
                     MessageBox.Show("Setting UP address was successfull.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -67,14 +71,14 @@ namespace Server
                     ServerConnectionManager.StartServer();
 
 
-                StatusChanged($@"Server started on    <<<   {ServerConnectionManager.ServerAddress}   >>>", "green");
+                StatusChanged($@"Server started on    <<<   {serverConnection.ServerAddress}   >>>", "green");
                 startServer_btn.Enabled = false;
                 stopServer_btn.Enabled = true;
             }
             catch
             {
-                StatusChanged($"Server field to start on    <<<   {ServerConnectionManager.ServerAddress}   >>>", "red");
-                MessageBox.Show("please enter a valid ip and port", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                StatusChanged($"Server field to start on    <<<   {serverConnection.ServerAddress}    >>>", "red");
+               
 
             }
 
@@ -100,11 +104,12 @@ namespace Server
                     status.ForeColor = Color.DarkCyan;
                     break;
             }
-            status.Text += msg + $",      {DateTime.Now.ToString("HH:MM:ss")}";
+            string serverStatus = msg + $",      {DateTime.Now.ToString("HH:MM:ss")}";
+            status.Text = serverStatus;
             status.Dock = DockStyle.Top;
             status.TextAlign = ContentAlignment.MiddleLeft;
-          
-            ServerConnectionManager.ServerStatus = msg;
+            
+            ServerManager.ServerStatus = serverStatus;
             this.BeginInvoke((Action)(() =>
             {
                 statusBar_gp.Controls.Add(status);

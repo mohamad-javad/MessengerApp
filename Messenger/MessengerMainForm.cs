@@ -10,7 +10,19 @@ namespace MessengerApp
     {
         Form currentForm;
         Manager manager;
-        public MessengerMainForm()
+        static MessengerMainForm mainForm;
+        public static MessengerMainForm GetForm { 
+            get
+            {
+                if (mainForm == null)
+                {
+                    mainForm = new MessengerMainForm();
+                }
+                return mainForm;
+            } 
+        }
+
+        private MessengerMainForm()
         {
             InitializeComponent();
             
@@ -18,12 +30,7 @@ namespace MessengerApp
         }
         private void MessengerMainForm_Load(object sender, EventArgs e)
         {
-            Client.ConnectToServer();
-            manager = new Manager();
-            Header header = new Header() { Command = "upload forms" };
-            Server.Message msg = new Server.Message(header);
-            msg.MessageContent = this;
-            manager.ExecuteCommand(msg);
+
         }
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)
@@ -121,13 +128,6 @@ namespace MessengerApp
         private void ch_btn_Click(object sender, EventArgs e)
         {
         }
-        public void HideForm()
-        {
-            
-            this.Hide();
-            this.Visible = false;
-            
-        }
         public void SayHi(string name)
         {
             BeginInvoke((Action)(() =>
@@ -149,6 +149,11 @@ namespace MessengerApp
         private void exit_btn_Click_2(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void CheckFroConnectio_timer_Tick(object sender, EventArgs e)
+        {
+            Client.ConnectToServer();
         }
     }
 }

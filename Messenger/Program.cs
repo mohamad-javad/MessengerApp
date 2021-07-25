@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Sliding_Application;
 namespace MessengerApp
 {
     static class Program
@@ -16,7 +16,7 @@ namespace MessengerApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MessengerMainForm());
+            Application.Run(RegistrationForm.GetForm);
         }
     }
 }

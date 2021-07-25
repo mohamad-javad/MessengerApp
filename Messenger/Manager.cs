@@ -31,7 +31,7 @@ namespace MessengerApp
                     }
                     else
                     {
-                        manager.ShowRegistratio();
+                        manager.ShowRegistration();
                         manager.AddError("this user name exist", "register");
 
                     }
@@ -91,15 +91,7 @@ namespace MessengerApp
 
                     break;
 
-                case "register":
-                    manager.ShowRegistratio();
-                    break;
-                case "login":
-                    manager.ShowLogin();
-                    break;
-                case "upload forms":
-                    manager.UploadForms((MessengerMainForm)message.MessageContent);
-                    break;
+              
 
                 default:
                     break;
@@ -111,6 +103,19 @@ namespace MessengerApp
         {
             Owner.Name.SayHi();
             manager.ShowMain();
+        }
+        public void ManageForms(Message message)
+        {
+            switch (message["command"])
+            {
+                case "register":
+                    manager.ShowRegistration();
+                    break;
+                case "login":
+                    manager.ShowLogin();
+                    break;
+
+            }
         }
     }
 }

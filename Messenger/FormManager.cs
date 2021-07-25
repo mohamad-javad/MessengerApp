@@ -13,38 +13,52 @@ namespace Sliding_Application
         public static RegistrationForm Registration { get; private set; }
         public static LoginForm Login { get; private set; }
 
-        public static void UploadForms(this Manager manager, MessengerMainForm mainForm)
+        static FormManager()
         {
-            MainForm = mainForm;
+            MainForm = MessengerMainForm.GetForm;
             Registration = RegistrationForm.GetForm;
             Login = LoginForm.GetFrom;
         }
-        public static void HideAll(this Manager manager)
-        {
-            try { MainForm.Hide(); } catch { }
-            try{ Registration.Hide(); } catch{}
-            try { Login.Hide(); } catch { }
-        }
+
         public static void ShowMain(this Manager manager)
         {
             try { MainForm.ShowDialog(); } catch { }
-            try { Registration.Hide(); } catch { }
-            try { Login.Hide(); } catch { }
         }
-        public static void ShowRegistratio(this Manager manager)
+        public static void HideLogin(this Manager manager)
         {
-            try { MainForm.Hide(); } catch { }
+            if (Login.Visible)
+            {
+                Login.Visible = false;
+                Login.Hide();
+            }
+        }
+        public static void HideRegistration(this Manager manager)
+        {
+            if (Registration.Visible)
+            {
+                Registration.Visible = false;
+                Registration.Hide();
+            }
+        }
+        public static void ShowRegistration(this Manager manager)
+        {
+            manager.HideLogin();
+
             try { Registration.ShowDialog(); } catch { }
-            try { Login.Hide(); } catch { }
         }
 
         public static void ShowLogin(this Manager manager)
         {
-            try { MainForm.Hide(); } catch { }
-            try { Registration.Hide(); } catch { }
-            try { Login.ShowDialog(); } catch { }
+
+
+            try
+            {
+                Login.Show();
+            }
+            catch { }
+            manager.HideRegistration();
+
         }
-        
         public static void AddError(this Manager manager, string error, string form)
         {
             switch (form)
@@ -64,5 +78,7 @@ namespace Sliding_Application
             MainForm.SayHi(name);
         }
 
+
     }
+
 }
