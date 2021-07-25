@@ -1,5 +1,5 @@
 ﻿
-namespace MessengerApp
+namespace Sliding_Application
 {
     partial class ChatsMainForm
     {

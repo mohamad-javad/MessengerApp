@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Server
 {
-    struct GroupMessage
+    public struct GroupMessage
     {
         string Sender;
         string message;
         DateTime date;
     }
 
-    class Group
+    public class Group
     {
         public ObjectId _id { get; set; }
         public string GroupName { get; set; }

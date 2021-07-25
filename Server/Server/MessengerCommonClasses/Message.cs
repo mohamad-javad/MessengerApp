@@ -34,9 +34,9 @@ namespace Server
         public override string ToString()
         {
             if(MessageContent is string)
-            return $"{MessageHeader.Sender}:{MessageContent}:{CreationDate.ToString("HH:mm:ss")}";
+            return $"{MessageHeader.Sender}:\n{MessageContent}:\n{CreationDate.ToString("HH:mm:ss")}";
             else{
-                return $"{MessageHeader.Sender}:Send a file:{CreationDate.ToString("HH:mm:ss")}";
+                return $"{MessageHeader.Sender}:\nSend a file:\n{CreationDate.ToString("HH:mm:ss")}";
             }
         }
 

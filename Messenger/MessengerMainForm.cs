@@ -40,7 +40,10 @@ namespace MessengerApp
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)
         {
-            FormManager(new ChatsMainForm());
+            Header header = new Header() { Command = "personal" };
+            Server.Message message = new Server.Message(header);
+            message.MessageContent = Manager.Owner;
+            FormManager(new ChatsMainForm(message));
         }
         private void Desktop_Paint(object sender, PaintEventArgs e)
         {

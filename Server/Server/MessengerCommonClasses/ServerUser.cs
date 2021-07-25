@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using Server;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,10 @@ namespace Server
         public string Password { get; set; }
         public string Name { get; set; }
         public string Family { get; set; }
-        public List<User> contacts;
+        public List<User> contacts { get; set; }
+        public List<Message> Messages { get; set; }
+        public List<Group> Groups { get; set; }
+        
     }
 
 
@@ -27,3 +31,4 @@ namespace Server
     }
 
 }
+
