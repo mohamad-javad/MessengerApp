@@ -13,8 +13,8 @@ namespace MessengerApp
     public partial class ChatsMainForm : Form
     {
         Chat chat = new Chat();
-
-        public ChatsMainForm()
+        Server.Message command;
+        public ChatsMainForm(Server.Message message)
         {
             InitializeComponent();
 

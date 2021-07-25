@@ -33,6 +33,9 @@ namespace MessengerApp
         {
             CheckForIllegalCrossThreadCalls = false;
             ckeckClientConnection_timer.Start();
+
+            //testing messenger
+            SayHi();
         }
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)
@@ -89,11 +92,11 @@ namespace MessengerApp
         private void ch_btn_Click(object sender, EventArgs e)
         {
         }
-        public void SayHi(string name)
+        public void SayHi(string name = "Mohammad")
         {
             BeginInvoke((Action)(() =>
             {
-                welcom_lbl.Text += "\n" + name;
+                welcom_lbl.Text += "\n" + name.ToUpper();
             }));
         }
 
@@ -114,10 +117,10 @@ namespace MessengerApp
 
         private async void ckeckClientConnection_timer_Tick(object sender, EventArgs e)
         {
-            //await Task.Run((Action)(() =>
-            //{
-            //    Client.ConnectToServer();
-            //}));
+            await Task.Run((Action)(() =>
+            {
+                Client.ConnectToServer();
+            }));
         }
     }
 }

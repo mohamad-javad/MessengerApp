@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
+using Server;
 using System;
 using System.Collections.Generic;
 
-namespace MessengerApp
+
+namespace Server
 {
     struct GroupMessage
     {
@@ -10,7 +12,7 @@ namespace MessengerApp
         string message;
         DateTime date;
     }
-    
+
     class Group
     {
         public ObjectId _id { get; set; }
@@ -28,7 +30,7 @@ namespace MessengerApp
 
         public void DelelteGroup(User reqUser)
         {
-            if(reqUser.UserName == GroupOwner.UserName)
+            if (reqUser.Username == GroupOwner.Username)
             {
                 if (!IsDeleted)
                 {
@@ -36,14 +38,7 @@ namespace MessengerApp
                     //add to database
                 }
             }
-           
-        }
 
-    }
-    public class User
-    {
-        public string Name { get; set; }
-        public string Family { get; set; }
-        public string UserName { get; set; }
+        }
     }
 }

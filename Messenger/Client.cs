@@ -27,7 +27,7 @@ namespace MessengerApp
 
             Manager mngr = new Manager();
             Message msg = e.Data.ConvertMessageFromByte();
-            mngr.ExecuteCommand(msg);
+            mngr.ExecuteAnswer(msg);
 
         }
 

@@ -22,21 +22,6 @@ namespace MessengerApp
 
             switch (message["command"])
             {
-                case "register user response":
-                    if (message["msgType"] == "ServerUser")
-                    {
-                        Owner = (ServerUser)message.MessageContent;
-                        LoginUser();
-                    }
-                    else
-                    {
-                        manager.ShowRegistration();
-                        manager.AddError("this user name exist", "register");
-
-                    }
-
-                    break;
-
                 case "register user":
                     usr = (ServerUser)message.MessageContent;
                     header = new Header()
@@ -56,15 +41,10 @@ namespace MessengerApp
                     break;
 
 
-                case "all user messages":
-                    break;
+               
 
 
                 case "get user Contacts":
-                    break;
-
-
-                case "all user contacts":
                     break;
 
 
@@ -75,6 +55,37 @@ namespace MessengerApp
 
                     break;
 
+              
+
+                default:
+                    break;
+            }
+            Client.SendToServer(CMessage);
+        }
+        public void ExecuteAnswer(Message message)
+        {
+
+            ServerUser usr;
+
+            Header header;
+            Message CMessage = new Message(header);
+
+            switch (message["command"])
+            {
+                case "register user response":
+                    if (message["msgType"] == "ServerUser")
+                    {
+                        Owner = (ServerUser)message.MessageContent;
+                        LoginUser();
+                    }
+                    else
+                    {
+                        manager.ShowRegistration();
+                        manager.AddError("this user name exist", "register");
+
+                    }
+
+                    break;
 
                 case "login response":
                     manager.HideLogin();
@@ -91,18 +102,11 @@ namespace MessengerApp
 
                     break;
 
-              
-
-                default:
-                    break;
             }
-            Client.SendToServer(CMessage);
         }
 
         private void LoginUser()
         {
-            manager.HideRegistration();
-            manager.HideLogin();
             Owner.Name.SayHi();
             manager.ShowMain();
             

@@ -257,7 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chat.cs" />
-    <Compile Include="ChatMessage.cs" />
     <Compile Include="ChatsMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
