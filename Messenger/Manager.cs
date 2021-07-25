@@ -26,7 +26,6 @@ namespace MessengerApp
                     if (message["msgType"] == "ServerUser")
                     {
                         Owner = (ServerUser)message.MessageContent;
-                        manager.ShowMain();
                         LoginUser();
                     }
                     else
@@ -78,6 +77,7 @@ namespace MessengerApp
 
 
                 case "login response":
+                    manager.HideLogin();
                     if (message["msgType"] == "ServerUser")
                     {
                         Owner = (ServerUser)message.MessageContent;
@@ -101,8 +101,11 @@ namespace MessengerApp
 
         private void LoginUser()
         {
+            manager.HideRegistration();
+            manager.HideLogin();
             Owner.Name.SayHi();
             manager.ShowMain();
+            
         }
         public void ManageForms(Message message)
         {

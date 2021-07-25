@@ -9,10 +9,10 @@ using SimpleTcp;
 
 namespace MessengerApp
 {
-    static class Client
+    public class Client
     {
         static SimpleTcpClient client;
-        static Manager mngr;
+       
 
         static Client()
         {
@@ -22,24 +22,10 @@ namespace MessengerApp
             client.Events.DataReceived += ReciveData;
         }
 
-        public static void ClientSetUp()
-        {
-
-            try
-            {
-                client.Connect();
-            }
-            catch
-            {
-
-            }
-
-        }
-
         private static void ReciveData(object sender, DataReceivedEventArgs e)
         {
 
-            mngr = new Manager();
+            Manager mngr = new Manager();
             Message msg = e.Data.ConvertMessageFromByte();
             mngr.ExecuteCommand(msg);
 

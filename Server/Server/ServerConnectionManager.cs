@@ -73,7 +73,7 @@ namespace Server
             Task<Message> response = svManager.ExecuteCommand(msg);
             Message message = await response;
 
-            server.Send(e.IpPort, message.ConvertMessageToByte());
+           await server.SendAsync(e.IpPort, message.ConvertMessageToByte());
 
         }
 

@@ -58,7 +58,7 @@
             this.verticalTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.CheckFroConnectio_timer = new System.Windows.Forms.Timer(this.components);
+            this.ckeckClientConnection_timer = new System.Windows.Forms.Timer(this.components);
             this.PanelMenu.SuspendLayout();
             this.bunifuGradientPanel1.SuspendLayout();
             this.PanelUp.SuspendLayout();
@@ -596,10 +596,10 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Messenger";
             // 
-            // CheckFroConnectio_timer
+            // ckeckClientConnection_timer
             // 
-            this.CheckFroConnectio_timer.Interval = 5000;
-            this.CheckFroConnectio_timer.Tick += new System.EventHandler(this.CheckFroConnectio_timer_Tick);
+            this.ckeckClientConnection_timer.Interval = 5000;
+            this.ckeckClientConnection_timer.Tick += new System.EventHandler(this.ckeckClientConnection_timer_Tick);
             // 
             // MessengerMainForm
             // 
@@ -658,7 +658,7 @@
         private System.Windows.Forms.Label welcom_lbl;
         private System.Windows.Forms.Label exit_btn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer CheckFroConnectio_timer;
+        private System.Windows.Forms.Timer ckeckClientConnection_timer;
     }
 }
 

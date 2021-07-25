@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Server;
 using Sliding_Application;
@@ -30,54 +31,14 @@ namespace MessengerApp
         }
         private void MessengerMainForm_Load(object sender, EventArgs e)
         {
-
+            CheckForIllegalCrossThreadCalls = false;
+            ckeckClientConnection_timer.Start();
         }
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)
         {
             FormManager(new ChatsMainForm());
         }
-
-        private void FlowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Exit_btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BunifuPictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Exit_btn_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Fill_menu_btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Desktop_Paint(object sender, PaintEventArgs e)
         {
 
@@ -151,9 +112,12 @@ namespace MessengerApp
             Application.Exit();
         }
 
-        private void CheckFroConnectio_timer_Tick(object sender, EventArgs e)
+        private async void ckeckClientConnection_timer_Tick(object sender, EventArgs e)
         {
-            Client.ConnectToServer();
+            //await Task.Run((Action)(() =>
+            //{
+            //    Client.ConnectToServer();
+            //}));
         }
     }
 }

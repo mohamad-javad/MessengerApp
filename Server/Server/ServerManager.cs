@@ -147,7 +147,16 @@ namespace Server
                     ServerUser usr3 = Login(usr1.UserName, usr1.Password);
                     if (usr3 != null)
                     {
-                        resmessage.MessageContent = usr3;
+                        resmessage.MessageContent = usr3; 
+                        try
+                        {
+                            sUI.StatusChanged($"{usr3.UserName} was logedin");
+                        }
+                        catch (System.Exception)
+                        {
+
+
+                        }
                     }
                     else
                     {

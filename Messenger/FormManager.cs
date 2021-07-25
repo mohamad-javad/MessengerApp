@@ -9,15 +9,16 @@ namespace Sliding_Application
 {
     public static class FormManager
     {
+        
         public static MessengerMainForm MainForm { get; private set; }
         public static RegistrationForm Registration { get; private set; }
         public static LoginForm Login { get; private set; }
-
         static FormManager()
         {
             MainForm = MessengerMainForm.GetForm;
             Registration = RegistrationForm.GetForm;
             Login = LoginForm.GetFrom;
+            
         }
 
         public static void ShowMain(this Manager manager)

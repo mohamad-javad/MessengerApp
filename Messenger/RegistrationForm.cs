@@ -23,6 +23,7 @@ namespace Sliding_Application
         }
         private RegistrationForm()
         {
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
 
         }
@@ -104,9 +105,15 @@ namespace Sliding_Application
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
-            CheckConnection_timer.Start();
+            ConnectClient();
         }
-
+        public async void ConnectClient()
+        {
+            await Task.Run((Action)(() =>
+            {
+                Client.ConnectToServer();
+            }));
+        }
         private void Exit_btn_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -123,14 +130,6 @@ namespace Sliding_Application
         public void AddError(string error)
         {
             error_lbl.Text += error;
-        }
-
-        private async void CheckConnection_timer_Tick(object sender, EventArgs e)
-        {
-            await Task.Run((Action)(() =>
-            {
-                Client.ConnectToServer();
-            }));
         }
     }
 }
