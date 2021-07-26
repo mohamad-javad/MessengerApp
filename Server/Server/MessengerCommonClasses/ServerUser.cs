@@ -3,6 +3,7 @@ using Server;
 using System;
 using System.Collections.Generic;
 
+
 namespace Server
 {
     [Serializable]
@@ -14,17 +15,18 @@ namespace Server
             contacts = new List<User>();
             Messages = new List<Message>();
             Groups = new List<Group>();
+            
         }
         public User user { get; }
         public ObjectId _id { get; set; }
         public string UserName {
             get
             {
-               return user.Username;
+               return user.UserName;
             }
             set 
             {
-                user.Username = value;
+                user.UserName = value;
             } 
         }
         public string Password { get; set; }
@@ -52,16 +54,6 @@ namespace Server
         public List<Message> Messages { get; set; }
         public List<Group> Groups { get; set; }
         
-    }
-
-
-    [Serializable]
-    public class User
-    {
-        public string Name { get; set; }
-        public string Family { get; set; }
-        public string Username { get; set; }
-
     }
 
 }

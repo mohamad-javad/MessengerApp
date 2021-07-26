@@ -69,10 +69,11 @@ namespace MessengerApp
             switch (message["command"])
             {
                 case "register user response":
+                    manager.HideRegistration();
                     if (message["msgType"] == "ServerUser")
                     {
                         LoginUser((ServerUser)message.MessageContent);
-                        System.Windows.Forms.MessageBox.Show("showin mainform");
+                       
                     }
                     else
                     {

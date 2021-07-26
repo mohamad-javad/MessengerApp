@@ -17,22 +17,15 @@ namespace Sliding_Application
     public partial class ChatsMainForm : Form
     {
         Chat chat = new Chat();
-        string command;
         Server.ServerUser ownerUser;
-        public ChatsMainForm(Server.Message message)
+        IChatsManager chatManager;
+        public ChatsMainForm(ServerUser owner, IChatsManager chatmanager)
         {
             InitializeComponent();
-            command = message["command"];
-            ownerUser = (ServerUser)message.MessageContent;
-            switch (command)
-            {
-                case "personal":
-                    ShowContacts(ownerUser);
-                    break;
-                default:
-                    break;
-            }
            
+            ownerUser = owner;
+            chatManager = chatmanager;
+            chatManager.ShowMembers(ownerUser, this);
         }
 
         private void messages_pnl_ControlAdded(object sender, ControlEventArgs e)
@@ -40,64 +33,30 @@ namespace Sliding_Application
             Label control = (Label)sender;
 
         }
-
-        private void ShowContacts(ServerUser owner)
+        public void AddMember(BunifuFlatButton button)
         {
-            accountsName_pnl.Controls.Clear();
-            if (owner != null)
-            {
-                foreach (var item in owner.contacts)
-                {
-                    BunifuFlatButton button = new BunifuFlatButton();
-                    button.Name = owner.UserName;
-                    button.Text = owner.Name;
-                    button.Dock = DockStyle.Top;
-                    button.BackColor = MessengerGUI.ThemeColor;
-                    button.ForeColor = MessengerGUI.ForColor;
+            
+            button.Dock = DockStyle.Top;
+            button.Click += MemberClicked;
+            button.DoubleClick += ShowProfile;
 
-                    button.Click += ShowPersonalMessages;
-                    button.DoubleClick += ShowProfile;
-                    this.accountsName_pnl.Controls.Add(button);
-                }
-            }
+            button.Normalcolor = MessengerGUI.ThemeColor;
+            button.ForeColor = MessengerGUI.ForColor;
+            accountsName_pnl.Controls.Add(button);
+        }
+
+        private void MemberClicked(object sender, EventArgs e)
+        {
+            chatManager.ShowMessages(ownerUser.Messages, ownerUser.UserName, ((BunifuFlatButton)sender).Name, this);
         }
 
         private void ShowProfile(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        private void ShowPersonalMessages(object sender, EventArgs e)
-        {
-            messages_pnl.Controls.Clear();
-            BunifuFlatButton button = (BunifuFlatButton)sender;
-            foreach (Server.Message msg in ownerUser.Messages)
-            {
-                Label label = new Label();
-                label.Dock = DockStyle.Bottom;
-                if (msg["sender"] == button.Name)
-                {
-                    label.Text = msg.ToString();
-
-                    label.Location = new Point(0, messages_pnl.Height- label.Height);
-                }
-                if (msg["reciever"] == button.Name)
-                {
-                    label.Text = msg.ToString();
-
-                    label.Location = new Point(messages_pnl.Width - label.Width, messages_pnl.Height - label.Height);
-                }
-                label.SendToBack();
-                messages_pnl.Controls.Add(label);
-                
-            }
+            chatManager.ShowProfile(ownerUser.FindUser(((BunifuFlatButton)sender).Name));
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            AddContact newContact = new AddContact(command);
-            newContact.ShowDialog();
-
 
         }
     }

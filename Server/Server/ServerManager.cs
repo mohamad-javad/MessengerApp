@@ -96,9 +96,10 @@ namespace Server
                 case "add contact":
                     string userName = message["sender"];
                     string contactName = (string)message.MessageContent;
-                    User contact = IdentifyUser(contactName).user;
-                    if (contact != null)
+                    ServerUser su = dtManager.FindUserName(contactName);
+                    if (su != null)
                     {
+                        User contact = su.user;
                         UpdateUsers();
                         dtManager.AddContact(userName, contact);
                         header = new Header() { Sender = "Server", Reciever = message["sender"], Command = "add contact res" };
@@ -152,33 +153,16 @@ namespace Server
         }
         public bool CreateUser(ServerUser user)
         {
-            UpdateUsers();
-            bool result = true;
-            foreach (var usr in users)
-            {
-                if (usr.UserName == user.UserName)
-                {
-                    result = false;
-                    break;
-                }
-            }
-            if (!result)
-            {
-                return result;
-            }
-            return dtManager.AddUser(user);
-        }
-
-
-        public bool NewMessage(Message msg)
-        {
-            return false;
+            if (dtManager.FindUserName(user.UserName) == null)
+                return dtManager.AddUser(user);
+            else
+                return false;
         }
 
         private ServerUser Login(string userName, string password)
         {
             ServerUser user = new ServerUser();
-            user = IdentifyUser(userName);
+            user = dtManager.FindUserName(userName);
             if (user != null)
             {
                 if (password == user.Password)
@@ -190,15 +174,6 @@ namespace Server
 
             return null;
         }
-        private ServerUser IdentifyUser(string username)
-        {
-            ServerUser identifiedUser = new ServerUser();
-            if (users.Any(n => n.UserName == username))
-            {
-                identifiedUser = users.Select(n => n).Where(n => n.UserName == username).FirstOrDefault();
-            }
 
-            return identifiedUser;
-        }
     }
 }

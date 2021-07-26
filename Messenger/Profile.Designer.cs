@@ -30,11 +30,12 @@
         {
             this.family_txt = new Bunifu.Framework.BunifuCustomTextbox();
             this.name_txt = new Bunifu.Framework.BunifuCustomTextbox();
-            this.age_txt = new Bunifu.Framework.BunifuCustomTextbox();
             this.usrName_lbl = new System.Windows.Forms.Label();
-            this.phone_txt = new Bunifu.Framework.BunifuCustomTextbox();
-            this.emai_txt = new Bunifu.Framework.BunifuCustomTextbox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exit_profile_btn = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // family_txt
@@ -71,23 +72,6 @@
             this.name_txt.Text = "Name";
             this.name_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // age_txt
-            // 
-            this.age_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.age_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.age_txt.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.age_txt.BorderColor = System.Drawing.Color.Transparent;
-            this.age_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.age_txt.Font = new System.Drawing.Font("B Zar", 12F);
-            this.age_txt.ForeColor = System.Drawing.Color.Gray;
-            this.age_txt.Location = new System.Drawing.Point(123, 288);
-            this.age_txt.Multiline = true;
-            this.age_txt.Name = "age_txt";
-            this.age_txt.Size = new System.Drawing.Size(313, 62);
-            this.age_txt.TabIndex = 11;
-            this.age_txt.Text = "Age";
-            this.age_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // usrName_lbl
             // 
             this.usrName_lbl.AutoSize = true;
@@ -98,61 +82,69 @@
             this.usrName_lbl.TabIndex = 15;
             this.usrName_lbl.Text = "UserName";
             // 
-            // phone_txt
+            // exit_profile_btn
             // 
-            this.phone_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.phone_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.phone_txt.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.phone_txt.BorderColor = System.Drawing.Color.Transparent;
-            this.phone_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.phone_txt.Font = new System.Drawing.Font("B Zar", 12F);
-            this.phone_txt.ForeColor = System.Drawing.Color.Gray;
-            this.phone_txt.Location = new System.Drawing.Point(584, 288);
-            this.phone_txt.Multiline = true;
-            this.phone_txt.Name = "phone_txt";
-            this.phone_txt.Size = new System.Drawing.Size(313, 62);
-            this.phone_txt.TabIndex = 12;
-            this.phone_txt.Text = "Phone Number";
-            this.phone_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.exit_profile_btn.AutoSize = true;
+            this.exit_profile_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exit_profile_btn.Location = new System.Drawing.Point(1005, 9);
+            this.exit_profile_btn.Name = "exit_profile_btn";
+            this.exit_profile_btn.Size = new System.Drawing.Size(31, 29);
+            this.exit_profile_btn.TabIndex = 17;
+            this.exit_profile_btn.Text = "X";
+            this.exit_profile_btn.Click += new System.EventHandler(this.label1_Click);
+            this.exit_profile_btn.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
+            this.exit_profile_btn.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
             // 
-            // emai_txt
+            // listBox1
             // 
-            this.emai_txt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.emai_txt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllSystemSources;
-            this.emai_txt.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.emai_txt.BorderColor = System.Drawing.Color.Transparent;
-            this.emai_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emai_txt.Font = new System.Drawing.Font("B Zar", 12F);
-            this.emai_txt.ForeColor = System.Drawing.Color.Gray;
-            this.emai_txt.Location = new System.Drawing.Point(123, 409);
-            this.emai_txt.Multiline = true;
-            this.emai_txt.Name = "emai_txt";
-            this.emai_txt.Size = new System.Drawing.Size(774, 62);
-            this.emai_txt.TabIndex = 13;
-            this.emai_txt.Text = "Email";
-            this.emai_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(123, 282);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(313, 388);
+            this.listBox1.TabIndex = 18;
             // 
-            // button1
+            // label1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(420, 548);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 61);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Apply Changes";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(119, 259);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 20);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "UserName";
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(584, 282);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(313, 404);
+            this.listBox2.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(580, 259);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 20);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "UserName";
             // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1048, 621);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1048, 702);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.exit_profile_btn);
             this.Controls.Add(this.usrName_lbl);
-            this.Controls.Add(this.emai_txt);
-            this.Controls.Add(this.phone_txt);
-            this.Controls.Add(this.age_txt);
             this.Controls.Add(this.name_txt);
             this.Controls.Add(this.family_txt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -167,10 +159,11 @@
         #endregion
         private Bunifu.Framework.BunifuCustomTextbox family_txt;
         private Bunifu.Framework.BunifuCustomTextbox name_txt;
-        private Bunifu.Framework.BunifuCustomTextbox age_txt;
         private System.Windows.Forms.Label usrName_lbl;
-        private Bunifu.Framework.BunifuCustomTextbox phone_txt;
-        private Bunifu.Framework.BunifuCustomTextbox emai_txt;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label exit_profile_btn;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Label label2;
     }
 }

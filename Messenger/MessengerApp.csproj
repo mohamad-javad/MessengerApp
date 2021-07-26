@@ -71,8 +71,9 @@
     <Reference Include="Bunifu.UI.WinForm.BunifuShadowPanel">
       <HintPath>C:\jb-visual2019\buninfu controls\Bunifu.UI.WinForm.BunifuShadowPanel.dll</HintPath>
     </Reference>
-    <Reference Include="Bunifu.UI.WinForms.1.5.3">
-      <HintPath>C:\jb-visual2019\buninfu controls\Bunifu.UI.WinForms.1.5.3.dll</HintPath>
+    <Reference Include="Bunifu.UI.WinForms.1.5.3, Version=1.5.3.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\jb-visual2019\buninfu controls\Bunifu.UI.WinForms.1.5.3.dll</HintPath>
     </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuButton">
       <HintPath>C:\jb-visual2019\buninfu controls\Bunifu.UI.WinForms.BunifuButton.dll</HintPath>
@@ -274,6 +275,8 @@
     </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="FormManager.cs" />
+    <Compile Include="GroupChatManager.cs" />
+    <Compile Include="IChatsManager.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,6 +291,7 @@
     <Compile Include="MessengerMainForm.Designer.cs">
       <DependentUpon>MessengerMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PersonalChatManager.cs" />
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
     </Compile>

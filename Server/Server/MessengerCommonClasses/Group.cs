@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using Server;
 using System;
 using System.Collections.Generic;
 
@@ -7,32 +6,28 @@ using System.Collections.Generic;
 namespace Server
 {
     [Serializable]
-    public struct GroupMessage
-    {
-        string Sender;
-        string message;
-        DateTime date;
-    }
-
-    [Serializable]
-    public class Group
+    public class Group:IDisplayable
     {
         public ObjectId _id { get; set; }
-        public string GroupName { get; set; }
+        public string Name { get; set; }
+        public string UserName { get; set; }
         public User GroupOwner { get; set; }
         public DateTime DateOfCreation { get; private set; }
-        public List<User> GroupUsers { get; set; }
-        List<User> GroupAdmins { get; set; }
-        List<GroupMessage> GroupMessages { get; set; }
+        public List<User> contacts { get; set; }
+        public List<User> GroupAdmins { get; set; }
+        public List<Message> Messages { get; set; }
         private bool IsDeleted = false;
         public Group()
         {
             DateOfCreation = DateTime.Now;
+            contacts = new List<User>();
+            Messages = new List<Message>();
+            GroupAdmins = new List<User>();
         }
 
         public void DelelteGroup(User reqUser)
         {
-            if (reqUser.Username == GroupOwner.Username)
+            if (reqUser.UserName == GroupOwner.UserName)
             {
                 if (!IsDeleted)
                 {
@@ -41,6 +36,11 @@ namespace Server
                 }
             }
 
+        }
+
+        public object GetSpecificatios()
+        {
+            return this;
         }
     }
 }

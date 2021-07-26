@@ -171,7 +171,9 @@
     <Compile Include="Databse\DataManager.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="MessengerCommonClasses\Group.cs" />
+    <Compile Include="MessengerCommonClasses\IDisplayable.cs" />
     <Compile Include="MessengerCommonClasses\MyExtentions.cs" />
+    <Compile Include="MessengerCommonClasses\User.cs" />
     <Compile Include="ServerManager.cs" />
     <Compile Include="MessengerCommonClasses\Message.cs" />
     <Compile Include="ServerConnectionManager.cs" />

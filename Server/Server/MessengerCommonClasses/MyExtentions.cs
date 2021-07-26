@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Server
 {
@@ -53,6 +55,26 @@ namespace Server
             return false;
         }
 
+
+        public static User FindUser(this ServerUser serverUser, string username)
+        {
+            User user = serverUser.contacts.Select(n => n).Where(n => n.UserName == username).FirstOrDefault();
+            return user;
+        }
+
+        public static List<string> CommontGroups(this ServerUser owner, string userName)
+        {
+            List<string> commons = new List<string>();
+            foreach (var item in owner.Groups)
+            {
+                 if(item.contacts.Any(n => n.UserName == userName))
+                {
+                    commons.Add(item.Name);
+                }
+            }
+
+            return commons;
+        }
     }
 
 }

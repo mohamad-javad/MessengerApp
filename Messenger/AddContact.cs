@@ -13,35 +13,25 @@ namespace Sliding_Application
     public partial class AddContact : Form
     {
         private event Action closeform;
-        string member_type;
-        public AddContact(string command)
+        string _command;
+        public AddContact(string topOfPage, string deffinition, string command)
         {
             InitializeComponent();
-            member_type = command;
-        }
-
-        private void Closeform()
-        {
-            this.Close();
-
+            this.Text = topOfPage;
+            this.defining_lbl.Text = deffinition;
+            _command = command;
+            if (topOfPage == "Add Existing Group")
+            {
+                createNew_btn.Visible = true;
+            }
         }
 
         private async void search_btn_Click(object sender, EventArgs e)
         {
             MessengerApp.Manager manager = new MessengerApp.Manager();
-            Server.Message message = new Server.Message(new Server.Header() { Command = "add contact" });
+            Server.Message message = new Server.Message(new Server.Header() { Command = _command });
             message.MessageContent = userName_text.Text;
-            switch (member_type)
-            {
-                case "personal":
-                    manager.ExecuteCommand(message);
-                    break;
-                default:
-                    break;
-            }
-
-            closeform += Closeform;
-
+            manager.ExecuteCommand(message);
         }
 
         private void search_btn_MouseDown(object sender, MouseEventArgs e)
@@ -52,6 +42,18 @@ namespace Sliding_Application
         private void search_btn_MouseUp(object sender, MouseEventArgs e)
         {
             search_btn.BorderStyle = BorderStyle.None;
+        }
+
+        private void AddContact_Load(object sender, EventArgs e)
+        {
+            this.BackColor = MessengerGUI.ThemeColor;
+            this.ForeColor = MessengerGUI.ForColor;
+            
+        }
+
+        private void createNew_btn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

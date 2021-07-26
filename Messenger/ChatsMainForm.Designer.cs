@@ -35,16 +35,17 @@ namespace Sliding_Application
             this.messages_pnl = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.accountsName_pnl = new Bunifu.UI.WinForms.BunifuShadowPanel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.write_msg = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.send_btn = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.accountsName_pnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.write_msg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.send_btn)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -54,6 +55,7 @@ namespace Sliding_Application
             // 
             // messages_pnl
             // 
+            this.messages_pnl.AutoScroll = true;
             this.messages_pnl.BackColor = System.Drawing.Color.Transparent;
             this.messages_pnl.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.messages_pnl.BorderRadius = 1;
@@ -61,7 +63,7 @@ namespace Sliding_Application
             this.messages_pnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.messages_pnl.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Solid;
             this.messages_pnl.GradientMode = Bunifu.UI.WinForms.BunifuShadowPanel.GradientModes.Vertical;
-            this.messages_pnl.Location = new System.Drawing.Point(354, 0);
+            this.messages_pnl.Location = new System.Drawing.Point(354, 87);
             this.messages_pnl.Name = "messages_pnl";
             this.messages_pnl.PanelColor = System.Drawing.Color.WhiteSmoke;
             this.messages_pnl.PanelColor2 = System.Drawing.Color.WhiteSmoke;
@@ -70,7 +72,7 @@ namespace Sliding_Application
             this.messages_pnl.ShadowDepth = 5;
             this.messages_pnl.ShadowStyle = Bunifu.UI.WinForms.BunifuShadowPanel.ShadowStyles.Surrounded;
             this.messages_pnl.ShadowTopLeftVisible = false;
-            this.messages_pnl.Size = new System.Drawing.Size(823, 501);
+            this.messages_pnl.Size = new System.Drawing.Size(823, 414);
             this.messages_pnl.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.messages_pnl.TabIndex = 1;
             this.messages_pnl.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.messages_pnl_ControlAdded);
@@ -104,6 +106,18 @@ namespace Sliding_Application
             this.accountsName_pnl.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.accountsName_pnl.TabIndex = 0;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(354, 46);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 5;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
             // write_msg
             // 
             this.write_msg.BackColor = System.Drawing.Color.Transparent;
@@ -112,7 +126,7 @@ namespace Sliding_Application
             this.write_msg.BorderThickness = 1;
             this.write_msg.Controls.Add(this.richTextBox1);
             this.write_msg.Controls.Add(this.pictureBox2);
-            this.write_msg.Controls.Add(this.pictureBox1);
+            this.write_msg.Controls.Add(this.send_btn);
             this.write_msg.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.write_msg.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Gradient;
             this.write_msg.GradientMode = Bunifu.UI.WinForms.BunifuShadowPanel.GradientModes.Vertical;
@@ -149,29 +163,26 @@ namespace Sliding_Application
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
-            // pictureBox1
+            // send_btn
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.SteelBlue;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(762, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(61, 74);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.send_btn.BackColor = System.Drawing.Color.SteelBlue;
+            this.send_btn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.send_btn.Image = ((System.Drawing.Image)(resources.GetObject("send_btn.Image")));
+            this.send_btn.Location = new System.Drawing.Point(762, 0);
+            this.send_btn.Name = "send_btn";
+            this.send_btn.Size = new System.Drawing.Size(61, 74);
+            this.send_btn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.send_btn.TabIndex = 7;
+            this.send_btn.TabStop = false;
             // 
-            // pictureBox3
+            // panel1
             // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(354, 46);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(354, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(823, 87);
+            this.panel1.TabIndex = 5;
             // 
             // ChatsMainForm
             // 
@@ -179,16 +190,17 @@ namespace Sliding_Application
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 575);
             this.Controls.Add(this.messages_pnl);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.write_msg);
             this.Controls.Add(this.accountsName_pnl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ChatsMainForm";
             this.Text = "Chats";
             this.accountsName_pnl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.write_msg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.send_btn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -196,13 +208,14 @@ namespace Sliding_Application
         #endregion
 
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
-        private Bunifu.UI.WinForms.BunifuShadowPanel messages_pnl;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
         private Bunifu.UI.WinForms.BunifuShadowPanel accountsName_pnl;
         private Bunifu.UI.WinForms.BunifuShadowPanel write_msg;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox send_btn;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Panel panel1;
+        public Bunifu.UI.WinForms.BunifuShadowPanel messages_pnl;
     }
 }
