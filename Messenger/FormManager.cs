@@ -74,10 +74,6 @@ namespace Sliding_Application
                     break;
             }
         }
-        public static void SayHi(this string name)
-        {
-            MainForm.SayHi(name.ToUpper());
-        }
 
 
     }

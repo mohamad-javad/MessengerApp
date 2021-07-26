@@ -16,8 +16,8 @@ namespace MessengerApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(MessengerMainForm.GetForm);
-           // Application.Run(RegistrationForm.GetForm);
+            //Application.Run(MessengerMainForm.GetForm);
+            Application.Run(RegistrationForm.GetForm);
         }
     }
 }

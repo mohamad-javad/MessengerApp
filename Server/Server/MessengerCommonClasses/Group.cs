@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace Server
 {
+    [Serializable]
     public struct GroupMessage
     {
         string Sender;
@@ -13,6 +14,7 @@ namespace Server
         DateTime date;
     }
 
+    [Serializable]
     public class Group
     {
         public ObjectId _id { get; set; }

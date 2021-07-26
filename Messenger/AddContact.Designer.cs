@@ -57,6 +57,7 @@ namespace Sliding_Application
             // 
             // search_btn
             // 
+            this.search_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.search_btn.Image = ((System.Drawing.Image)(resources.GetObject("search_btn.Image")));
             this.search_btn.Location = new System.Drawing.Point(427, 67);
             this.search_btn.Name = "search_btn";
@@ -65,6 +66,8 @@ namespace Sliding_Application
             this.search_btn.TabIndex = 2;
             this.search_btn.TabStop = false;
             this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
+            this.search_btn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.search_btn_MouseDown);
+            this.search_btn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.search_btn_MouseUp);
             // 
             // AddContact
             // 

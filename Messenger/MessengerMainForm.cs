@@ -26,16 +26,18 @@ namespace MessengerApp
         private MessengerMainForm()
         {
             InitializeComponent();
-            
+
             
         }
         private void MessengerMainForm_Load(object sender, EventArgs e)
         {
+            manager.HideLogin();
+            manager.HideRegistration();
             CheckForIllegalCrossThreadCalls = false;
             ckeckClientConnection_timer.Start();
 
+            SayHi(Manager.Owner.Name);
             //testing messenger
-            SayHi();
         }
 
         private void BunifuFlatButton1_Click(object sender, EventArgs e)
@@ -95,7 +97,7 @@ namespace MessengerApp
         private void ch_btn_Click(object sender, EventArgs e)
         {
         }
-        public void SayHi(string name = "Mohammad")
+        public void SayHi(string name)
         {
             BeginInvoke((Action)(() =>
             {

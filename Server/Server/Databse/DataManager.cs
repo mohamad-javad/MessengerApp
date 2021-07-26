@@ -36,10 +36,22 @@ namespace Server
 
         public void AddMessage(Message msg)
         {
-            MongoCollection<Message> usr1Messages = dB.GetCollection<Message>(msg.MessageHeader.Sender);
-            usr1Messages.Insert<Message>(msg);
-            MongoCollection<Message> usr2Messages = dB.GetCollection<Message>(msg.MessageHeader.Reciever);
-            usr2Messages.Insert<Message>(msg);
+            List<Message> messages1 = new List<Message>();
+            List<Message> messages2 = new List<Message>();
+
+            var query1 = Query<ServerUser>.EQ(u => u.UserName, msg["sender"]);
+            var query2 = Query<ServerUser>.EQ(u => u.UserName, msg["reciever"]);
+            ServerUser user1 = UsersCollection.FindOne(query1);
+            ServerUser user2 = UsersCollection.FindOne(query2);
+            messages1 = user1.Messages;
+            messages2 = user2.Messages;
+            messages1.Add(msg);
+            messages2.Add(msg);
+
+            var update1 = Update<ServerUser>.Set(u => u.Messages, messages1);
+            var update2 = Update<ServerUser>.Set(u => u.Messages, messages2);
+            UsersCollection.Update(query1, update1);
+            UsersCollection.Update(query2, update2);
         }
         public string FindUserName(string userName)
         {
@@ -49,30 +61,10 @@ namespace Server
         public bool AddUser(ServerUser user)
         {
             bool res = false;
-
-            BsonDocument bsonUser = new BsonDocument() {
-                { "Name",user.Name}, { "Family", user.Family },
-                {"UserName",user.UserName },{"Password",user.Password}
-            };
-            WriteConcernResult result = UsersCollection.Insert(bsonUser);
+            WriteConcernResult result = UsersCollection.Insert<ServerUser>(user);
             res = !result.HasLastErrorMessage;
 
             return res;
-        }
-        public async Task<List<Message>> GetUserMessages(string srcUserName, string userName)
-        {
-            List<Message> msgs = new List<Message>();
-            MongoCollection<Message> msgCollection = dB.GetCollection<Message>(srcUserName);
-            
-            foreach (var msg in msgCollection.FindAll())
-            {
-                if (msg["sender"] == userName || msg["reciever"] == userName)
-                {
-                    msgs.Add(msg);
-                }
-            }
-
-            return msgs;
         }
         public void AddContact(string username, User contact)
         {

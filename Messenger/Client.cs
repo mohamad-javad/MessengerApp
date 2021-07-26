@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Server;
 using SimpleTcp;
 
@@ -12,7 +13,7 @@ namespace MessengerApp
     public class Client
     {
         static SimpleTcpClient client;
-       
+
 
         static Client()
         {
@@ -46,31 +47,32 @@ namespace MessengerApp
         {
             try
             {
+                ConnectToServer();
                 client.Send(msg.ConvertMessageToByte());
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show("connection error", "", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show("connection error:\n" + "\n" + e.ToString(), "", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
             }
         }
 
         public static void ConnectToServer()
         {
-                while (!client.IsConnected)
+            while (!client.IsConnected)
+            {
+                try
                 {
-                    try
-                    {
-                        client.Connect();
-                    }
-                    catch (Exception)
-                    {
-
-
-                    }
-
+                    client.Connect();
+                }
+                catch (Exception e)
+                {
 
                 }
+
+
+            }
         }
     }
 }

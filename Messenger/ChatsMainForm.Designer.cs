@@ -82,6 +82,7 @@ namespace Sliding_Application
             // 
             // accountsName_pnl
             // 
+            this.accountsName_pnl.AutoScroll = true;
             this.accountsName_pnl.BackColor = System.Drawing.Color.Transparent;
             this.accountsName_pnl.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.accountsName_pnl.BorderRadius = 1;
@@ -162,10 +163,11 @@ namespace Sliding_Application
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(46, 46);
+            this.pictureBox3.Size = new System.Drawing.Size(354, 46);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 5;
             this.pictureBox3.TabStop = false;

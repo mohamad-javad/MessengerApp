@@ -6,15 +6,13 @@ namespace MessengerApp
 {
     public class Manager
     {
-        public static ServerUser Owner { get; set; }
-        public static Manager manager;
-        static Manager()
-        {
-            manager = new Manager();
-        }
+        public static ServerUser Owner { get; private set; }
+        
+
         public void ExecuteCommand(Message message)
         {
-            
+
+            Manager manager = new Manager();
             ServerUser usr;
             
             Header header;
@@ -61,6 +59,7 @@ namespace MessengerApp
         }
         public void ExecuteAnswer(Message message)
         {
+            Manager manager = new Manager();
 
             ServerUser usr;
 
@@ -72,8 +71,8 @@ namespace MessengerApp
                 case "register user response":
                     if (message["msgType"] == "ServerUser")
                     {
-                        Owner = (ServerUser)message.MessageContent;
-                        LoginUser();
+                        LoginUser((ServerUser)message.MessageContent);
+                        System.Windows.Forms.MessageBox.Show("showin mainform");
                     }
                     else
                     {
@@ -88,8 +87,7 @@ namespace MessengerApp
                     manager.HideLogin();
                     if (message["msgType"] == "ServerUser")
                     {
-                        Owner = (ServerUser)message.MessageContent;
-                        LoginUser();
+                        LoginUser((ServerUser)message.MessageContent);
                     }
                     else
                     {
@@ -101,14 +99,20 @@ namespace MessengerApp
             }
         }
 
-        private void LoginUser()
+        private void LoginUser(ServerUser user)
         {
-            Owner.Name.SayHi();
+            Manager manager = new Manager();
+
+            Owner = user;
             manager.ShowMain();
+            
+            
             
         }
         public void ManageForms(Message message)
         {
+            Manager manager = new Manager();
+
             switch (message["command"])
             {
                 case "register":

@@ -12,7 +12,7 @@ namespace Sliding_Application
 {
     public partial class AddContact : Form
     {
-
+        private event Action closeform;
         string member_type;
         public AddContact(string command)
         {
@@ -20,7 +20,13 @@ namespace Sliding_Application
             member_type = command;
         }
 
-        private void search_btn_Click(object sender, EventArgs e)
+        private void Closeform()
+        {
+            this.Close();
+
+        }
+
+        private async void search_btn_Click(object sender, EventArgs e)
         {
             MessengerApp.Manager manager = new MessengerApp.Manager();
             Server.Message message = new Server.Message(new Server.Header() { Command = "add contact" });
@@ -34,6 +40,18 @@ namespace Sliding_Application
                     break;
             }
 
+            closeform += Closeform;
+
+        }
+
+        private void search_btn_MouseDown(object sender, MouseEventArgs e)
+        {
+            search_btn.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void search_btn_MouseUp(object sender, MouseEventArgs e)
+        {
+            search_btn.BorderStyle = BorderStyle.None;
         }
     }
 }

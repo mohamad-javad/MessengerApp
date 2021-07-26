@@ -36,7 +36,7 @@ namespace Server
             if(MessageContent is string)
             return $"{MessageHeader.Sender}:\n{MessageContent}:\n{CreationDate.ToString("HH:mm:ss")}";
             else{
-                return $"{MessageHeader.Sender}:\nSend a file:\n{CreationDate.ToString("HH:mm:ss")}";
+                return $"{MessageHeader.Sender}:\nSent an object:\n{CreationDate.ToString("HH:mm:ss")}";
             }
         }
 

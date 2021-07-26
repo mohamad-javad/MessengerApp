@@ -43,18 +43,22 @@ namespace Sliding_Application
 
         private void ShowContacts(ServerUser owner)
         {
-            foreach (var item in owner.contacts)
+            accountsName_pnl.Controls.Clear();
+            if (owner != null)
             {
-                BunifuFlatButton button = new BunifuFlatButton();
-                button.Name = owner.UserName;
-                button.Text = owner.Name;
-                button.Dock = DockStyle.Top;
-                button.BackColor = MessengerGUI.ThemeColor;
-                button.ForeColor = MessengerGUI.ForColor;
+                foreach (var item in owner.contacts)
+                {
+                    BunifuFlatButton button = new BunifuFlatButton();
+                    button.Name = owner.UserName;
+                    button.Text = owner.Name;
+                    button.Dock = DockStyle.Top;
+                    button.BackColor = MessengerGUI.ThemeColor;
+                    button.ForeColor = MessengerGUI.ForColor;
 
-                button.Click += ShowPersonalMessages;
-                button.DoubleClick += ShowProfile;
-                this.accountsName_pnl.Controls.Add(button);
+                    button.Click += ShowPersonalMessages;
+                    button.DoubleClick += ShowProfile;
+                    this.accountsName_pnl.Controls.Add(button);
+                }
             }
         }
 
@@ -91,6 +95,9 @@ namespace Sliding_Application
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
+            AddContact newContact = new AddContact(command);
+            newContact.ShowDialog();
+
 
         }
     }

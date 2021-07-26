@@ -15,14 +15,20 @@ namespace Server
     public class ServerManager : IManager
     {
         public static List<string> serverStatus;
-        ServerUI sUI;
-        List<ServerUser> users;
+        static ServerUI sUI;
+        static List<ServerUser> users;
         DataManager dtManager;
-        public ServerManager()
+        static ServerManager()
         {
             sUI = ServerUI.GetForm;
-            dtManager = new DataManager();
             users = new List<ServerUser>();
+        }
+        public ServerManager()
+        {
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            
+            dtManager = new DataManager();
+            
             UpdateUsers();
 
         }
@@ -39,7 +45,7 @@ namespace Server
         }
         void UpdateUsers()
         {
-            this.users = dtManager.GetAllUsers();
+            users = dtManager.GetAllUsers();
         }
         public Message ExecuteCommand(Message message)
         {
@@ -87,29 +93,10 @@ namespace Server
                     dtManager.AddMessage(message);
                     break;
 
-
-                case "get messages":
-                    string srcUserName = message["sender"],
-                        destUserName = message["reciever"];
-
-                    header = new Header()
-                    {
-                        Sender = srcUserName,
-                        Reciever = destUserName,
-                        Command = "all user messages",
-                        TypeOfMessage = "list of messages"
-                    };
-                    resmessage = new Message(header);
-                    Task<List<Message>> tskMsg = dtManager.GetUserMessages(srcUserName, destUserName);
-                    List<Message> messages = await tskMsg;
-                    resmessage.MessageContent = messages;
-                    break;
-
-
                 case "add contact":
                     string userName = message["sender"];
                     string contactName = (string)message.MessageContent;
-                    User contact = IdentifyUser(contactName).ConvertToUser();
+                    User contact = IdentifyUser(contactName).user;
                     if (contact != null)
                     {
                         UpdateUsers();

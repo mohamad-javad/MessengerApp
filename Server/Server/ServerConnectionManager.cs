@@ -11,6 +11,7 @@ namespace Server
 {
     public class ServerConnectionManager
     {
+        static ServerManager svManager;
         static ServerConnectionManager scm;
         private static string _serverIpAddress;
         private static SimpleTcpServer server;
@@ -67,12 +68,22 @@ namespace Server
         }
         private static void DataRecieved(object sender, DataReceivedEventArgs e)
         {
+            svManager = new ServerManager();
             Message msg = e.Data.ConvertMessageFromByte();
-            
-            ServerManager svManager = new ServerManager();
-            Message message = svManager.ExecuteCommand(msg);
 
-           server.Send(e.IpPort, message.ConvertMessageToByte());
+           
+            Message message = svManager.ExecuteCommand(msg);
+            try
+            {
+                server.Send(e.IpPort, message.ConvertMessageToByte());
+               
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("error in send message" + E.ToString());
+                
+            }
+           
 
         }
 
