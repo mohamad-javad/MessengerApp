@@ -259,6 +259,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddContact.Designer.cs">
+      <DependentUpon>AddContact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Chat.cs" />
     <Compile Include="ChatsMainForm.cs">
       <SubType>Form</SubType>
@@ -296,6 +302,9 @@
     <Compile Include="RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddContact.resx">
+      <DependentUpon>AddContact.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChatsMainForm.resx">
       <DependentUpon>ChatsMainForm.cs</DependentUpon>
     </EmbeddedResource>

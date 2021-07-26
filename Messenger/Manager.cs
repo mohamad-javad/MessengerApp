@@ -36,15 +36,12 @@ namespace MessengerApp
                     break;
 
 
-                case "get user messages":
-
-                    break;
-
-
-               
-
-
-                case "get user Contacts":
+                case "add contact":
+                    header.Command = "add contact";
+                    header.Sender = Owner.UserName;
+                    header.Reciever = "Server";
+                    CMessage = new Message(header);
+                    CMessage.MessageContent = message.MessageContent;
                     break;
 
 

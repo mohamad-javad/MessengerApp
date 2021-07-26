@@ -53,6 +53,22 @@ namespace Server
             return false;
         }
 
+
+        public static User ConvertToUser(this ServerUser serverUser)
+        {
+            if (serverUser == null)
+            {
+                return null;
+            }
+            User user = new User();
+            user.Name = serverUser.Name;
+            user.Family = serverUser.Family;
+            user._id = serverUser._id;
+            user.Username = serverUser.UserName;
+
+            return user;
+        }
+
     }
 
 }

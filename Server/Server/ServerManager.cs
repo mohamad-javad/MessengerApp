@@ -30,7 +30,7 @@ namespace Server
         {
             set
             {
-                if(serverStatus == null)
+                if (serverStatus == null)
                 {
                     serverStatus = new List<string>();
                 }
@@ -71,7 +71,7 @@ namespace Server
                         catch (System.Exception)
                         {
 
-                            
+
                         }
 
                     }
@@ -108,24 +108,17 @@ namespace Server
 
                 case "add contact":
                     string userName = message["sender"];
-                    List<User> contact = (List<User>)message.MessageContent;
-                    dtManager.AddContact(userName, contact);
-                    UpdateUsers();
-                    break;
-
-
-                case "get contacts":
-                    string usrName = message["sender"];
-                    List<User> contacts = dtManager.GetUserContacts(usrName);
-
-                    header = new Header()
+                    string contactName = (string)message.MessageContent;
+                    User contact = IdentifyUser(contactName).ConvertToUser();
+                    if (contact != null)
                     {
-                        Sender = "Server",
-                        Command = "all user contacts",
-                        Reciever = usrName
-                    };
-                    resmessage = new Message(header);
-                    resmessage.MessageContent = contacts;
+                        UpdateUsers();
+                        dtManager.AddContact(userName, contact);
+                        header = new Header() { Sender = "Server", Reciever = message["sender"], Command = "add contact res" };
+                        resmessage = new Message(header);
+                        resmessage.MessageContent = contact;
+                    }
+
                     break;
 
 
@@ -147,7 +140,7 @@ namespace Server
                     ServerUser usr3 = Login(usr1.UserName, usr1.Password);
                     if (usr3 != null)
                     {
-                        resmessage.MessageContent = usr3; 
+                        resmessage.MessageContent = usr3;
                         try
                         {
                             sUI.StatusChanged($"{usr3.UserName} was logedin");
@@ -197,17 +190,28 @@ namespace Server
 
         private ServerUser Login(string userName, string password)
         {
-            foreach (var user in users)
+            ServerUser user = new ServerUser();
+            user = IdentifyUser(userName);
+            if (user != null)
             {
-                if (user.UserName == userName)
+                if (password == user.Password)
                 {
-                    if (password == user.Password)
-                    {
-                        return user;
-                    }
+                    return user;
                 }
             }
+            
+
             return null;
+        }
+        private ServerUser IdentifyUser(string username)
+        {
+            ServerUser identifiedUser = new ServerUser();
+            if (users.Any(n => n.UserName == username))
+            {
+                identifiedUser = users.Select(n => n).Where(n => n.UserName == username).FirstOrDefault();
+            }
+
+            return identifiedUser;
         }
     }
 }

@@ -74,28 +74,26 @@ namespace Server
 
             return msgs;
         }
-        public void AddContact(string username, List<User> contact)
+        public void AddContact(string username, User contact)
         {
             List<User> ct = new List<User>();
             var query = Query<ServerUser>.EQ(u => u.UserName, username);
             ServerUser user = UsersCollection.FindOne(query);
 
             ct = user.contacts;
-            foreach (var item in contact)
-            {
-                ct.Add(item);
-            }
+            ct.Add(contact);
             var update = Update<ServerUser>.Set(u => u.contacts, ct);
             UsersCollection.Update(query, update);
         }
-        public List<User> GetUserContacts(string userName)
+        public void AddGroup(string userName, Group group)
         {
-            List<User> cntct = new List<User>();
+            List<Group> groups = new List<Group>();
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
             ServerUser user = UsersCollection.FindOne(query);
-            cntct = user.contacts;
-
-            return cntct;
+            groups = user.Groups;
+            groups.Add(group);
+            var update = Update<ServerUser>.Set(u => u.Groups, groups);
+            UsersCollection.Update(query, update);
         }
 
     }
