@@ -9,7 +9,7 @@ namespace Server
 {
     public interface IManager
     {
-        Task<Message> ExecuteCommand(Message msg);
+        Message ExecuteCommand(Message msg);
     }
 
     public class ServerManager : IManager
@@ -41,7 +41,7 @@ namespace Server
         {
             this.users = dtManager.GetAllUsers();
         }
-        public async Task<Message> ExecuteCommand(Message message)
+        public Message ExecuteCommand(Message message)
         {
             Message resmessage = new Message(new Header());
             Header header;

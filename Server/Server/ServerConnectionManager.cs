@@ -65,15 +65,14 @@ namespace Server
             ServerUI.GetForm.StatusChanged(e.IpPort + " is connected.", "cyan");
             ServerUI.GetForm.AD_UserList(e.IpPort, true);
         }
-        private static async void DataRecieved(object sender, DataReceivedEventArgs e)
+        private static void DataRecieved(object sender, DataReceivedEventArgs e)
         {
             Message msg = e.Data.ConvertMessageFromByte();
             
             ServerManager svManager = new ServerManager();
-            Task<Message> response = svManager.ExecuteCommand(msg);
-            Message message = await response;
+            Message message = svManager.ExecuteCommand(msg);
 
-           await server.SendAsync(e.IpPort, message.ConvertMessageToByte());
+           server.Send(e.IpPort, message.ConvertMessageToByte());
 
         }
 
