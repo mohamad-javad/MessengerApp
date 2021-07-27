@@ -2,7 +2,7 @@
 {
     public interface IDisplayable
     {
-        object GetSpecificatios(ُ);
+        object GetSpecificatios();
     }
 
 }

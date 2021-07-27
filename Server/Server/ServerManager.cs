@@ -17,11 +17,15 @@ namespace Server
         public static List<string> serverStatus;
         static ServerUI sUI;
         static List<ServerUser> users;
+        static List<Group> groups;
+        static Dictionary<string, string> usernameCollection;
         DataManager dtManager;
         static ServerManager()
         {
             sUI = ServerUI.GetForm;
             users = new List<ServerUser>();
+            groups = new List<Group>();
+            usernameCollection = new Dictionary<string, string>();
         }
         public ServerManager()
         {
@@ -46,6 +50,21 @@ namespace Server
         void UpdateUsers()
         {
             users = dtManager.GetAllUsers();
+            groups = dtManager.GetAllGroups();
+            AddToUserColleciton();
+
+        }
+        void AddToUserColleciton()
+        {
+            foreach (var user in users)
+            {
+                usernameCollection.Add(user.UserName, "user");
+
+            }
+            foreach (var gp in groups)
+            {
+                usernameCollection.Add(gp.UserName, "group");
+            }
         }
         public Message ExecuteCommand(Message message)
         {
@@ -55,6 +74,7 @@ namespace Server
             switch (message["command"])
             {
                 case "new user":
+                    
                     ServerUser usr = (ServerUser)(message.MessageContent);
                     header = new Header()
                     {
@@ -90,7 +110,19 @@ namespace Server
 
 
                 case "send message":
-                    dtManager.AddMessage(message);
+                    if(usernameCollection.ContainsKey(message["reciever"]))
+                    {
+                        switch (usernameCollection[message["reciever"]])
+                        {
+                            case "user":
+                                dtManager.AddPersonalMessage(message);
+                                break;
+                            case "group":
+                                break;
+
+                        }
+                    }
+                    
                     break;
 
                 case "add contact":

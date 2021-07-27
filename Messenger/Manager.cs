@@ -50,7 +50,33 @@ namespace MessengerApp
 
                     break;
 
-              
+
+                case "add group":
+                    header.Sender = Owner.UserName;
+                    header.Reciever = "Server";
+                    header.Command = "add group";
+                    CMessage.MessageContent = message.MessageContent;
+                    CMessage.MessageHeader = header;
+                    break;
+
+
+                case "add message":
+                    header.Sender = Owner.UserName;
+                    header.Reciever = message["reciever"];
+                    header.Command = "send message";
+                    header.TypeOfMessage = message["msgType"];
+                    CMessage.MessageHeader = header;
+                    CMessage.MessageContent = message.MessageContent;
+                    break;
+
+
+                case "create group":
+                    header.Sender = Owner.UserName;
+                    header.Reciever = "Server";
+                    header.Command = "create group";
+                    CMessage.MessageContent = message.MessageContent;
+                    CMessage.MessageHeader = header;
+                    break;
 
                 default:
                     break;

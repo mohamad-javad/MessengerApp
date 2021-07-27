@@ -53,6 +53,7 @@ namespace Server
         public List<User> contacts { get; set; }
         public List<Message> Messages { get; set; }
         public List<Group> Groups { get; set; }
+        public List<string> groups { get; set; }
         
     }
 

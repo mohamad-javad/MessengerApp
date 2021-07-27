@@ -13,6 +13,7 @@ namespace Server
         MongoServer mongoServer;
         MongoDatabase dB;
         MongoCollection<ServerUser> UsersCollection;
+        MongoCollection<Group> groupCollection;
 
         [Obsolete]
         public DataManager()
@@ -21,6 +22,8 @@ namespace Server
             mongoServer = mongoClient.GetServer();
             dB = mongoServer.GetDatabase("MessengerDB");
             UsersCollection = dB.GetCollection<ServerUser>("Users");
+            groupCollection = dB.GetCollection<Group>("Groups");
+
         }
 
         public List<ServerUser> GetAllUsers()
@@ -33,8 +36,18 @@ namespace Server
 
             return users;
         }
+        public List<Group> GetAllGroups()
+        { 
+            List<Group> gps = new List<Group>();
+            foreach (var user in groupCollection.FindAll())
+            {
+                gps.Add(user);
+            }
 
-        public void AddMessage(Message msg)
+            return gps;
+        }
+
+        public void AddPersonalMessage(Message msg)
         {
             List<Message> messages1 = new List<Message>();
             List<Message> messages2 = new List<Message>();
