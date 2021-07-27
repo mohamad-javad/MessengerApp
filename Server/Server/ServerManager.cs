@@ -121,42 +121,47 @@ namespace Server
                                 dtManager.AddGroupMessage(message);
                                 break;
                         }
-                        UpdateUsers();
-                        header = new Header();
-                        header.Command = "refresh user";
-                        header.Reciever = message["sender"];
-                        header.Sender = "Server";
-                        resmessage.MessageHeader = header;
-                        ServerUser user = dtManager.FindUserName(message["sender"]);
-                        user.Groups = dtManager.CollectGroups(user);
-                        resmessage.MessageContent
-                            = user;
+                       
                     }
+                    resmessage = RefreshUser(message["sender"]);
                     
                     break;
 
                 case "add contact":
                     string userName = message["sender"];
                     string contactName = (string)message.MessageContent;
-                    ServerUser su = dtManager.FindUserName(contactName);
-                    if (su != null)
+                    if (usernameCollection.ContainsKey(contactName))
                     {
-                        User contact = su.user;
-                        UpdateUsers();
-                        dtManager.AddContact(userName, contact);
-                        header = new Header() { Sender = "Server", Reciever = message["sender"], Command = "add contact res" };
-                        resmessage = new Message(header);
-                        resmessage.MessageContent = contact;
+                        switch (usernameCollection[contactName])
+                        {
+                            case "user":
+                                ServerUser su = dtManager.FindUserName(contactName);
+                                break;
+                            case "group":
+                                dtManager.AddGroup(message["sender"], (string)message.MessageContent);
+                                break;
+                        }
+                       
                     }
+                    
 
+                    resmessage = RefreshUser(message["sender"]);
                     break;
 
 
                 case "create group":
-
+                    dtManager.CreateGroup(message["sender"],(Group)message.MessageContent);
+                    resmessage = RefreshUser(message["sender"]);
                     break;
 
 
+                case "add group admin":
+                    dtManager.AddGroupAdmin(message["sender"], (string)message.MessageContent);
+                    resmessage = RefreshUser(message["sender"]);
+                    break;
+
+                case "remove group admin":
+                    break;
                 case "login user":
                     ServerUser usr1 = (ServerUser)message.MessageContent;
                     header = new Header()
@@ -170,6 +175,7 @@ namespace Server
                     ServerUser usr3 = Login(usr1.UserName, usr1.Password);
                     if (usr3 != null)
                     {
+                        usr3.Groups = dtManager.CollectGroups(usr3);
                         resmessage.MessageContent = usr3;
                         try
                         {
@@ -215,6 +221,25 @@ namespace Server
             
 
             return null;
+        }
+
+        Message RefreshUser(string username)
+        {
+            Message resmessage;
+            Header header;
+            UpdateUsers();
+            header = new Header();
+            header.Command = "refresh user";
+            header.Reciever =username;
+            header.Sender = "Server";
+            resmessage = new Message(header);
+            resmessage.MessageHeader = header;
+            ServerUser user = dtManager.FindUserName(username);
+            user.Groups = dtManager.CollectGroups(user);
+            resmessage.MessageContent
+                = user;
+
+            return resmessage;
         }
 
     }

@@ -47,7 +47,7 @@ namespace Sliding_Application
 
         private void MemberClicked(object sender, EventArgs e)
         {
-            chatManager.ShowMessages(ownerUser.Messages, ownerUser.UserName, ((BunifuFlatButton)sender).Name, this);
+            chatManager.ShowMessages(ownerUser, ownerUser.UserName, ((BunifuFlatButton)sender).Name, this);
         }
 
         private void ShowProfile(object sender, EventArgs e)

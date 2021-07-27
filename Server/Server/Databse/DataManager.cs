@@ -130,6 +130,18 @@ namespace Server
         }
         public void AddGroup(string userName, string groupUserName)
         {
+            AddGroupToUserGroups(userName, groupUserName);
+            AddUserToGroupUsers(userName, groupUserName);
+        }
+        public void CreateGroup(string owner, Group gp)
+        {
+            groupCollection.Insert<Group>(gp);
+
+            AddGroup(owner, gp.UserName);
+        }
+
+        private void AddGroupToUserGroups(string userName, string groupUserName)
+        {
             List<string> groups = new List<string>();
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
 
@@ -143,11 +155,35 @@ namespace Server
             var update = Update<ServerUser>.Set(u => u.groups, groups);
             UsersCollection.Update(query, update);
         }
-        public void CreateGroup(string owner, Group gp)
+        private void AddUserToGroupUsers(string userName, string gpName)
         {
-            groupCollection.Insert<Group>(gp);
+            List<User> users;
+            var query = Query<Group>.EQ(g => g.UserName, gpName);
+            Group gp = groupCollection.FindOne(query);
+            users = gp.contacts;
+            if (users == null)
+            {
+                users = new List<User>();
+            }
+            users.Add(FindUserName(userName).user);
 
-            AddGroup(owner, gp.UserName);
+            var update = Update<Group>.Set(u => u.contacts, users);
+            groupCollection.Update(query, update);
+        }
+        public void AddGroupAdmin(string userName, string gpName)
+        {
+            List<User> admins;
+            var query = Query<Group>.EQ(g => g.UserName, gpName);
+            Group gp = groupCollection.FindOne(query);
+            admins = gp.GroupAdmins;
+            if (admins == null)
+            {
+                admins = new List<User>();
+            }
+            admins.Add(FindUserName(userName).user);
+
+            var update = Update<Group>.Set(u => u.GroupAdmins, admins);
+            groupCollection.Update(query, update);
         }
     }
 }
