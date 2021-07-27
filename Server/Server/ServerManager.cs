@@ -161,7 +161,11 @@ namespace Server
                     break;
 
                 case "remove group admin":
+                    dtManager.RemoveGroupAdmin(message["sender"], (string)message.MessageContent);
+                    resmessage = RefreshUser(message["sender"]);
                     break;
+
+
                 case "login user":
                     ServerUser usr1 = (ServerUser)message.MessageContent;
                     header = new Header()

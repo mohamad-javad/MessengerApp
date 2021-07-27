@@ -185,5 +185,20 @@ namespace Server
             var update = Update<Group>.Set(u => u.GroupAdmins, admins);
             groupCollection.Update(query, update);
         }
+        public void RemoveGroupAdmin(string userName, string gpName)
+        {
+            List<User> admins;
+            var query = Query<Group>.EQ(g => g.UserName, gpName);
+            Group gp = groupCollection.FindOne(query);
+            admins = gp.GroupAdmins;
+            if (admins != null && userName != gp.GroupOwner.UserName)
+            {
+                admins.Remove(FindUserName(userName).user);
+
+                var update = Update<Group>.Set(u => u.GroupAdmins, admins);
+                groupCollection.Update(query, update);
+            }
+            
+        }
     }
 }
