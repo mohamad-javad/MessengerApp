@@ -67,12 +67,46 @@ namespace Server
             UsersCollection.Update(query1, update1);
             UsersCollection.Update(query2, update2);
         }
+        public void AddGroupMessage(Message msg)
+        {
+            List<Message> messages1 = new List<Message>();
+
+            var query = Query<Group>.EQ(u => u.UserName, msg["reciever"]);
+            Group gp = groupCollection.FindOne(query);
+           
+            messages1 = gp.Messages == null ? new List<Message>() : gp.Messages;
+
+            messages1.Add(msg);
+           
+
+            var update = Update<Group>.Set(u => u.Messages, messages1);
+            UsersCollection.Update(query, update);
+           
+        }
         public ServerUser FindUserName(string userName)
         {
             var query = Query<ServerUser>.EQ(n => n.UserName, userName);
             ServerUser user = UsersCollection.FindOne(query);
             return user;
+        } 
+        public Group FindGroup(string groupUserName)
+        {
+            var query = Query<Group>.EQ(n => n.UserName, groupUserName);
+            Group gp = groupCollection.FindOne(query);
+            return gp;
         }
+        public List<Group> CollectGroups(ServerUser user)
+        {
+            List<Group> groups = new List<Group>();
+            foreach (var gp in user.groups)
+            {
+                groups.Add(FindGroup(gp));
+            }
+
+            user.Groups = groups;
+            return groups;
+        }
+
         public bool AddUser(ServerUser user)
         {
             bool res = false;
@@ -94,20 +128,26 @@ namespace Server
             var update = Update<ServerUser>.Set(u => u.contacts, ct);
             UsersCollection.Update(query, update);
         }
-        public void AddGroup(string userName, Group group)
+        public void AddGroup(string userName, string groupUserName)
         {
-            List<Group> groups = new List<Group>();
+            List<string> groups = new List<string>();
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
+
             ServerUser user = UsersCollection.FindOne(query);
-            groups = user.Groups;
+            groups = user.groups;
             if (groups == null)
             {
-                groups = new List<Group>();
+                groups = new List<string>();
             }
-            groups.Add(group);
-            var update = Update<ServerUser>.Set(u => u.Groups, groups);
+            groups.Add(groupUserName);
+            var update = Update<ServerUser>.Set(u => u.groups, groups);
             UsersCollection.Update(query, update);
         }
+        public void CreateGroup(string owner, Group gp)
+        {
+            groupCollection.Insert<Group>(gp);
 
+            AddGroup(owner, gp.UserName);
+        }
     }
 }

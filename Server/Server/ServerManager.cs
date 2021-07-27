@@ -118,9 +118,19 @@ namespace Server
                                 dtManager.AddPersonalMessage(message);
                                 break;
                             case "group":
+                                dtManager.AddGroupMessage(message);
                                 break;
-
                         }
+                        UpdateUsers();
+                        header = new Header();
+                        header.Command = "refresh user";
+                        header.Reciever = message["sender"];
+                        header.Sender = "Server";
+                        resmessage.MessageHeader = header;
+                        ServerUser user = dtManager.FindUserName(message["sender"]);
+                        user.Groups = dtManager.CollectGroups(user);
+                        resmessage.MessageContent
+                            = user;
                     }
                     
                     break;
