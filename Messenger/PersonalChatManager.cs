@@ -46,7 +46,7 @@ namespace Sliding_Application
             }
             foreach (Server.Message msg in messages)
             {
-               if (msg.MessageHeader.TypeOfMessage == "text")
+                if (msg.MessageHeader.TypeOfMessage == "text")
                 {
                     if (msg["sender"] == sender)
                     {
@@ -63,13 +63,14 @@ namespace Sliding_Application
 
         }
 
-            public void ShowProfile(IDisplayable displayed)
-            {
+        public void ShowProfile(IDisplayable displayed)
+        {
             User user = (User)displayed;
             ProfileForm profile = new ProfileForm(user);
             profile.NameLabels("Common Groups", "Common Channels");
             profile.AddListBox1(Manager.Owner.CommonGroups(user.UserName));
+            profile.ShowDialog();
         }
-        
+
     }
 }

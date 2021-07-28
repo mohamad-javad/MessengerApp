@@ -115,9 +115,10 @@ namespace MessengerApp
             switch (message["command"])
             {
                 case "register user response":
-                    manager.HideRegistration();
                     if (message.MessageContent is ServerUser)
                     {
+                        manager.HideRegistration();
+
                         LoginUser((ServerUser)message.MessageContent);
                        
                     }
@@ -131,9 +132,10 @@ namespace MessengerApp
                     break;
 
                 case "login response":
-                    manager.HideLogin();
                     if (message.MessageContent is ServerUser)
                     {
+                        manager.HideLogin();
+
                         LoginUser((ServerUser)message.MessageContent);
                     }
                     else
