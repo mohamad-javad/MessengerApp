@@ -39,7 +39,6 @@ namespace Sliding_Application
 
         public void ShowMessages(ServerUser user, string sender, string reciever, ChatsMainForm chatsMainForm)
         {
-            chatsMainForm.Controls.Clear();
             List<Server.Message> messages = user.Messages;
             if (messages == null)
             {

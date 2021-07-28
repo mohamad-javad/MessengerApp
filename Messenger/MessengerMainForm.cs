@@ -45,7 +45,7 @@ namespace MessengerApp
             Header header = new Header() { Command = "personal" };
             Server.Message message = new Server.Message(header);
             message.MessageContent = Manager.Owner;
-            FormManager(new ChatsMainForm(message));
+            FormManager(new ChatsMainForm(new PersonalChatManager()));
         }
         private void Desktop_Paint(object sender, PaintEventArgs e)
         {
@@ -72,7 +72,7 @@ namespace MessengerApp
 
         private void Profile_btn_Click(object sender, EventArgs e)
         {
-            FormManager(new ProfileForm());
+
         }
 
         private void bunifuCustomLabel1_Click(object sender, EventArgs e)

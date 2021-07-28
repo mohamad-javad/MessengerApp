@@ -41,8 +41,8 @@ namespace Sliding_Application
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.send_btn = new System.Windows.Forms.PictureBox();
             this.statepanel = new System.Windows.Forms.Panel();
-            this.name_lbl = new System.Windows.Forms.Label();
             this.userName_lbl = new System.Windows.Forms.Label();
+            this.name_lbl = new System.Windows.Forms.Label();
             this.accountsName_pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.write_msg.SuspendLayout();
@@ -115,7 +115,7 @@ namespace Sliding_Application
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(354, 46);
+            this.pictureBox3.Size = new System.Drawing.Size(354, 62);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 5;
             this.pictureBox3.TabStop = false;
@@ -191,15 +191,6 @@ namespace Sliding_Application
             this.statepanel.Size = new System.Drawing.Size(823, 62);
             this.statepanel.TabIndex = 5;
             // 
-            // name_lbl
-            // 
-            this.name_lbl.AutoSize = true;
-            this.name_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name_lbl.Location = new System.Drawing.Point(6, 9);
-            this.name_lbl.Name = "name_lbl";
-            this.name_lbl.Size = new System.Drawing.Size(0, 25);
-            this.name_lbl.TabIndex = 0;
-            // 
             // userName_lbl
             // 
             this.userName_lbl.AutoSize = true;
@@ -208,6 +199,15 @@ namespace Sliding_Application
             this.userName_lbl.Name = "userName_lbl";
             this.userName_lbl.Size = new System.Drawing.Size(0, 22);
             this.userName_lbl.TabIndex = 1;
+            // 
+            // name_lbl
+            // 
+            this.name_lbl.AutoSize = true;
+            this.name_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name_lbl.Location = new System.Drawing.Point(6, 9);
+            this.name_lbl.Name = "name_lbl";
+            this.name_lbl.Size = new System.Drawing.Size(0, 25);
+            this.name_lbl.TabIndex = 0;
             // 
             // ChatsMainForm
             // 

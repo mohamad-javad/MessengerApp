@@ -12,8 +12,9 @@ namespace Sliding_Application
     public static class MessengerGUI
     {
         static System.Drawing.Color _themeColor = System.Drawing.Color.WhiteSmoke;
-        private static System.Drawing.Color _messageForeColor;
-        private static System.Drawing.Color _messageBackColor;
+        private static System.Drawing.Color _messageForeColor =  Color.White;
+        
+        private static System.Drawing.Color _messageBackColor = Color.Blue;
 
         public static System.Drawing.Color MessageBackColor
         {
@@ -70,15 +71,15 @@ namespace Sliding_Application
             switch (color)
             {
                 case MessageColor.DarkCyan:
-                    MesageForeColor = Color.White;
+                    MessageForeColor = Color.White;
                     MessageBackColor = Color.DarkCyan;
                     break;
                 case MessageColor.Magenta:
-                    MesageForeColor = Color.White;
+                    MessageForeColor = Color.White;
                     MessageBackColor = Color.Magenta;
                     break;
                 case MessageColor.DarkBlue:
-                    MesageForeColor = Color.White;
+                    MessageForeColor = Color.White;
                     MessageBackColor = Color.DarkBlue;
                     break;
                 default:

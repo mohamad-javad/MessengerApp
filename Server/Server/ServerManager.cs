@@ -56,8 +56,10 @@ namespace Server
         }
         void AddToUserColleciton()
         {
+            usernameCollection = new Dictionary<string, string>();
             foreach (var user in users)
             {
+                
                 usernameCollection.Add(user.UserName, "user");
 
             }
@@ -116,9 +118,11 @@ namespace Server
                         {
                             case "user":
                                 dtManager.AddPersonalMessage(message);
+                                dtManager.AddContact(message["reciever"], dtManager.FindUserName(message["sender"]).user);
                                 break;
                             case "group":
                                 dtManager.AddGroupMessage(message);
+                                dtManager.AddGroup(message["reciever"], message["sender"]);
                                 break;
                         }
                        
@@ -136,6 +140,7 @@ namespace Server
                         {
                             case "user":
                                 ServerUser su = dtManager.FindUserName(contactName);
+                                dtManager.AddContact(message["sender"], su.user);
                                 break;
                             case "group":
                                 dtManager.AddGroup(message["sender"], (string)message.MessageContent);

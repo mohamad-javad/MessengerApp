@@ -10,17 +10,34 @@ namespace Sliding_Application
     public enum MessageSide { Left, Right };
     public partial class ChatsMainForm : Form
     {
-        Chat chat = new Chat();
         Server.ServerUser ownerUser;
         IChatsManager chatManager;
         IClientManager manager;
-        public ChatsMainForm(ServerUser owner, IChatsManager chatmanager)
+        public ChatsMainForm(IChatsManager chatmanager)
         {
             InitializeComponent();
-           
-            ownerUser = owner;
+            send_btn.Enabled = false;
+            ownerUser = Manager.Owner;
             chatManager = chatmanager;
             chatManager.ShowMembers(ownerUser, this);
+            msg_txt.TextChanged += EnableSendBtn;
+        }
+
+        private void EnableSendBtn(object sender, EventArgs e)
+        {
+            if (msg_txt.Text.Length == 0)
+            {
+                try
+                {
+                    send_btn.Enabled = false;
+
+                }
+                catch { }
+            }
+            else
+            {
+                send_btn.Enabled = true;
+            }
         }
 
         private void messages_pnl_ControlAdded(object sender, ControlEventArgs e)
@@ -33,11 +50,12 @@ namespace Sliding_Application
             
             button.Dock = DockStyle.Top;
             button.Click += MemberClicked;
-            button.DoubleClick += ShowProfile;
 
-            button.Normalcolor = MessengerGUI.ThemeColor;
-            button.ForeColor = MessengerGUI.ForColor;
+
+            button.Normalcolor = MessengerGUI.MessageBackColor;
+            button.ForeColor = MessengerGUI.MessageForeColor;
             accountsName_pnl.Controls.Add(button);
+            pictureBox3.SendToBack();
         }
 
         private void MemberClicked(object sender, EventArgs e)
@@ -58,7 +76,7 @@ namespace Sliding_Application
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-
+            chatManager.AddMember(this);
         }
 
         private void send_btn_Click(object sender, EventArgs e)

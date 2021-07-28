@@ -116,7 +116,7 @@ namespace MessengerApp
             {
                 case "register user response":
                     manager.HideRegistration();
-                    if (message["msgType"] == "ServerUser")
+                    if (message.MessageContent is ServerUser)
                     {
                         LoginUser((ServerUser)message.MessageContent);
                        
@@ -132,7 +132,7 @@ namespace MessengerApp
 
                 case "login response":
                     manager.HideLogin();
-                    if (message["msgType"] == "ServerUser")
+                    if (message.MessageContent is ServerUser)
                     {
                         LoginUser((ServerUser)message.MessageContent);
                     }

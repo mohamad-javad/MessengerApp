@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Server
 {
@@ -98,12 +99,15 @@ namespace Server
         public List<Group> CollectGroups(ServerUser user)
         {
             List<Group> groups = new List<Group>();
-            foreach (var gp in user.groups)
+            if (user.groups != null)
             {
-                groups.Add(FindGroup(gp));
+                foreach (var gp in user.groups)
+                {
+                    groups.Add(FindGroup(gp));
+                }
+                user.Groups = groups;
             }
-
-            user.Groups = groups;
+            
             return groups;
         }
 
@@ -124,9 +128,14 @@ namespace Server
             ct = user.contacts;
             if (ct == null)
                 ct = new List<User>();
-            ct.Add(contact);
-            var update = Update<ServerUser>.Set(u => u.contacts, ct);
-            UsersCollection.Update(query, update);
+            if(!ct.Any(n=> n.UserName == contact.UserName))
+            {
+                ct.Add(contact);
+                var update = Update<ServerUser>.Set(u => u.contacts, ct);
+                UsersCollection.Update(query, update);
+            }
+            
+            
         }
         public void AddGroup(string userName, string groupUserName)
         {

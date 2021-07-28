@@ -26,7 +26,7 @@ namespace Sliding_Application
             }
         }
 
-        private async void search_btn_Click(object sender, EventArgs e)
+        private void search_btn_Click(object sender, EventArgs e)
         {
             MessengerApp.Manager manager = new MessengerApp.Manager();
             Server.Message message = new Server.Message(new Server.Header() { Command = _command });
@@ -48,7 +48,9 @@ namespace Sliding_Application
         {
             this.BackColor = MessengerGUI.ThemeColor;
             this.ForeColor = MessengerGUI.ForColor;
-            
+            defining_lbl.BackColor = MessengerGUI.ThemeColor;
+            defining_lbl.ForeColor = MessengerGUI.ForColor;
+
         }
 
         private void createNew_btn_Click(object sender, EventArgs e)

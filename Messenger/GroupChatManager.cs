@@ -33,7 +33,6 @@ namespace Sliding_Application
 
         public void ShowMessages(ServerUser user, string sender, string reciever, ChatsMainForm chatsMainForm)
         {
-            chatsMainForm.Controls.Clear();
             Group gp = (Group)user.Groups.Select(n => n).Where(n => n.UserName == reciever).FirstOrDefault();
             List<Server.Message> messages = gp.Messages;
             if (messages == null)
