@@ -62,18 +62,34 @@ namespace Server
             return user;
         }
 
-        public static List<string> CommontGroups(this ServerUser owner, string userName)
+        public static List<string> CommonGroups(this ServerUser owner, string userName)
         {
             List<string> commons = new List<string>();
             foreach (var item in owner.Groups)
             {
-                 if(item.contacts.Any(n => n.UserName == userName))
+                if (item.contacts.Any(n => n.UserName == userName))
                 {
                     commons.Add(item.Name);
                 }
             }
 
             return commons;
+        }
+        public static IDisplayable MakeDisplayable(this string username, ServerUser serverUser)
+        {
+            List<Group> gp = serverUser.Groups;
+            List<User> usrs = serverUser.contacts;
+            if (gp.Any(n => n.UserName == username))
+            {
+                Group group = (Group)gp.Select(n => n).Where(n => n.UserName == username);
+                return group;
+            }
+            else if (usrs.Any(n => n.UserName == username))
+            {
+                User user = (User)usrs.Select(n => n).Where(n => n.UserName == username);
+                return user;
+            }
+            return null;
         }
     }
 

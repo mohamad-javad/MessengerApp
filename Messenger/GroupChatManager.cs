@@ -31,10 +31,10 @@ namespace Sliding_Application
             }
         }
 
-        public void ShowMessages(ServerUser user, string sender, string reviever, ChatsMainForm chatsMainForm)
+        public void ShowMessages(ServerUser user, string sender, string reciever, ChatsMainForm chatsMainForm)
         {
             chatsMainForm.Controls.Clear();
-            Group gp = (Group)user.Groups.Select(n => n).Where(n => n.UserName == reviever).FirstOrDefault();
+            Group gp = (Group)user.Groups.Select(n => n).Where(n => n.UserName == reciever).FirstOrDefault();
             List<Server.Message> messages = gp.Messages;
             if (messages == null)
             {
@@ -42,22 +42,23 @@ namespace Sliding_Application
             }
             foreach (Server.Message msg in messages)
             {
-                Label label = new Label();
-                label.Dock = DockStyle.Bottom;
-                if (msg["sender"] == reviever)
+                if (msg["msgType"] == "text")
                 {
-                    label.Text = msg.ToString();
+                    if (msg["sender"] == sender)
+                    {
+                        string mesage = msg.ToString();
+                        chatsMainForm.AddTextMessage(mesage, MessageSide.Left);
+                        
+                    }
+                    else
+                    {
+                        string mesage = msg.ToString();
+                        chatsMainForm.AddTextMessage(mesage, MessageSide.Right);
 
-                    label.Location = new Point(0, chatsMainForm.messages_pnl.Height - label.Height);
+                        
+                    }
+                    
                 }
-                else
-                {
-                    label.Text = msg.ToString();
-
-                    label.Location = new Point(chatsMainForm.messages_pnl.Width - label.Width, chatsMainForm.messages_pnl.Height - label.Height);
-                }
-                label.SendToBack();
-                chatsMainForm.messages_pnl.Controls.Add(label);
             }
         }
 

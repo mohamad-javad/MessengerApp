@@ -4,7 +4,12 @@ using Sliding_Application;
 
 namespace MessengerApp
 {
-    public class Manager
+    public interface IClientManager
+    {
+        void ExecuteCommand(Message message);
+    }
+
+    public class Manager:IClientManager
     {
         public static ServerUser Owner { get; private set; }
         
@@ -78,6 +83,21 @@ namespace MessengerApp
                     CMessage.MessageHeader = header;
                     break;
 
+                case "add group admin":
+                    header.Sender = Owner.UserName;
+                    header.Reciever = "Server";
+                    header.Command = "add group admin";
+                    CMessage.MessageContent = message.MessageContent;
+                    CMessage.MessageHeader = header;
+                    break;
+
+                case "remove group admin":
+                    header.Sender = Owner.UserName;
+                    header.Reciever = "Server";
+                    header.Command = "remove group admin";
+                    CMessage.MessageContent = message.MessageContent;
+                    CMessage.MessageHeader = header;
+                    break;
                 default:
                     break;
             }
@@ -121,7 +141,11 @@ namespace MessengerApp
                         manager.ShowLogin();
                         manager.AddError("user name or password are wrong!", "login");
                     }
+                    break;
 
+
+                case "refresh user":
+                    Owner = (ServerUser)message.MessageContent;
                     break;
             }
         }

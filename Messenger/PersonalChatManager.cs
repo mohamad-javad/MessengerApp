@@ -37,7 +37,7 @@ namespace Sliding_Application
             }
         }
 
-        public void ShowMessages(ServerUser user, string sender, string reviever, ChatsMainForm chatsMainForm)
+        public void ShowMessages(ServerUser user, string sender, string reciever, ChatsMainForm chatsMainForm)
         {
             chatsMainForm.Controls.Clear();
             List<Server.Message> messages = user.Messages;
@@ -47,22 +47,19 @@ namespace Sliding_Application
             }
             foreach (Server.Message msg in messages)
             {
-                Label label = new Label();
-                label.Dock = DockStyle.Bottom;
-                if (msg["sender"] == reviever)
+               if (msg.MessageHeader.TypeOfMessage == "text")
                 {
-                    label.Text = msg.ToString();
-
-                    label.Location = new Point(0, chatsMainForm.messages_pnl.Height - label.Height);
+                    if (msg["sender"] == sender)
+                    {
+                        string mesage = msg.ToString();
+                        chatsMainForm.AddTextMessage(mesage, MessageSide.Left);
+                    }
+                    else if (msg["reciever"] == reciever)
+                    {
+                        string mesage = msg.ToString();
+                        chatsMainForm.AddTextMessage(mesage, MessageSide.Right);
+                    }
                 }
-                if (msg["reciever"] == reviever)
-                {
-                    label.Text = msg.ToString();
-
-                    label.Location = new Point(chatsMainForm.messages_pnl.Width - label.Width, chatsMainForm.messages_pnl.Height - label.Height);
-                }
-                label.SendToBack();
-                chatsMainForm.messages_pnl.Controls.Add(label);
             }
 
         }
@@ -72,7 +69,7 @@ namespace Sliding_Application
             User user = (User)displayed;
             ProfileForm profile = new ProfileForm(user);
             profile.NameLabels("Common Groups", "Common Channels");
-            profile.AddListBox1(Manager.Owner.CommontGroups(user.UserName));
+            profile.AddListBox1(Manager.Owner.CommonGroups(user.UserName));
         }
         
     }
