@@ -42,7 +42,7 @@ namespace Sliding_Application
             this.statepanel = new System.Windows.Forms.Panel();
             this.userName_lbl = new System.Windows.Forms.Label();
             this.name_lbl = new System.Windows.Forms.Label();
-            this.message_pnl = new System.Windows.Forms.Panel();
+            this.message_gb = new System.Windows.Forms.Panel();
             this.accountsName_pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.write_msg.SuspendLayout();
@@ -87,9 +87,9 @@ namespace Sliding_Application
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 513);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(354, 62);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -134,6 +134,7 @@ namespace Sliding_Application
             this.msg_txt.Size = new System.Drawing.Size(690, 74);
             this.msg_txt.TabIndex = 8;
             this.msg_txt.Text = "";
+            this.msg_txt.TextChanged += new System.EventHandler(this.msg_txt_TextChanged);
             // 
             // pictureBox2
             // 
@@ -186,15 +187,13 @@ namespace Sliding_Application
             this.name_lbl.Size = new System.Drawing.Size(0, 25);
             this.name_lbl.TabIndex = 0;
             // 
-            // message_pnl
+            // message_gb
             // 
-            this.message_pnl.AutoScroll = true;
-            this.message_pnl.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.message_pnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.message_pnl.Location = new System.Drawing.Point(354, 62);
-            this.message_pnl.Name = "message_pnl";
-            this.message_pnl.Size = new System.Drawing.Size(823, 439);
-            this.message_pnl.TabIndex = 6;
+            this.message_gb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.message_gb.Location = new System.Drawing.Point(354, 62);
+            this.message_gb.Name = "message_gb";
+            this.message_gb.Size = new System.Drawing.Size(823, 439);
+            this.message_gb.TabIndex = 6;
             // 
             // ChatsMainForm
             // 
@@ -202,13 +201,14 @@ namespace Sliding_Application
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1177, 575);
-            this.Controls.Add(this.message_pnl);
+            this.Controls.Add(this.message_gb);
             this.Controls.Add(this.statepanel);
             this.Controls.Add(this.write_msg);
             this.Controls.Add(this.accountsName_pnl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ChatsMainForm";
             this.Text = "Chats";
+            this.Load += new System.EventHandler(this.ChatsMainForm_Load);
             this.accountsName_pnl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.write_msg.ResumeLayout(false);
@@ -233,6 +233,6 @@ namespace Sliding_Application
         private System.Windows.Forms.Panel statepanel;
         private System.Windows.Forms.Label name_lbl;
         private System.Windows.Forms.Label userName_lbl;
-        private System.Windows.Forms.Panel message_pnl;
+        private System.Windows.Forms.Panel message_gb;
     }
 }

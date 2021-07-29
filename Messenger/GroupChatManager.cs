@@ -46,14 +46,12 @@ namespace Sliding_Application
                 {
                     if (msg["sender"] == sender)
                     {
-                        string mesage = msg.ToString();
-                        chatsMainForm.AddTextMessage(mesage, MessageSide.Left);
+                        chatsMainForm.AddTextMessage(msg, MessageSide.Left);
                         
                     }
                     else
                     {
-                        string mesage = msg.ToString();
-                        chatsMainForm.AddTextMessage(mesage, MessageSide.Right);
+                        chatsMainForm.AddTextMessage(msg, MessageSide.Right);
 
                         
                     }

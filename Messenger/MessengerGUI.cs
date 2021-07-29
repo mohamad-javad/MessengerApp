@@ -8,43 +8,35 @@ using System.Drawing;
 namespace Sliding_Application
 {
     public enum Theme { Dark, Light };
-    public enum MessageColor { DarkCyan, Magenta, DarkBlue };
+    public enum MessageColor { DarkCyan, Magenta, DodgerBlue };
     public static class MessengerGUI
     {
-        static System.Drawing.Color _themeColor = System.Drawing.Color.WhiteSmoke;
-        private static System.Drawing.Color _messageForeColor =  Color.White;
-        
-        private static System.Drawing.Color _messageBackColor = Color.Blue;
 
         public static System.Drawing.Color MessageBackColor
         {
-            get { return _messageBackColor; }
-            set { _messageBackColor = value; }
+            get;
+            set;
+            
         }
 
         public static System.Drawing.Color MessageForeColor
         {
-            get { return _messageForeColor; }
-            set { _messageForeColor = value; }
+            get;
+            set;
         }
             
 
 
-        public static System.Drawing.Color ThemeColor { 
-            get
+        public static System.Drawing.Color ThemeColor 
             {
-                return _themeColor;
+            get;
+            set;
             }
-            
-        }
-        static System.Drawing.Color _forColor = System.Drawing.Color.Black;
-        public static System.Drawing.Color ForColor
+
+        public static Color ForColor
         {
-            get
-            {
-                return _forColor;
-            }
-
+            get;
+            set;
         }
 
 
@@ -54,12 +46,12 @@ namespace Sliding_Application
             switch (theme)
             {
                 case Theme.Dark:
-                    _themeColor = System.Drawing.Color.BlueViolet;
-                    _forColor = System.Drawing.Color.White;
+                    ThemeColor = System.Drawing.Color.DarkSlateGray;
+                    ForColor = System.Drawing.Color.White;
                     break;
                 case Theme.Light:
-                    _themeColor = System.Drawing.Color.WhiteSmoke;
-                    _forColor = System.Drawing.Color.Black;
+                    ThemeColor = System.Drawing.Color.WhiteSmoke;
+                    ForColor = System.Drawing.Color.Black;
                     break;
                 default:
                     break;
@@ -78,9 +70,9 @@ namespace Sliding_Application
                     MessageForeColor = Color.White;
                     MessageBackColor = Color.Magenta;
                     break;
-                case MessageColor.DarkBlue:
+                case MessageColor.DodgerBlue:
                     MessageForeColor = Color.White;
-                    MessageBackColor = Color.DarkBlue;
+                    MessageBackColor = Color.DodgerBlue;
                     break;
                 default:
                     break;

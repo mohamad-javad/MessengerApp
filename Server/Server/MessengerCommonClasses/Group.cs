@@ -32,7 +32,7 @@ namespace Server
                 if (!IsDeleted)
                 {
                     IsDeleted = false;
-                    //add to database
+                    //delete group from data base
                 }
             }
 

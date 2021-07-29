@@ -15,9 +15,9 @@ namespace MessengerApp
         {
             InitializeComponent();
             profileUser = user;
-            family_txt.Text = profileUser.Family;
-            name_txt.Text = profileUser.Name;
-            usrName_lbl.Text = profileUser.UserName;
+            family_txt.Text ="Family: "+ profileUser.Family;
+            name_txt.Text = "Name: " + profileUser.Name;
+            usrName_lbl.Text = "User Name: " + profileUser.UserName;
         }
         public ProfileForm(Group gp)
         {

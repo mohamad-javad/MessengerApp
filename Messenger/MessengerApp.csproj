@@ -266,7 +266,6 @@
     <Compile Include="AddContact.Designer.cs">
       <DependentUpon>AddContact.cs</DependentUpon>
     </Compile>
-    <Compile Include="Chat.cs" />
     <Compile Include="ChatsMainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -40,6 +40,7 @@ namespace Sliding_Application
 
         public void ShowMessages(ServerUser user, string sender, string reciever, ChatsMainForm chatsMainForm)
         {
+            
             List<Server.Message> messages = user.Messages;
             if (messages == null)
             {
@@ -51,13 +52,11 @@ namespace Sliding_Application
                 {
                     if (msg["sender"] == sender)
                     {
-                        string mesage = msg.ToString();
-                        chatsMainForm.AddTextMessage(mesage, MessageSide.Left);
+                        chatsMainForm.AddTextMessage(msg, MessageSide.Left);
                     }
-                    else if (msg["reciever"] == reciever)
+                    else if (msg["sender"] == reciever)
                     {
-                        string mesage = msg.ToString();
-                        chatsMainForm.AddTextMessage(mesage, MessageSide.Right);
+                        chatsMainForm.AddTextMessage(msg, MessageSide.Right);
                     }
                 }
             }

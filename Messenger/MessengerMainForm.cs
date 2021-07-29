@@ -54,7 +54,15 @@ namespace MessengerApp
         {
             if (currentForm != null)
             {
-                currentForm.Close();
+                if (currentForm is SettingForm)
+                {
+                    currentForm.Hide();
+                    currentForm = null;
+                }
+                else
+                {
+                    currentForm.Close();
+                }
             }
             welcom_lbl.Visible = false;
             currentForm = form;
@@ -70,7 +78,7 @@ namespace MessengerApp
 
         private void Profile_btn_Click(object sender, EventArgs e)
         {
-
+            FormManager(SettingForm.GetForm);
         }
 
         private void bunifuCustomLabel1_Click(object sender, EventArgs e)
@@ -84,7 +92,7 @@ namespace MessengerApp
         }
         private void People_btn_Click(object sender, EventArgs e)
         {
-
+            FormManager(new ChatsMainForm(new GroupChatManager()));
         }
 
         private void bunifuGradientPanel1_Paint(object sender, PaintEventArgs e)
