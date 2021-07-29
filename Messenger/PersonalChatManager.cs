@@ -65,7 +65,7 @@ namespace Sliding_Application
 
         public void ShowProfile(IDisplayable displayed)
         {
-            User user = (User)displayed;
+            User user = (User)displayed.GetSpecificatios();
             ProfileForm profile = new ProfileForm(user);
             profile.NameLabels("Common Groups", "Common Channels");
             profile.AddListBox1(Manager.Owner.CommonGroups(user.UserName));

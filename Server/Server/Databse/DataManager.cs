@@ -158,11 +158,8 @@ namespace Server
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
 
             ServerUser user = UsersCollection.FindOne(query);
-            groups = user.groups == null? new List<string>(): user.groups;
-            if (groups == null)
-            {
-                groups = new List<string>();
-            }
+            groups = user.groups == null ? new List<string>() : user.groups;
+
             groups.Add(groupUserName);
             var update = Update<ServerUser>.Set(u => u.groups, groups);
             UsersCollection.Update(query, update);

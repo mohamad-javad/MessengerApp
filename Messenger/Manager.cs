@@ -85,7 +85,7 @@ namespace MessengerApp
                     break;
 
                 case "add group admin":
-                    header.Sender = Owner.UserName;
+                    header.Sender = message.MessageHeader.Sender;
                     header.Reciever = "Server";
                     header.Command = "add group admin";
                     CMessage.MessageContent = message.MessageContent;
@@ -93,7 +93,7 @@ namespace MessengerApp
                     break;
 
                 case "remove group admin":
-                    header.Sender = Owner.UserName;
+                    header.Sender = message.MessageHeader.Sender;
                     header.Reciever = "Server";
                     header.Command = "remove group admin";
                     CMessage.MessageContent = message.MessageContent;

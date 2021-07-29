@@ -9,7 +9,7 @@ namespace MessengerApp
 {
     public partial class ProfileForm : Form
     {
-        
+        Group proGp;
         User profileUser;
         public ProfileForm(User user)
         {
@@ -21,9 +21,15 @@ namespace MessengerApp
         }
         public ProfileForm(Group gp)
         {
-            usrName_lbl.Text = "User Name: "+ gp.UserName;
-            name_txt.Text = "Name: "+gp.Name;
-            family_txt.Text = "Owner: "+gp.GroupOwner.UserName;
+            proGp = gp;
+            usrName_lbl.Text = "User Name: "+ proGp.UserName;
+            name_txt.Text = "Name: "+proGp.Name;
+            family_txt.Text = "Owner: "+proGp.GroupOwner.UserName;
+           if(gp.GroupOwner.UserName == Manager.Owner.UserName)
+            {
+                adAdmin_btn.Visible = true;
+                remoneAdmin_btn.Visible = true;
+            }
         }
 
         private void ProfileForm_Load(object sender, EventArgs e)
@@ -90,6 +96,28 @@ namespace MessengerApp
         {
             label1.Text = lbl1;
             label2.Text = lbl2;
+        }
+
+        private void adAdmin_btn_Click(object sender, EventArgs e)
+        {
+            IClientManager manager = new Manager();
+            Header h = new Header();
+            h.Command = "add group admin";
+            h.Sender = (string)listBox1.SelectedItem;
+            Server.Message msg = new Server.Message(h);
+            msg.MessageContent = usrName_lbl.Text;
+            manager.ExecuteCommand(msg);
+        }
+
+        private void remoneAdmin_btn_Click(object sender, EventArgs e)
+        {
+            IClientManager manager = new Manager();
+            Header h = new Header();
+            h.Command = "remove group admin";
+            h.Sender = (string)listBox2.SelectedItem;
+            Server.Message msg = new Server.Message(h);
+            msg.MessageContent = usrName_lbl.Text;
+            manager.ExecuteCommand(msg);
         }
     }
 }

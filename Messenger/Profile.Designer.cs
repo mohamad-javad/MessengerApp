@@ -36,6 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.adAdmin_btn = new System.Windows.Forms.Button();
+            this.remoneAdmin_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // family_txt
@@ -134,12 +136,36 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "UserName";
             // 
+            // adAdmin_btn
+            // 
+            this.adAdmin_btn.Location = new System.Drawing.Point(456, 362);
+            this.adAdmin_btn.Name = "adAdmin_btn";
+            this.adAdmin_btn.Size = new System.Drawing.Size(112, 50);
+            this.adAdmin_btn.TabIndex = 22;
+            this.adAdmin_btn.Text = "Add >>";
+            this.adAdmin_btn.UseVisualStyleBackColor = true;
+            this.adAdmin_btn.Visible = false;
+            this.adAdmin_btn.Click += new System.EventHandler(this.adAdmin_btn_Click);
+            // 
+            // remoneAdmin_btn
+            // 
+            this.remoneAdmin_btn.Location = new System.Drawing.Point(456, 434);
+            this.remoneAdmin_btn.Name = "remoneAdmin_btn";
+            this.remoneAdmin_btn.Size = new System.Drawing.Size(112, 50);
+            this.remoneAdmin_btn.TabIndex = 23;
+            this.remoneAdmin_btn.Text = "Remove<<";
+            this.remoneAdmin_btn.UseVisualStyleBackColor = true;
+            this.remoneAdmin_btn.Visible = false;
+            this.remoneAdmin_btn.Click += new System.EventHandler(this.remoneAdmin_btn_Click);
+            // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1048, 702);
+            this.Controls.Add(this.remoneAdmin_btn);
+            this.Controls.Add(this.adAdmin_btn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.label1);
@@ -166,5 +192,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button adAdmin_btn;
+        private System.Windows.Forms.Button remoneAdmin_btn;
     }
 }
