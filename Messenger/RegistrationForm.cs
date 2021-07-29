@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Server;
 using MessengerApp;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Sliding_Application
 {
@@ -109,10 +110,24 @@ namespace Sliding_Application
         }
         public async void ConnectClient()
         {
-            await Task.Run((Action)(() =>
+            
+
+            
+            Thread th = new Thread(new ThreadStart(ConnectToServerFunc));
+            th.Start();
+
+        }
+
+        private void ConnectToServerFunc()
+        {
+            Task.Run(() =>
             {
-                Client.ConnectToServer();
-            }));
+                while (true)
+                {
+                    Client.ConnectToServer();
+                    Thread.Sleep(3000);
+                }
+            });
         }
         private void Exit_btn_Click(object sender, EventArgs e)
         {

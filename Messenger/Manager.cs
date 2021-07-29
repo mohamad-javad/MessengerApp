@@ -21,7 +21,7 @@ namespace MessengerApp
             Manager manager = new Manager();
             ServerUser usr;
 
-            Header header;
+            Header header = new Header();
             Message CMessage = new Message(header);
 
             switch (message["command"])
@@ -110,7 +110,7 @@ namespace MessengerApp
 
             ServerUser usr;
             Thread th;
-            Header header;
+            Header header =  new Header();
             Message CMessage = new Message(header);
 
             switch (message["command"])
