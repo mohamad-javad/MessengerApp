@@ -15,14 +15,17 @@ namespace Server
         static ServerConnectionManager scm;
         private static string _serverIpAddress;
         private static SimpleTcpServer server;
-        public static ServerConnectionManager ServerConnectionGetForm { get
+        public static ServerConnectionManager ServerConnectionGetForm
+        {
+            get
             {
                 if (scm == null)
                 {
                     scm = new ServerConnectionManager();
                 }
                 return scm;
-            } }
+            }
+        }
         private ServerConnectionManager()
         {
             _serverIpAddress = "127.0.0.1:9000";
@@ -31,7 +34,7 @@ namespace Server
             server.Events.ClientConnected += ClientConnected;
             server.Events.ClientDisconnected += ClientDisconnected;
         }
-       
+
         public string ServerAddress
         {
             get
@@ -70,20 +73,25 @@ namespace Server
         {
             svManager = new ServerManager();
             Message msg = e.Data.ConvertMessageFromByte();
+            Message message;
 
-           
-            Message message = svManager.ExecuteCommand(msg);
-            try
+            Task.Run(() =>
             {
-                server.Send(e.IpPort, message.ConvertMessageToByte());
-               
-            }
-            catch (Exception E)
-            {
-                MessageBox.Show("error in send message" + E.ToString());
-                
-            }
-           
+                message = svManager.ExecuteCommand(msg);
+                ServerUI.GetForm.StatusChanged($"{msg["sender"]}: {msg["command"]}");
+                try
+                {
+                    server.Send(e.IpPort, message.ConvertMessageToByte());
+
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show("error in send message" + E.ToString());
+
+                }
+            });
+
+
 
         }
 

@@ -42,8 +42,7 @@ namespace Sliding_Application
 
         private void messages_pnl_ControlAdded(object sender, ControlEventArgs e)
         {
-            Label control = (Label)sender;
-
+           
         }
         public void AddMember(BunifuFlatButton button)
         {
@@ -71,7 +70,9 @@ namespace Sliding_Application
 
         private void ShowProfile(object sender, EventArgs e)
         {
-            chatManager.ShowProfile((((BunifuFlatButton)sender).Name.MakeDisplayable(ownerUser)));
+            string userName = userName_lbl.Text;
+            IDisplayable user = userName.MakeDisplayable(ownerUser);
+            chatManager.ShowProfile(user);
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)

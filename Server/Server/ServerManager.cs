@@ -118,7 +118,9 @@ namespace Server
                         {
                             case "user":
                                 dtManager.AddPersonalMessage(message);
-                                dtManager.AddContact(message["reciever"], dtManager.FindUserName(message["sender"]).user);
+                                User u = users.Select(n => n.user).Where(n => n.UserName == message["sender"]).FirstOrDefault();
+
+                                dtManager.AddContact(message["reciever"], u);
                                 break;
                             case "group":
                                 dtManager.AddGroupMessage(message);
@@ -245,8 +247,7 @@ namespace Server
             resmessage.MessageHeader = header;
             ServerUser user = dtManager.FindUserName(username);
             user.Groups = dtManager.CollectGroups(user);
-            resmessage.MessageContent
-                = user;
+            resmessage.MessageContent = user;
 
             return resmessage;
         }

@@ -24,9 +24,16 @@ namespace Sliding_Application
 
         public static void ShowMain(this Manager manager)
         {
-            try { MainForm.ShowDialog(); } catch (Exception e) { }
+            try
+            {
+                manager.HideLogin();
+                manager.HideRegistration();
+                MainForm.ShowDialog();
+            }
+            catch (Exception e) { System.Windows.Forms.MessageBox.Show(e.ToString()); }
+
         }
-        public static void HideLogin(this Manager manager)
+        static void HideLogin(this Manager manager)
         {
             if (Login.Visible)
             {
@@ -34,7 +41,7 @@ namespace Sliding_Application
                 Login.Hide();
             }
         }
-        public static void HideRegistration(this Manager manager)
+        static void HideRegistration(this Manager manager)
         {
             if (Registration.Visible)
             {

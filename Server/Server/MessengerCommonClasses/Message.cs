@@ -20,7 +20,6 @@ namespace Server
     [Serializable]
     public class Message
     {
-        public ObjectId _id { get; set; }
         public object MessageContent { get; set; }
         public DateTime CreationDate { get; private set; }
         public Header MessageHeader { get; set; }

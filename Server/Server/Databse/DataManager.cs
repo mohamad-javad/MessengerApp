@@ -38,7 +38,7 @@ namespace Server
             return users;
         }
         public List<Group> GetAllGroups()
-        { 
+        {
             List<Group> gps = new List<Group>();
             foreach (var user in groupCollection.FindAll())
             {
@@ -74,22 +74,22 @@ namespace Server
 
             var query = Query<Group>.EQ(u => u.UserName, msg["reciever"]);
             Group gp = groupCollection.FindOne(query);
-           
+
             messages1 = gp.Messages == null ? new List<Message>() : gp.Messages;
 
             messages1.Add(msg);
-           
+
 
             var update = Update<Group>.Set(u => u.Messages, messages1);
             UsersCollection.Update(query, update);
-           
+
         }
         public ServerUser FindUserName(string userName)
         {
             var query = Query<ServerUser>.EQ(n => n.UserName, userName);
             ServerUser user = UsersCollection.FindOne(query);
             return user;
-        } 
+        }
         public Group FindGroup(string groupUserName)
         {
             var query = Query<Group>.EQ(n => n.UserName, groupUserName);
@@ -107,7 +107,7 @@ namespace Server
                 }
                 user.Groups = groups;
             }
-            
+
             return groups;
         }
 
@@ -121,21 +121,24 @@ namespace Server
         }
         public void AddContact(string username, User contact)
         {
-            List<User> ct = new List<User>();
-            var query = Query<ServerUser>.EQ(u => u.UserName, username);
-            ServerUser user = UsersCollection.FindOne(query);
-
-            ct = user.contacts;
-            if (ct == null)
-                ct = new List<User>();
-            if(!ct.Any(n=> n.UserName == contact.UserName))
+            if (contact != null)
             {
-                ct.Add(contact);
-                var update = Update<ServerUser>.Set(u => u.contacts, ct);
-                UsersCollection.Update(query, update);
+                List<User> ct = new List<User>();
+                var query = Query<ServerUser>.EQ(u => u.UserName, username);
+                ServerUser user = UsersCollection.FindOne(query);
+
+                ct = user.contacts;
+                if (ct == null)
+                    ct = new List<User>();
+                if (!ct.Any(n => n.UserName == contact.UserName))
+                {
+                    ct.Add(contact);
+                    var update = Update<ServerUser>.Set(u => u.contacts, ct);
+                    UsersCollection.Update(query, update);
+                }
             }
-            
-            
+
+
         }
         public void AddGroup(string userName, string groupUserName)
         {
@@ -207,7 +210,7 @@ namespace Server
                 var update = Update<Group>.Set(u => u.GroupAdmins, admins);
                 groupCollection.Update(query, update);
             }
-            
+
         }
     }
 }

@@ -31,8 +31,6 @@ namespace MessengerApp
         }
         private void MessengerMainForm_Load(object sender, EventArgs e)
         {
-            manager.HideLogin();
-            manager.HideRegistration();
             CheckForIllegalCrossThreadCalls = false;
             ckeckClientConnection_timer.Start();
 

@@ -1,6 +1,7 @@
 ﻿using Server;
 using Sliding_Application;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MessengerApp
 {
@@ -117,8 +118,6 @@ namespace MessengerApp
                 case "register user response":
                     if (message.MessageContent is ServerUser)
                     {
-                        manager.HideRegistration();
-
                         LoginUser((ServerUser)message.MessageContent);
 
                     }
@@ -135,8 +134,6 @@ namespace MessengerApp
                 case "login response":
                     if (message.MessageContent is ServerUser)
                     {
-                        manager.HideLogin();
-
                         LoginUser((ServerUser)message.MessageContent);
                     }
                     else
@@ -172,12 +169,10 @@ namespace MessengerApp
             switch (message["command"])
             {
                 case "register":
-                    th = new Thread(new ThreadStart(manager.ShowRegistration));
-                    th.Start();
+                    manager.ShowRegistration();
                     break;
                 case "login":
-                    th = new Thread(new ThreadStart(manager.ShowLogin));
-                    th.Start();
+                    manager.ShowLogin();
                     break;
             }
         }
