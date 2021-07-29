@@ -167,8 +167,11 @@ namespace Sliding_Application
 
         private void addContact_Click(object sender, EventArgs e)
         {
-            AddContact add = new AddContact("Add User to Group", "Username: ", "add contact");
-            add.ShowDialog();
+            if (isMemberSelected)
+            {
+                AddContact add = new AddContact("Add User to Group", "Username: ", "add contact");
+                add.ShowDialog();
+            }
         }
     }
 }

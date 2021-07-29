@@ -48,10 +48,11 @@ namespace Sliding_Application
 
         private void AddContact_Load(object sender, EventArgs e)
         {
-            this.BackColor = MessengerGUI.ThemeColor;
-            this.ForeColor = MessengerGUI.ForColor;
-            defining_lbl.BackColor = MessengerGUI.ThemeColor;
-            defining_lbl.ForeColor = MessengerGUI.ForColor;
+            foreach (Control item in this.Controls)
+            {
+                item.BackColor = MessengerGUI.ThemeColor;
+                item.ForeColor = MessengerGUI.ForColor;
+            }
 
         }
 
