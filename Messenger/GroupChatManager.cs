@@ -1,4 +1,5 @@
 ﻿using Bunifu.Framework.UI;
+using MessengerApp;
 using Server;
 using System.Collections.Generic;
 using System.Drawing;
@@ -63,6 +64,13 @@ namespace Sliding_Application
         public void ShowProfile(IDisplayable displayed)
         {
             Group gp = (Group)displayed;
+            ProfileForm profile = new ProfileForm(gp);
+            profile.NameLabels("Users", "Admins");
+            List<string> cts = gp.GetGroupContacts();
+            List<string> ads = gp.GetgroupAdmins();
+            profile.AddListBox1(cts);
+            profile.AddListBox2(ads);
+            profile.ShowDialog();
         }
     }
 }

@@ -91,6 +91,25 @@ namespace Server
             }
             return null;
         }
+        public static List<string> GetGroupContacts(this Group gp)
+        {
+            List<string> cts = new List<string>();
+            foreach (var item in gp.contacts)
+            {
+                cts.Add(item.UserName);
+            }
+            return cts;
+        }
+        public static List<string> GetgroupAdmins(this Group gp)
+        {
+            List<string> ad = new List<string>();
+            foreach (var item in gp.GroupAdmins)
+            {
+                ad.Add(item.UserName);
+            }
+
+            return ad;
+        }
     }
 
 }

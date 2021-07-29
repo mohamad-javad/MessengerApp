@@ -43,6 +43,7 @@ namespace Sliding_Application
             this.userName_lbl = new System.Windows.Forms.Label();
             this.name_lbl = new System.Windows.Forms.Label();
             this.message_gb = new System.Windows.Forms.Panel();
+            this.addContact = new System.Windows.Forms.Label();
             this.accountsName_pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.write_msg.SuspendLayout();
@@ -161,6 +162,7 @@ namespace Sliding_Application
             // statepanel
             // 
             this.statepanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.statepanel.Controls.Add(this.addContact);
             this.statepanel.Controls.Add(this.userName_lbl);
             this.statepanel.Controls.Add(this.name_lbl);
             this.statepanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -194,6 +196,19 @@ namespace Sliding_Application
             this.message_gb.Name = "message_gb";
             this.message_gb.Size = new System.Drawing.Size(823, 439);
             this.message_gb.TabIndex = 6;
+            // 
+            // addContact
+            // 
+            this.addContact.AutoSize = true;
+            this.addContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addContact.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.addContact.Location = new System.Drawing.Point(690, 9);
+            this.addContact.Name = "addContact";
+            this.addContact.Size = new System.Drawing.Size(121, 25);
+            this.addContact.TabIndex = 2;
+            this.addContact.Text = "Add Contact";
+            this.addContact.Visible = false;
+            this.addContact.Click += new System.EventHandler(this.addContact_Click);
             // 
             // ChatsMainForm
             // 
@@ -234,5 +249,6 @@ namespace Sliding_Application
         private System.Windows.Forms.Label name_lbl;
         private System.Windows.Forms.Label userName_lbl;
         private System.Windows.Forms.Panel message_gb;
+        private System.Windows.Forms.Label addContact;
     }
 }

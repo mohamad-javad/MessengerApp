@@ -35,7 +35,7 @@ namespace Server
         public override string ToString()
         {
             if(MessageContent is string)
-            return $"\n{MessageContent}.\n";
+            return $"{MessageContent}.\n\n";
             else
             {
                 return $"{MessageHeader.Sender}:\nSent an object:\n{CreationDate.ToString("HH:mm:ss")}";

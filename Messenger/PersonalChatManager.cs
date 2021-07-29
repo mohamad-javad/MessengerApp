@@ -15,7 +15,7 @@ namespace Sliding_Application
     {
         public void AddMember(ChatsMainForm chatsMainForm)
         {
-            AddContact addmember = new AddContact("Add Existing User", "User Name:", "add contact");
+            AddContact addmember = new AddContact("Add Existing User", "Username:", "add contact");
 
             addmember.ShowDialog();
 

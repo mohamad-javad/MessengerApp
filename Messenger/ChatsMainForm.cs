@@ -23,6 +23,10 @@ namespace Sliding_Application
             chatManager.ShowMembers(ownerUser, this);
             msg_txt.TextChanged += EnableSendBtn;
             isMemberSelected = false;
+            if(chatmanager is GroupChatManager)
+            {
+                addContact.Visible = true;
+            }
 
         }
 
@@ -149,6 +153,8 @@ namespace Sliding_Application
             Color back = MessengerGUI.ThemeColor;
             BeginInvoke((Action)(() =>
             {
+                addContact.ForeColor = fore;
+                addContact.BackColor = back;
                 accountsName_pnl.ForeColor = fore;
                 accountsName_pnl.PanelColor2 = back;
                 accountsName_pnl.PanelColor = back;
@@ -157,6 +163,12 @@ namespace Sliding_Application
                 statepanel.ForeColor = fore;
                 statepanel.BackColor = back;
             }));
+        }
+
+        private void addContact_Click(object sender, EventArgs e)
+        {
+            AddContact add = new AddContact("Add User to Group", "Username: ", "add contact");
+            add.ShowDialog();
         }
     }
 }
