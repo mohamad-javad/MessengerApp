@@ -108,19 +108,17 @@ namespace Sliding_Application
         {
             ConnectClient();
         }
-        public async void ConnectClient()
+        public void ConnectClient()
         {
-            
 
-            
             Thread th = new Thread(new ThreadStart(ConnectToServerFunc));
             th.Start();
 
         }
 
-        private void ConnectToServerFunc()
+        private async void ConnectToServerFunc()
         {
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 while (true)
                 {

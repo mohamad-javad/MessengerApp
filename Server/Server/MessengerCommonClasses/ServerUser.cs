@@ -17,8 +17,8 @@ namespace Server
             Groups = new List<Group>();
             
         }
-        public User user { get; }
         public ObjectId _id { get; set; }
+        public User user { get; }
         public string UserName {
             get
             {
