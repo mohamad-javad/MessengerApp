@@ -96,20 +96,11 @@ namespace Sliding_Application
             label.Text = message.ToString();
             label.ForeColor = MessengerGUI.MessageForeColor;
             label.BackColor = MessengerGUI.MessageBackColor;
-            
-            switch (side)
-            {
-                case MessageSide.Left:
-                    label.Location = new Point(0, this.messages_pnl.Height - label.Height);
-                    break;
-                case MessageSide.Right:
-                    label.Location = new Point(this.messages_pnl.Width - label.Width, this.messages_pnl.Height - label.Height);
-                    break;
-                default:
-                    break;
-            }
+            label.Location = new Point(this.message_pnl.Location.X, this.write_msg.Location.Y - label.Height - 10);
+
             label.SendToBack();
-            messages_pnl.Controls.Add(label);
+
+            message_pnl.Controls.Add(label);
         }
     }
 }

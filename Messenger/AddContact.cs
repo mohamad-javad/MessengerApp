@@ -32,6 +32,8 @@ namespace Sliding_Application
             Server.Message message = new Server.Message(new Server.Header() { Command = _command });
             message.MessageContent = userName_text.Text;
             manager.ExecuteCommand(message);
+
+
         }
 
         private void search_btn_MouseDown(object sender, MouseEventArgs e)

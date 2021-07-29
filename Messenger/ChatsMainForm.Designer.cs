@@ -32,7 +32,6 @@ namespace Sliding_Application
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatsMainForm));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.messages_pnl = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.accountsName_pnl = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -43,6 +42,7 @@ namespace Sliding_Application
             this.statepanel = new System.Windows.Forms.Panel();
             this.userName_lbl = new System.Windows.Forms.Label();
             this.name_lbl = new System.Windows.Forms.Label();
+            this.message_pnl = new System.Windows.Forms.Panel();
             this.accountsName_pnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.write_msg.SuspendLayout();
@@ -55,30 +55,6 @@ namespace Sliding_Application
             // 
             this.bunifuElipse1.ElipseRadius = 0;
             this.bunifuElipse1.TargetControl = this;
-            // 
-            // messages_pnl
-            // 
-            this.messages_pnl.AutoScroll = true;
-            this.messages_pnl.BackColor = System.Drawing.Color.Transparent;
-            this.messages_pnl.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.messages_pnl.BorderRadius = 1;
-            this.messages_pnl.BorderThickness = 1;
-            this.messages_pnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.messages_pnl.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Solid;
-            this.messages_pnl.GradientMode = Bunifu.UI.WinForms.BunifuShadowPanel.GradientModes.Vertical;
-            this.messages_pnl.Location = new System.Drawing.Point(354, 62);
-            this.messages_pnl.Name = "messages_pnl";
-            this.messages_pnl.PanelColor = System.Drawing.Color.WhiteSmoke;
-            this.messages_pnl.PanelColor2 = System.Drawing.Color.WhiteSmoke;
-            this.messages_pnl.ShadowColor = System.Drawing.Color.DarkGray;
-            this.messages_pnl.ShadowDept = 2;
-            this.messages_pnl.ShadowDepth = 5;
-            this.messages_pnl.ShadowStyle = Bunifu.UI.WinForms.BunifuShadowPanel.ShadowStyles.Surrounded;
-            this.messages_pnl.ShadowTopLeftVisible = false;
-            this.messages_pnl.Size = new System.Drawing.Size(823, 439);
-            this.messages_pnl.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
-            this.messages_pnl.TabIndex = 1;
-            this.messages_pnl.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.messages_pnl_ControlAdded);
             // 
             // bunifuElipse2
             // 
@@ -148,10 +124,11 @@ namespace Sliding_Application
             // 
             // msg_txt
             // 
-            this.msg_txt.BackColor = System.Drawing.Color.SteelBlue;
+            this.msg_txt.BackColor = System.Drawing.Color.DarkSlateGray;
             this.msg_txt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.msg_txt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.msg_txt.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msg_txt.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.msg_txt.ForeColor = System.Drawing.Color.White;
             this.msg_txt.Location = new System.Drawing.Point(72, 0);
             this.msg_txt.Name = "msg_txt";
             this.msg_txt.Size = new System.Drawing.Size(690, 74);
@@ -169,7 +146,7 @@ namespace Sliding_Application
             // 
             // send_btn
             // 
-            this.send_btn.BackColor = System.Drawing.Color.SteelBlue;
+            this.send_btn.BackColor = System.Drawing.Color.DarkSlateGray;
             this.send_btn.Dock = System.Windows.Forms.DockStyle.Right;
             this.send_btn.Image = ((System.Drawing.Image)(resources.GetObject("send_btn.Image")));
             this.send_btn.Location = new System.Drawing.Point(762, 0);
@@ -209,12 +186,23 @@ namespace Sliding_Application
             this.name_lbl.Size = new System.Drawing.Size(0, 25);
             this.name_lbl.TabIndex = 0;
             // 
+            // message_pnl
+            // 
+            this.message_pnl.AutoScroll = true;
+            this.message_pnl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.message_pnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.message_pnl.Location = new System.Drawing.Point(354, 62);
+            this.message_pnl.Name = "message_pnl";
+            this.message_pnl.Size = new System.Drawing.Size(823, 439);
+            this.message_pnl.TabIndex = 6;
+            // 
             // ChatsMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1177, 575);
-            this.Controls.Add(this.messages_pnl);
+            this.Controls.Add(this.message_pnl);
             this.Controls.Add(this.statepanel);
             this.Controls.Add(this.write_msg);
             this.Controls.Add(this.accountsName_pnl);
@@ -243,8 +231,8 @@ namespace Sliding_Application
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel statepanel;
-        public Bunifu.UI.WinForms.BunifuShadowPanel messages_pnl;
         private System.Windows.Forms.Label name_lbl;
         private System.Windows.Forms.Label userName_lbl;
+        private System.Windows.Forms.Panel message_pnl;
     }
 }

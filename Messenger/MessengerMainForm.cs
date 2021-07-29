@@ -84,7 +84,7 @@ namespace MessengerApp
         }
         private void People_btn_Click(object sender, EventArgs e)
         {
-            FormManager(new ChatsMainForm(new GroupChatManager()));
+
         }
 
         private void bunifuGradientPanel1_Paint(object sender, PaintEventArgs e)

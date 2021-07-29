@@ -13,6 +13,7 @@ namespace Sliding_Application
         {
             AddContact addGp = new AddContact("Add Existing Group", "Group Name", "add group");
             addGp.ShowDialog();
+            chatsMainForm.Refresh();
         }
 
         public void ShowMembers(ServerUser owner, ChatsMainForm chatsMainForm)

@@ -19,6 +19,7 @@ namespace Sliding_Application
 
             addmember.ShowDialog();
 
+            chatsMainForm.Refresh();
         }
 
         public void ShowMembers(ServerUser owner, ChatsMainForm chatsMainForm)

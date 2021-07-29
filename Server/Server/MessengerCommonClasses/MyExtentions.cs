@@ -81,12 +81,12 @@ namespace Server
             List<User> usrs = serverUser.contacts;
             if (gp.Any(n => n.UserName == username))
             {
-                Group group = (Group)gp.Select(n => n).Where(n => n.UserName == username);
+                Group group = gp.Find(g => g.UserName == username);
                 return group;
             }
             else if (usrs.Any(n => n.UserName == username))
             {
-                User user = (User)usrs.Select(n => n).Where(n => n.UserName == username);
+                User user = usrs.Find(n => n.UserName == username);
                 return user;
             }
             return null;
