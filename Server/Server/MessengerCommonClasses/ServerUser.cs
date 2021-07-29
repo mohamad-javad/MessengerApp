@@ -15,7 +15,7 @@ namespace Server
             contacts = new List<User>();
             Messages = new List<Message>();
             Groups = new List<Group>();
-            
+            groups = new List<string>();
         }
         public ObjectId _id { get; set; }
         public User user { get; }

@@ -154,11 +154,11 @@ namespace Server
 
         private void AddGroupToUserGroups(string userName, string groupUserName)
         {
-            List<string> groups = new List<string>();
+            List<string> groups;
             var query = Query<ServerUser>.EQ(u => u.UserName, userName);
 
             ServerUser user = UsersCollection.FindOne(query);
-            groups = user.groups;
+            groups = user.groups == null? new List<string>(): user.groups;
             if (groups == null)
             {
                 groups = new List<string>();

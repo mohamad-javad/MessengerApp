@@ -124,7 +124,7 @@ namespace Server
                                 break;
                             case "group":
                                 dtManager.AddGroupMessage(message);
-                                dtManager.AddGroup(message["reciever"], message["sender"]);
+                                dtManager.AddGroup(message["sender"], message["reciever"]);
                                 break;
                         }
                        

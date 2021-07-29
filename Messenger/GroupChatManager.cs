@@ -63,7 +63,7 @@ namespace Sliding_Application
 
         public void ShowProfile(IDisplayable displayed)
         {
-            Group gp = (Group)displayed;
+            Group gp =(Group) displayed.GetSpecificatios();
             ProfileForm profile = new ProfileForm(gp);
             profile.NameLabels("Users", "Admins");
             List<string> cts = gp.GetGroupContacts();
