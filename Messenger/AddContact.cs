@@ -48,6 +48,8 @@ namespace Sliding_Application
 
         private void AddContact_Load(object sender, EventArgs e)
         {
+            this.BackColor = MessengerGUI.ThemeColor;
+            this.ForeColor = MessengerGUI.ForColor;
             foreach (Control item in this.Controls)
             {
                 item.BackColor = MessengerGUI.ThemeColor;
@@ -58,7 +60,8 @@ namespace Sliding_Application
 
         private void createNew_btn_Click(object sender, EventArgs e)
         {
-
+            CreateGroup cGp = new CreateGroup();
+            cGp.ShowDialog();
         }
     }
 }

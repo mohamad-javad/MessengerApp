@@ -20,7 +20,7 @@ namespace Sliding_Application
             send_btn.Enabled = false;
             ownerUser = Manager.Owner;
             chatManager = chatmanager;
-            chatManager.ShowMembers(ownerUser, this);
+            
             msg_txt.TextChanged += EnableSendBtn;
             isMemberSelected = false;
             if(chatmanager is GroupChatManager)
@@ -58,9 +58,12 @@ namespace Sliding_Application
             button.Click += MemberClicked;
 
 
+            BeginInvoke((Action)(() =>
+            {
 
-            button.Normalcolor = MessengerGUI.MessageBackColor;
-            button.ForeColor = MessengerGUI.MessageForeColor;
+                button.Normalcolor = MessengerGUI.MessageBackColor;
+                button.ForeColor = MessengerGUI.MessageForeColor;
+            }));
 
             accountsName_pnl.Controls.Add(button);
             pictureBox3.SendToBack();
@@ -163,6 +166,7 @@ namespace Sliding_Application
                 statepanel.ForeColor = fore;
                 statepanel.BackColor = back;
             }));
+            chatManager.ShowMembers(ownerUser, this);
         }
 
         private void addContact_Click(object sender, EventArgs e)
