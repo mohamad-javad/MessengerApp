@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Server
 {
     [Serializable]
-    public struct Header
+    public class Header
     {
         public ObjectId _id { get; set; }
         public string Command { get; set; }
