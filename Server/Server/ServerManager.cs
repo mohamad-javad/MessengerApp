@@ -157,10 +157,13 @@ namespace Server
 
 
                 case "create group":
-                    dtManager.CreateGroup(message["sender"],(Group)message.MessageContent);
-                    resmessage = RefreshUser(message["sender"]);
+                    if (!groups.Contains((Group)message.MessageContent))
+                    {
+                        dtManager.CreateGroup(message["sender"], (Group)message.MessageContent);
+                        resmessage = RefreshUser(message["sender"]);
+                        
+                    }
                     break;
-
 
                 case "add group admin":
                     dtManager.AddGroupAdmin(message["sender"], (string)message.MessageContent);
