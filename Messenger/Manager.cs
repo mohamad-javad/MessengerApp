@@ -1,6 +1,6 @@
 ﻿using Server;
 using Sliding_Application;
-
+using System.Threading;
 
 namespace MessengerApp
 {
@@ -9,17 +9,17 @@ namespace MessengerApp
         void ExecuteCommand(Message message);
     }
 
-    public class Manager:IClientManager
+    public class Manager : IClientManager
     {
         public static ServerUser Owner { get; private set; }
-        
+
 
         public void ExecuteCommand(Message message)
         {
 
             Manager manager = new Manager();
             ServerUser usr;
-            
+
             Header header;
             Message CMessage = new Message(header);
 
@@ -108,7 +108,7 @@ namespace MessengerApp
             Manager manager = new Manager();
 
             ServerUser usr;
-
+            Thread th;
             Header header;
             Message CMessage = new Message(header);
 
@@ -120,11 +120,12 @@ namespace MessengerApp
                         manager.HideRegistration();
 
                         LoginUser((ServerUser)message.MessageContent);
-                       
+
                     }
                     else
                     {
-                        manager.ShowRegistration();
+                        th = new Thread(new ThreadStart(manager.ShowRegistration));
+                        th.Start();
                         manager.AddError("this user name exist", "register");
 
                     }
@@ -140,7 +141,8 @@ namespace MessengerApp
                     }
                     else
                     {
-                        manager.ShowLogin();
+                        th = new Thread(new ThreadStart(manager.ShowRegistration));
+                        th.Start();
                         manager.AddError("user name or password are wrong!", "login");
                     }
                     break;
@@ -157,24 +159,26 @@ namespace MessengerApp
             Manager manager = new Manager();
 
             Owner = user;
-            manager.ShowMain();
-            
-            
-            
+            Thread th = new Thread(new ThreadStart(manager.ShowMain));
+            th.Start();
+
+
+
         }
         public void ManageForms(Message message)
         {
             Manager manager = new Manager();
-
+            Thread th;
             switch (message["command"])
             {
                 case "register":
-                    manager.ShowRegistration();
+                    th = new Thread(new ThreadStart(manager.ShowRegistration));
+                    th.Start();
                     break;
                 case "login":
-                    manager.ShowLogin();
+                    th = new Thread(new ThreadStart(manager.ShowLogin));
+                    th.Start();
                     break;
-
             }
         }
     }

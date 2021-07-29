@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Server;
@@ -25,10 +26,14 @@ namespace MessengerApp
 
         private static void ReciveData(object sender, DataReceivedEventArgs e)
         {
-
             Manager mngr = new Manager();
             Message msg = e.Data.ConvertMessageFromByte();
-            mngr.ExecuteAnswer(msg);
+
+            Task.Run(() =>
+            {
+                mngr.ExecuteAnswer(msg);
+            });
+            
 
         }
 

@@ -85,6 +85,8 @@ namespace Sliding_Application
             Header header = new Header() { Command = "add message", Sender = ownerUser.UserName, Reciever = userName_lbl.Text, TypeOfMessage ="text"};
             Server.Message message = new Server.Message(header);
             message.MessageContent = msg_txt.Text;
+            manager.ExecuteCommand(message);
+            AddTextMessage(message.ToString(), MessageSide.Left);
         }
         public void AddTextMessage(string message, MessageSide side)
         {

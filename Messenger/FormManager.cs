@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sliding_Application
 {
     public static class FormManager
     {
-        
+
         public static MessengerMainForm MainForm { get; private set; }
         public static RegistrationForm Registration { get; private set; }
         public static LoginForm Login { get; private set; }
@@ -18,12 +19,12 @@ namespace Sliding_Application
             MainForm = MessengerMainForm.GetForm;
             Registration = RegistrationForm.GetForm;
             Login = LoginForm.GetFrom;
-            
+
         }
 
         public static void ShowMain(this Manager manager)
         {
-            try { MainForm.ShowDialog(); } catch { }
+            try { MainForm.ShowDialog(); } catch (Exception e) { }
         }
         public static void HideLogin(this Manager manager)
         {
@@ -45,7 +46,11 @@ namespace Sliding_Application
         {
             manager.HideLogin();
 
-            try { Registration.ShowDialog(); } catch { }
+            try
+            {
+                Registration.ShowDialog();
+            }
+            catch { }
         }
 
         public static void ShowLogin(this Manager manager)
